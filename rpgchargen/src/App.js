@@ -23,6 +23,7 @@ class App extends Component {
     this.setState({
       submitted: true
     });
+    fetch('')
     console.log(this.state.role);
     console.log(this.state.race);
     console.log(this.state.system);
