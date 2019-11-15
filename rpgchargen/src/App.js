@@ -3,6 +3,10 @@ import './App.css';
 import SelectionButtons from './components/selectionButtons/SelectionButtons';
 import InfoCards from './components/infoCards/InfoCards';
 import SubmitButtons from './components/submitButtons/SubmitButtons';
+import InputName from './components/inputName/InputName'
+import InputImage from './components/inputImage/InputImage'
+import ImageUploader from 'react-images-upload';
+
 
 const initialState = {
   submitted: false,
@@ -12,12 +16,14 @@ const initialState = {
   system: 'Random',
   nameOutput:'',
   imageOutput: '',
-  statsOutput:''
+  statsOutput:'',
+  pictures: []
 }
 class App extends Component {
   constructor(){
-    super();
+    super(props);
     this.state = initialState;
+    this.onDrop = this.onDrop.bind(this);
   }
 
 
@@ -74,6 +80,7 @@ class App extends Component {
           ? <InfoCards imageOutput={this.state.imageOutput} nameOutput={this.state.nameOutput}/>
           : <div></div>
         }
+        <InputName/>
       
       </div>
     );
