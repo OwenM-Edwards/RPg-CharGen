@@ -7,8 +7,8 @@ import SubmitButtons from './components/submitButtons/SubmitButtons';
 const initialState = {
   submitted: false,
   fullRandom: true,
-  gender:'male',
-  race: 'nameshuman',
+  gender:'',
+  race: '',
   system: 'Random',
   nameOutput:'',
   imageOutput: '',
@@ -24,7 +24,6 @@ class App extends Component {
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
-    
     fetch('http://localhost:3000/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -34,22 +33,20 @@ class App extends Component {
       })
     })
     .then(response => response.json())
-    .then(response => this.setState({nameOutput:response[0].male}))
+    .then(data => {
+      this.setState({nameOutput:data[1][0].name})
+      this.setState({imageOutput:data[0][0].url})
+      
+    })
     .then(this.setState({
       fullRandom: false
     }))
     .then(this.setState({
       submitted: true
     }))
-
-    
     .catch(err=>{
       console.log('problemo')
     })
-  }
-
-  test=()=>{
-    console.log(this.state.nameOutput)
   }
 
   //HANDLES DROP OPTIONS CHANGES
@@ -71,10 +68,10 @@ class App extends Component {
         <h1>The RPG character generator</h1>
         <h2>Who are you looking for?</h2>
 
-        <SelectionButtons handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleRoleChange={this.handleRoleChange}/>
-        <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} test={this.test}/>
+        <SelectionButtons handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleGenderChange={this.handleGenderChange}/>
+        <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
         { submitted === true
-          ? <InfoCards nameOutput={this.state.nameOutput}/>
+          ? <InfoCards imageOutput={this.state.imageOutput} nameOutput={this.state.nameOutput}/>
           : <div></div>
         }
       
