@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const SelectionButtons = ({role, handleRoleChange, handleRaceChange,handleSystemChange,fullRandom, submit, submitted}) => {
+const SelectionButtons = ({handleGenderChange, handleRaceChange,handleSystemChange}) => {
    return (
       <form>
          <div>
-            <select onChange={handleRoleChange}>
+            <select onChange={handleGenderChange}>
                <option value = "Random">Random</option>
                <option value = "Warrior">Warrior</option>
                <option value = "Hunter">Hunter</option>

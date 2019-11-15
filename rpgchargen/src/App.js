@@ -7,31 +7,54 @@ import SubmitButtons from './components/submitButtons/SubmitButtons';
 const initialState = {
   submitted: false,
   fullRandom: true,
-  role:'Random',
-  race: 'Random',
+  gender:'male',
+  race: 'nameshuman',
   system: 'Random',
+  nameOutput:'',
+  imageOutput: '',
+  statsOutput:''
 }
-
 class App extends Component {
   constructor(){
     super();
     this.state = initialState;
   }
 
+
   //HANDLES SUBMIT BUTTON
+
   submit = () => {
-    this.setState({
+    
+    fetch('http://localhost:3000/genchar', {
+      method: 'post',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        "race": this.state.race,
+        "gender": this.state.gender
+      })
+    })
+    .then(response => response.json())
+    .then(response => this.setState({nameOutput:response[0].male}))
+    .then(this.setState({
+      fullRandom: false
+    }))
+    .then(this.setState({
       submitted: true
-    });
-    fetch('')
-    console.log(this.state.role);
-    console.log(this.state.race);
-    console.log(this.state.system);
+    }))
+
+    
+    .catch(err=>{
+      console.log('problemo')
+    })
+  }
+
+  test=()=>{
+    console.log(this.state.nameOutput)
   }
 
   //HANDLES DROP OPTIONS CHANGES
-  handleRoleChange = (event) => {
-    this.setState({role: event.target.value});
+  handleGenderChange = (event) => {
+    this.setState({gender: event.target.value});
   }
   handleRaceChange = (event) => {
     this.setState({race: event.target.value});
@@ -42,16 +65,16 @@ class App extends Component {
 
 
   render() {
-    const { role, race, system, fullRandom, submitted } = this.state;
+    const {submitted } = this.state;
     return (
       <div className="App">
         <h1>The RPG character generator</h1>
         <h2>Who are you looking for?</h2>
 
         <SelectionButtons handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleRoleChange={this.handleRoleChange}/>
-        <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted}/>
+        <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} test={this.test}/>
         { submitted === true
-          ? <InfoCards role={this.state.role} race={this.state.race} system={this.state.system}/>
+          ? <InfoCards nameOutput={this.state.nameOutput}/>
           : <div></div>
         }
       
