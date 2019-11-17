@@ -11,8 +11,8 @@ import InputImage from './components/inputImage/InputImage'
 const initialState = {
   submitted: false,
   fullRandom: true,
-  gender:'',
-  race: '',
+  gender:'male',
+  race: 'human',
   system: 'Random',
   nameOutput:'',
   imageOutput: '',

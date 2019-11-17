@@ -6,17 +6,26 @@ class InputImage extends React.Component {
       super()
       this.state = {
          files:[],
-         errors:[]
+         errors:[],
+         race:'human',
+         gender:'male'
       }
    }
-
+   handleRace = (event)=>{
+      this.setState({race: event.target.value});
+   }
+   handleGender = (event) =>{
+      this.setState({gender: event.target.value});
+   }
    uploadImage =() =>{
-      console.log(this.state.files)
+      console.log(this.state)
       fetch('http://localhost:3000/charimage', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
-        "image": this.state.files
+        "image": this.state.files,
+        "gender":this.state.gender,
+        "race":this.state.race
       })
     })
     .then(response => response.json())
@@ -27,13 +36,24 @@ class InputImage extends React.Component {
 
    render(){
       return (
-         <div id='photo-form-container'>
+         
+         <div>
+            <form id="newName">
+               Gender: 
+                  <select onChange={this.handleGender}>
+                     <option value = "male">Male</option>
+                     <option value = "female">Female</option>
+                  </select>
+               Race: 
+                  <select onChange={this.handleRace}>
+                     <option value = "human">Human</option>
+                     <option value = "orc">Orc</option>
+                  </select>
+            </form>
             <Files
-               multiple={true} 
-               maxSize="2mb"
-               multipleMaxSize="10mb"
-               multipleMaxCount={3}
-               accept={["application/pdf","image/jpg","image/jpeg"]}
+               multiple={false} 
+               maxSize="60mb"
+               accept={["application/pdf","image/jpg","image/jpeg", "image/png"]}
                onSuccess={files => this.setState({ files })}
                onError={errors => this.setState({ errors })}
                convertToBase64={true}
@@ -55,7 +75,7 @@ class InputImage extends React.Component {
                </>
             )}
             </Files>
-            <button onClick={this.uploadImage}></button>
+            <button onClick={this.uploadImage}>Upload Image</button>
          </div>
       )
    }
