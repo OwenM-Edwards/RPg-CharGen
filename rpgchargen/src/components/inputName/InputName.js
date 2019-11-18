@@ -7,6 +7,7 @@ class InputName extends React.Component {
       super()
       this.state = {
          name: '',
+         lastName:'',
          gender: 'male',
          race: 'human'
       }
@@ -18,6 +19,11 @@ class InputName extends React.Component {
    handleName = (event) => {
       let str = event.target.value.replace(/\s+/g, '');
       this.setState({name: str});
+   }
+   handleLastName =(event)=>{
+      let str = event.target.value.replace(/\s+/g, '');
+      this.setState({lastName: str});
+
    }
    handleRace = (event)=>{
       this.setState({race: event.target.value});
@@ -32,7 +38,8 @@ class InputName extends React.Component {
             body: JSON.stringify({
                "race": this.state.race,
                "gender": this.state.gender,
-               "name":this.state.name
+               "name":this.state.name,
+               "lastname":this.state.lastName
             })
          })
 
@@ -42,6 +49,8 @@ class InputName extends React.Component {
                console.log('Name added')
             } else if(status === 'duplicate'){
                console.log('Duplicate Name')
+            } else if(status === 'duplicate last name'){
+               console.log('First name added, Duplicate Last Name')
             } else {
                console.log('Error adding name')
             }
@@ -69,7 +78,8 @@ class InputName extends React.Component {
                </select>
             Character Name: 
                <input onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
-
+            Optional Character Last Name: 
+               <input onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="character last name"></input>
             <button type={"button"} onClick={this.onSubmitNewName}>submit</button> 
          </form>
       );

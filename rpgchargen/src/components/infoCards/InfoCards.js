@@ -1,18 +1,21 @@
 import React from 'react';
 import './infoCards.css';
 
-const InfoCards = ({imageOutput, nameOutput}) => {
+const InfoCards = ({imageOutput, nameOutput, ageOutput,role,race,lastNameOutput}) => {
+
    return (
       <div id="infoCardContainer">
          <div className="infocard" id="infoClass">
-           {`${nameOutput}`}
+           {`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${race} ${role}.`}
          </div>
          
          <div className="infocard" id="infoRace">
-            {`${imageOutput}`}
+            <img src={`${imageOutput}` } alt={''}></img>           
          </div>
             
-         <div className="infocard" id="infoSystem"></div>
+         <div className="infocard" id="infoMainline">
+
+         </div>
       </div>
    );
 }

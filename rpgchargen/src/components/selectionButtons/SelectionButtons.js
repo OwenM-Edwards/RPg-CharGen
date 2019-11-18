@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const SelectionButtons = ({handleGenderChange, handleRaceChange,handleSystemChange}) => {
+const SelectionButtons = ({handleRoleChange, handleGenderChange, handleRaceChange,handleSystemChange}) => {
    return (
       <form>
          <div>
@@ -14,9 +14,15 @@ const SelectionButtons = ({handleGenderChange, handleRaceChange,handleSystemChan
 
 
             <select onChange={handleRaceChange}>
-               <option value = "Random">Random</option>
+               <option value = "human">Random</option>
                <option value = "human">Human</option>
                <option value = "Orc">Orc</option>
+            </select>
+
+            <select onChange={handleRoleChange}>
+               <option value = "merchant">Random</option>
+               <option value = "merchant">Merchant</option>
+               <option value = "guard">Guard</option>
             </select>
 
 

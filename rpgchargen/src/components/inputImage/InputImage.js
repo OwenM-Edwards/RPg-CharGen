@@ -8,7 +8,8 @@ class InputImage extends React.Component {
          files:[],
          errors:[],
          race:'human',
-         gender:'male'
+         gender:'male',
+         role:'merchant'
       }
    }
    handleRace = (event)=>{
@@ -16,6 +17,9 @@ class InputImage extends React.Component {
    }
    handleGender = (event) =>{
       this.setState({gender: event.target.value});
+   }
+   handleRole = (event) =>{
+      this.setState({role: event.target.value});
    }
    uploadImage =() =>{
       console.log(this.state)
@@ -25,7 +29,8 @@ class InputImage extends React.Component {
       body: JSON.stringify({
         "image": this.state.files,
         "gender":this.state.gender,
-        "race":this.state.race
+        "race":this.state.race,
+        "role":this.state.role
       })
     })
     .then(response => response.json())
@@ -48,6 +53,13 @@ class InputImage extends React.Component {
                   <select onChange={this.handleRace}>
                      <option value = "human">Human</option>
                      <option value = "orc">Orc</option>
+                  </select>
+               Role:
+                  <select onChange={this.handleRole}>
+                     <option value = "merchant">Merchant</option>
+                     <option value = "guard">Guard</option>
+                     <option value = "magic">Magic User</option>
+                     <option value = "hunter">Hunter</option>
                   </select>
             </form>
             <Files
