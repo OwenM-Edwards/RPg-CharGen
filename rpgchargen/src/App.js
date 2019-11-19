@@ -3,8 +3,9 @@ import './App.css';
 import SelectionButtons from './components/selectionButtons/SelectionButtons';
 import InfoCards from './components/infoCards/InfoCards';
 import SubmitButtons from './components/submitButtons/SubmitButtons';
-import InputName from './components/inputName/InputName'
-import InputImage from './components/inputImage/InputImage'
+import InputName from './components/inputName/InputName';
+import InputImage from './components/inputImage/InputImage';
+import InputDesc from './components/descInput/descInput';
 
 
 
@@ -108,6 +109,7 @@ class App extends Component {
         }
         <InputName/>
         <InputImage/>
+        <InputDesc/>
 
 
         
