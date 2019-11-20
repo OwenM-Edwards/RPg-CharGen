@@ -6,11 +6,11 @@ import SubmitButtons from './components/submitButtons/SubmitButtons';
 import InputName from './components/inputName/InputName';
 import InputImage from './components/inputImage/InputImage';
 import InputDesc from './components/descInput/descInput';
+import LoadingIcons from './components/loadingIcons/LoadingIcons';
 
 
 
 const initialState = {
-  submitted: false,
   fullRandom: true,
   gender:'male',
   race: 'human',
@@ -20,7 +20,8 @@ const initialState = {
   statsOutput:'',
   role:'merchant',
   ageOutput: '',
-  lastNameOutput:''
+  lastNameOutput:'',
+  display:'init'
 }
 class App extends Component {
   constructor(){
@@ -32,6 +33,7 @@ class App extends Component {
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
+    this.setState({display:'loading'})
     fetch('http://localhost:3000/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -43,7 +45,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(this.state)
+      this.setState({display:'loaded'})
       this.setState({nameOutput:data[0][0].name})
       this.setState({imageOutput:data[1][0].url})
       this.setState({
@@ -95,7 +97,17 @@ class App extends Component {
 
 
   render() {
-    const {submitted, nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
+    const {nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
+    var displayState;
+    if (this.state.display === 'init') {
+      displayState = <div></div>;
+    } else if(this.state.display === 'loading') {
+      displayState = <LoadingIcons />;
+    } else if(this.state.display === 'loaded') {
+      displayState = <InfoCards imageOutput={imageOutput} nameOutput={nameOutput} ageOutput={ageOutput} role={role} race={race} lastNameOutput={lastNameOutput}/>;
+    }
+
+
     return (
       <div className="App">
         <h1>The RPG character generator</h1>
@@ -103,16 +115,14 @@ class App extends Component {
 
         <SelectionButtons handleRoleChange={this.handleRoleChange} handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleGenderChange={this.handleGenderChange}/>
         <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-        { submitted === true
-          ? <InfoCards imageOutput={imageOutput} nameOutput={nameOutput} ageOutput={ageOutput} role={role} race={race} lastNameOutput={lastNameOutput}/>
-          : <div></div>
-        }
+        {displayState}
         <InputName/>
         <InputImage/>
         <InputDesc/>
 
 
         
+          
 
         
 

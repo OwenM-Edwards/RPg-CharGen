@@ -53,7 +53,7 @@ class InputImage extends React.Component {
                   <select onChange={this.handleRace}>
                      <option value = "human">Human</option>
                      <option value = "orc">Orc</option>
-                  </select>
+                  </select>  
                Role:
                   <select onChange={this.handleRole}>
                      <option value = "merchant">Merchant</option>

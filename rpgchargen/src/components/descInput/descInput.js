@@ -72,7 +72,7 @@ class DescInput extends React.Component {
             Intrigue: 
             <textarea onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
 
-            <button type={"button"} onClick={this.onSubmitNewName}>submit</button> 
+            <button type={"button"} onClick={this.onSubmitDescInfo}>submit</button> 
          </form>
       );
    }
