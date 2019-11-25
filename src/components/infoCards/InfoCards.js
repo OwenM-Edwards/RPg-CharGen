@@ -1,67 +1,43 @@
-import React from 'react';
-import './infoCards.css';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
+// import React from 'react';
+// import './infoCards.css';
+// import LoadingIcons from '../loadingIcons/LoadingIcons';
 
-const InfoCards = ({intrigueOutput, roleplayOutput, display,imageOutput, nameOutput, ageOutput,role,race,lastNameOutput}) => {
+// const InfoCards = ({intrigueOutput, roleplayOutput, display,imageOutput, nameOutput, ageOutput,role,race,lastNameOutput}) => {
 
-   var displayStateMainLine;
-   if (display === 'init') {
-      displayStateMainLine = <div></div>;
+   
 
-   } else if(display === 'loading') {
-      displayStateMainLine = <LoadingIcons/>;
+//    var displayStateDesc;
+//    if (display === 'init') {
+//       displayStateDesc = <div></div>;
 
-   } else if(display === 'loaded') {
-      displayStateMainLine = <div id="infoClass">
-                                 {`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${race} ${role}.`}
-                              </div>
-   }
+//    } else if(display === 'loading') {
+//       displayStateDesc = <LoadingIcons/>;
 
-   var displayStateImage;
-   if (display === 'init') {
-      displayStateImage = <div></div>;
-
-   } else if(display === 'loading') {
-      displayStateImage = <LoadingIcons/>;
-
-   } else if(display === 'loaded') {
-      displayStateImage = <div id="infoRace">
-                              <img src={`${imageOutput}` } alt={''}></img>           
-                           </div>
-   }
-
-   var displayStateDesc;
-   if (display === 'init') {
-      displayStateDesc = <div></div>;
-
-   } else if(display === 'loading') {
-      displayStateDesc = <LoadingIcons/>;
-
-   } else if(display === 'loaded') {
-      displayStateDesc =<div>
-                           <div id="infoIntrigue">
-                              {`
-                                 ${intrigueOutput}.`}
-                           </div>
-                           <div id="infoRoleplay">
-                              {`
-                                 ${roleplayOutput}.`}
-                           </div>
-                        </div>
+//    } else if(display === 'loaded') {
+//       displayStateDesc =<div>
+//                            <div id="infoIntrigue">
+//                               {`
+//                                  ${intrigueOutput}.`}
+//                            </div>
+//                            <div id="infoRoleplay">
+//                               {`
+//                                  ${roleplayOutput}.`}
+//                            </div>
+//                         </div>
                         
-   }
+//    }
 
-   return (
-      <div id="infoCardContainer">
-         <div  className="infocard" >{displayStateMainLine} </div>
-         <div  className="infocard" >{displayStateImage} </div>
-         <div  className="infocard" > {displayStateDesc} </div>
+//    return (
+//       <div id="infoCardContainer">
+        
+         
+//          <div  className="infocard" > {displayStateDesc} </div>
          
          
          
 
-      </div>
-   );
-}
+//       </div>
+//    );
+// }
 
-export default InfoCards; 
+// export default InfoCards; 

@@ -1,3 +1,8 @@
+html {
+  --dark:#333;
+  --light:#fbfbfb ;
+  background-color: var(--light);
+}
 .App {
   text-align: center;
   
@@ -7,16 +12,21 @@
   margin:0 auto;
   font-family: 'Amatic SC', cursive;
   font-size: 1.8rem;
-  --dark:#333;
-  --light:#fbfbfb ;
 
-  background-color: var(--light);
   color: var(--dark);
   height: 100%;
 
 }
-.initOutput{
-  border:2px solid black;
+/* 
+.outputContainer{
+  width:78%;
+  height:100%;
+  border:1px solid var(--dark);
+}
+
+
+.OutputImage{
+  border:2px solid var(--dark);
   height:160px;
   width:40%;
   margin-left:auto;
@@ -27,17 +37,114 @@
   padding-top:40px;
   padding-bottom:40px;
 }
-.initOutput img{
+.OutputImage img{
   height:150px;
   position: relative;
   right:0;
   top:0;
-
 }
+.OutputImage div{
+  height:150px;
+  position: relative;
+  right:0;
+  top:0;
+}
+
+.OutputDesc{
+  border:2px solid var(--dark);
+  height:100px;
+  width:300px;
+  position: relative;
+  top:0px;
+} */
+
+
+
+
+
+
+
+.outputContainer{
+  width:78%;
+  height:100%;
+  border:1px solid var(--dark);
+  display:flex;
+  flex-wrap:wrap;
+}
+
+
+.OutputImage{
+  border:2px solid var(--dark);
+  height:160px;
+  width:20%;
+  margin-left:auto;
+  padding-right:40px;
+  padding-left:40px;
+  margin-right:10px;
+
+  padding-top:40px;
+  padding-bottom:40px;
+}
+.OutputImage img{
+  height:150px;
+  position: relative;
+  right:0;
+  top:0;
+}
+.OutputImage div{
+  height:150px;
+  position: relative;
+  right:0;
+  top:0;
+}
+
+.OutputDesc{
+  border:2px solid var(--dark);
+  height:240px;
+  width:60%;
+  position: relative;
+  top:0px;
+  text-align: left;
+}
+
+.OutputRoleplay{
+  border:2px solid var(--dark);
+  height:30%;
+  width:100%;
+  position: relative;
+  top:0px;
+  text-align: left;
+}
+.OutputIntrigue{
+  border:2px solid var(--dark);
+  height:30%;
+  width:100%;
+  position: relative;
+  top:0px;
+  text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .titleContainer{
   width:100%;
   height:20vh;
-  margin-bottom:100px;
+  margin-bottom:70px;
 }
 
 
@@ -65,10 +172,6 @@
 
   border-radius:5%;
   padding:5px;
-}
-.outputContainer{
-  width:78%;
-  height:100%;
 }
 
 

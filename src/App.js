@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
 import './App.css';
 import SelectionButtons from './components/selectionButtons/SelectionButtons';
-import InfoCards from './components/infoCards/InfoCards';
 import SubmitButtons from './components/submitButtons/SubmitButtons';
 import InputName from './components/inputName/InputName';
 import InputImage from './components/inputImage/InputImage';
-import InputDesc from './components/descInput/descInput';
+import InputDesc from './components/descInput/DescInput';
+import AddOwnButton from './components/addOwnButton/AddOwnButton';
+import CharImage from './components/charImage/CharImage';
+import CharDesc from './components/charDesc/CharDesc';
+import CharRoleplay from './components/charRoleplay/CharRoleplay';
+import CharIntrigue from './components/charIntrigue/CharIntrigue';
 
 
+ 
 
 
 const initialState = {
@@ -23,7 +28,8 @@ const initialState = {
   lastNameOutput:'',
   display:'init',
   intrigueOutput:'',
-  roleplayOutput:''
+  roleplayOutput:'',
+  addNewCharPage:false
 }
 class App extends Component {
   constructor(){
@@ -100,20 +106,30 @@ class App extends Component {
     this.setState({role: event.target.value});
   }
 
+  changeToAddCharScreen = () =>{
+    this.setState({addNewCharPage:true})
+  }
 
   render() {
     const {intrigueOutput, roleplayOutput, display, nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
-    var displayState;
-    if (this.state.display === 'init') {
-      displayState = <div className="initOutput"><img src={require('./img/blankProfile.png')}></img></div>;
-    } else{
-      displayState = <InfoCards intrigueOutput={intrigueOutput} roleplayOutput={roleplayOutput} display={display} imageOutput={imageOutput} nameOutput={nameOutput} ageOutput={ageOutput} role={role} race={race} lastNameOutput={lastNameOutput}/>;
-    }
+    var displayStateDesc;
+    var displayStateImg;
+    var displayStateRoleplay;
+    var displayStateIntrigue;
+    displayStateImg = <div className="OutputImage"><CharImage imageOutput={imageOutput} display={display} /></div>;
+    displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={nameOutput} lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} role={role} race={race}  /></div>;
+    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutput={roleplayOutput} display={display} /></div>
+    displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
+
+      // displayStateImg = <div className="loadedOutputImage"><CharImage imageOutput={imageOutput} display={display}/></div>;
+      // displayStateDesc = <div className="loadedOutputDesc"><CharDesc nameOutput={nameOutput} lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} role={role} race={race}  /></div>;
+      // displayStateRoleplay = <div className="loadedOutputRoleplay"><CharRoleplay roleplayOutput={roleplayOutput} display={display} /> </div>
+      // displayStateIntrigue = <div className="loadedOutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /> </div>
+    
 
 
     return (
       <div  className="App">
-
             <div className="titleContainer">
               <h1>The RPG character generator</h1>
               <h2>Who are you looking for?</h2>
@@ -122,17 +138,22 @@ class App extends Component {
               <div className="sidebarContainer">
                 <SelectionButtons handleRoleChange={this.handleRoleChange} handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleGenderChange={this.handleGenderChange}/>
                 <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+                <AddOwnButton/>
               </div>
 
               <div className="outputContainer">
-                {displayState}
+                {displayStateDesc}
+                {displayStateImg}
+
+                {displayStateRoleplay}
+                {displayStateIntrigue}
               </div>
 
-              <div className="inputContainer">
+              {/* <div className="inputContainer">
                 <InputName/>
                 <InputImage/>
                 <InputDesc/>
-              </div>
+              </div> */}
             </div>
       </div>
     );
