@@ -5,47 +5,63 @@ class DescInput extends React.Component {
    constructor(){
       super()
       this.state = {
-         hair:'',
-         face:'',
-         clothes:'',
-         roleplayQ1:'',
-         roleplayQ2:'',
+         roleplay:'',
          intrigue:'',
       }
    }
 
-   handleGender = (event) =>{
-      this.setState({gender: event.target.value});
+   handleRP = (event) =>{
+      this.setState({roleplay: event.target.value});
+   }
+   handleIntrigue = (event) =>{
+      this.setState({intrigue: event.target.value});
    }
 
-   onSubmitNewName = () => {
-      if(this.state.name.length < 3){
+   onSubmitRoleplay = () => {
+      if(this.state.name.roleplay < 3){
          console.log('problem')
       } else {
-         fetch('http://localhost:3000/addname', {
+         fetch('http://localhost:3000/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
-               "race": this.state.race,
-               "gender": this.state.gender,
-               "name":this.state.name,
-               "lastname":this.state.lastName
+               "roleplay": this.state.roleplay
             })
          })
-
          .then(response => response.json())
          .then(status => {
             if(status === 'Success'){
                console.log('Name added')
-            } else if(status === 'duplicate'){
-               console.log('Duplicate Name')
-            } else if(status === 'duplicate last name'){
-               console.log('First name added, Duplicate Last Name')
             } else {
                console.log('Error adding name')
             }
          })
-         
+         .catch(err=>{
+            console.log('problemo')
+         })
+      }
+   }
+
+
+   onSubmitIntrigue = () => {
+      if(this.state.intrigue.length < 3){
+         console.log('problem')
+      } else {
+         fetch('http://localhost:3000/addintrigue', {
+            method: 'post',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({
+               "intrigue": this.state.intrigue
+            })
+         })
+         .then(response => response.json())
+         .then(status => {
+            if(status === 'Success'){
+               console.log('Name added')
+            } else {
+               console.log('Error adding name')
+            }
+         })
          .catch(err=>{
             console.log('problemo')
          })
@@ -55,25 +71,20 @@ class DescInput extends React.Component {
 
    render(){
       return (
-         <form id="newName">
-            Hair: 
+         <div>
+            <form id="newName">
+               Roleplay Que: 
+               <input onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
 
-            <input onChange={this.handleHair} minLength="3" maxLength="200" required="required" type="text" name="charName" placeholder="Character name"></input>
-            
-            Face: 
-            <input onChange={this.handleFace} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
-            
-            Clothes: 
-            <input onChange={this.handleClothes} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
+               <button type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
+            </form>
+            <form id="newName">
+               Intrigue: 
+               <textarea onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
 
-            Roleplay Que: 
-            <input onChange={this.handleRP1} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
-
-            Intrigue: 
-            <textarea onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
-
-            <button type={"button"} onClick={this.onSubmitDescInfo}>submit</button> 
-         </form>
+               <button type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
+            </form>
+         </div>
       );
    }
 
