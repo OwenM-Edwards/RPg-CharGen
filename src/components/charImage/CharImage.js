@@ -1,6 +1,5 @@
 import React from 'react';
 import LoadingIcons from '../loadingIcons/LoadingIcons';
-import styles from './charImage.module.css';
 
 
 
@@ -8,15 +7,14 @@ const CharImage = ({display,imageOutput}) => {
 
    var displayStateImage;
    if (display === 'init') {
-      displayStateImage = <img src={require('../../img/blankProfile.png')}></img>;
+      displayStateImage = <img src={require('../../img/blankProfile.png')} alt={''}></img>;
 
    } else if(display === 'loading') {
       displayStateImage = <LoadingIcons/>;
 
    } else if(display === 'loaded') {
-      displayStateImage = <div id="infoRace">
-                              <img src={`${imageOutput}` } alt={''}></img>           
-                              </div>                  
+      displayStateImage = <img src={`${imageOutput}` } alt={''}></img>           
+                                            
    }
 
 

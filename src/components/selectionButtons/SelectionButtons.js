@@ -33,13 +33,13 @@ class SelectionButtons extends React.Component {
    }
    handleChange = selectedOption => {
       this.setState(
-        { selectedOption },
+      //   { selectedOption },
         () => console.log(`Option selected:`, this.state.selectedOption)
       );
    };
 
    render(){
-      const { selectedOption } = this.state;
+      // const { selectedOption } = this.state;
       return (
          <div className={styles.selectMainContainer}>
             <Select 

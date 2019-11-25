@@ -3,13 +3,13 @@ import styles from './addOwnButton.module.css';
 
 
 class AddOwnButton extends React.Component {
-   constructor(props){
-      super(props)
-   }
+   // constructor(props){
+   //    super(props)
+   // }
 
-   changeToAddChar = () =>{
-      this.props.changeToAddCharScreen();
-   }
+   // changeToAddChar = () =>{
+   //    this.props.changeToAddCharScreen();
+   // }
 
    render(){
       return (

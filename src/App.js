@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import './App.css';
 import SelectionButtons from './components/selectionButtons/SelectionButtons';
 import SubmitButtons from './components/submitButtons/SubmitButtons';
-import InputName from './components/inputName/InputName';
-import InputImage from './components/inputImage/InputImage';
-import InputDesc from './components/descInput/DescInput';
+// import InputName from './components/inputName/InputName';
+// import InputImage from './components/inputImage/InputImage';
+// import InputDesc from './components/descInput/DescInput';
 import AddOwnButton from './components/addOwnButton/AddOwnButton';
 import CharImage from './components/charImage/CharImage';
 import CharDesc from './components/charDesc/CharDesc';
@@ -28,7 +28,9 @@ const initialState = {
   lastNameOutput:'',
   display:'init',
   intrigueOutput:'',
-  roleplayOutput:'',
+  roleplayOutputA:'',
+  roleplayOutputB:'',
+  roleplayOutputC:'',
   addNewCharPage:false
 }
 class App extends Component {
@@ -62,7 +64,9 @@ class App extends Component {
       })
       this.setState({lastNameOutput:data[3][0].lastname})
       this.setState({intrigueOutput:data[4][0].intrigue})
-      this.setState({roleplayOutput:data[5][0].roleplay})
+      this.setState({roleplayOutputA:data[5][0].roleplay})
+      this.setState({roleplayOutputB:data[5][1].roleplay})
+      this.setState({roleplayOutputC:data[5][2].roleplay})
       if(this.state.ageOutput < 2){
         this.setState({
           ageOutput:this.state.ageOutput+14
@@ -111,14 +115,14 @@ class App extends Component {
   }
 
   render() {
-    const {intrigueOutput, roleplayOutput, display, nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
+    const {intrigueOutput, roleplayOutputA, roleplayOutputB, roleplayOutputC, display, nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
     var displayStateDesc;
     var displayStateImg;
     var displayStateRoleplay;
     var displayStateIntrigue;
     displayStateImg = <div className="OutputImage"><CharImage imageOutput={imageOutput} display={display} /></div>;
     displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={nameOutput} lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} role={role} race={race}  /></div>;
-    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutput={roleplayOutput} display={display} /></div>
+    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={roleplayOutputA} roleplayOutputB={roleplayOutputB} roleplayOutputC={roleplayOutputC} display={display} /></div>
     displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
 
       // displayStateImg = <div className="loadedOutputImage"><CharImage imageOutput={imageOutput} display={display}/></div>;

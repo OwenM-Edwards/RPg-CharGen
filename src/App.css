@@ -17,46 +17,6 @@ html {
   height: 100%;
 
 }
-/* 
-.outputContainer{
-  width:78%;
-  height:100%;
-  border:1px solid var(--dark);
-}
-
-
-.OutputImage{
-  border:2px solid var(--dark);
-  height:160px;
-  width:40%;
-  margin-left:auto;
-  padding-right:40px;
-  padding-left:40px;
-  margin-right:10px;
-  max-width:100px;
-  padding-top:40px;
-  padding-bottom:40px;
-}
-.OutputImage img{
-  height:150px;
-  position: relative;
-  right:0;
-  top:0;
-}
-.OutputImage div{
-  height:150px;
-  position: relative;
-  right:0;
-  top:0;
-}
-
-.OutputDesc{
-  border:2px solid var(--dark);
-  height:100px;
-  width:300px;
-  position: relative;
-  top:0px;
-} */
 
 
 
@@ -67,62 +27,76 @@ html {
 .outputContainer{
   width:78%;
   height:100%;
-  border:1px solid var(--dark);
+
   display:flex;
   flex-wrap:wrap;
 }
 
 
 .OutputImage{
-  border:2px solid var(--dark);
-  height:160px;
-  width:20%;
+  /* border:2px solid var(--dark); */
+  height:240px;
+  width:30%;
   margin-left:auto;
-  padding-right:40px;
-  padding-left:40px;
-  margin-right:10px;
-
-  padding-top:40px;
-  padding-bottom:40px;
 }
 .OutputImage img{
-  height:150px;
-  position: relative;
-  right:0;
-  top:0;
+  padding:10px;
+  max-width: 85%;
+  height: auto;
+  max-height:150%;
+  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+
 }
 .OutputImage div{
   height:150px;
   position: relative;
   right:0;
-  top:0;
+  top:15px;
 }
 
 .OutputDesc{
-  border:2px solid var(--dark);
+  /* border:2px solid var(--dark); */
   height:240px;
   width:60%;
   position: relative;
-  top:0px;
+  top:15px;
   text-align: left;
+  left:20px;
+
 }
+/* .OutputDesc div{
+  padding-left:20px;
+  padding-top:20px;
+} */
 
 .OutputRoleplay{
-  border:2px solid var(--dark);
   height:30%;
   width:100%;
   position: relative;
   top:0px;
   text-align: left;
+  left:20px;
+  margin-bottom:80px;
 }
+/* .OutputRoleplay div{
+  padding-left:13px;
+  padding-bottom:15px;
+} */
+
 .OutputIntrigue{
-  border:2px solid var(--dark);
   height:30%;
   width:100%;
   position: relative;
   top:0px;
   text-align: left;
+  left:20px;
 }
+/* .OutputIntrigue div {
+  padding-left:20px;
+  padding-top:20px;
+} */
 
 
 
@@ -170,8 +144,9 @@ html {
   display:flex;
   flex-wrap:wrap;
 
-  border-radius:5%;
+  border-radius:5px;
   padding:5px;
+  background-color: var(--dark);
 }
 
 
