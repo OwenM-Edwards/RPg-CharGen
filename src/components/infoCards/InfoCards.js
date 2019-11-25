@@ -38,9 +38,17 @@ const InfoCards = ({intrigueOutput, roleplayOutput, display,imageOutput, nameOut
       displayStateDesc = <LoadingIcons/>;
 
    } else if(display === 'loaded') {
-      displayStateDesc = <div id="infoMainline">
-                              {`${intrigueOutput} ${roleplayOutput}.`}
+      displayStateDesc =<div>
+                           <div id="infoIntrigue">
+                              {`
+                                 ${intrigueOutput}.`}
                            </div>
+                           <div id="infoRoleplay">
+                              {`
+                                 ${roleplayOutput}.`}
+                           </div>
+                        </div>
+                        
    }
 
    return (

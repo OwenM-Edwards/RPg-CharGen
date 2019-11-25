@@ -105,7 +105,7 @@ class App extends Component {
     const {intrigueOutput, roleplayOutput, display, nameOutput, imageOutput, ageOutput,role,race,lastNameOutput } = this.state;
     var displayState;
     if (this.state.display === 'init') {
-      displayState = <div className="emptyOutput"></div>;
+      displayState = <div className="initOutput"><img src={require('./img/blankProfile.png')}></img></div>;
     } else{
       displayState = <InfoCards intrigueOutput={intrigueOutput} roleplayOutput={roleplayOutput} display={display} imageOutput={imageOutput} nameOutput={nameOutput} ageOutput={ageOutput} role={role} race={race} lastNameOutput={lastNameOutput}/>;
     }
@@ -119,21 +119,21 @@ class App extends Component {
               <h2>Who are you looking for?</h2>
             </div>
             <div className="main">
-            <div className="sidebarContainer">
-              <SelectionButtons handleRoleChange={this.handleRoleChange} handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleGenderChange={this.handleGenderChange}/>
-              <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-            </div>
+              <div className="sidebarContainer">
+                <SelectionButtons handleRoleChange={this.handleRoleChange} handleRaceChange={this.handleRaceChange} handleSystemChange={this.handleSystemChange} handleGenderChange={this.handleGenderChange}/>
+                <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+              </div>
 
-            <div className="outputContainer">
-              {displayState}
-            </div>
+              <div className="outputContainer">
+                {displayState}
+              </div>
 
-            <div className="inputContainer">
-              <InputName/>
-              <InputImage/>
-              <InputDesc/>
+              <div className="inputContainer">
+                <InputName/>
+                <InputImage/>
+                <InputDesc/>
+              </div>
             </div>
-        </div>
       </div>
     );
   }
