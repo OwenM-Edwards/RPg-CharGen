@@ -7,8 +7,8 @@ const CharDesc = ({nameOutput, lastNameOutput, display, ageOutput, role, race}) 
    var displayStateMainLine;
    if (display === 'init') {
       displayStateMainLine = 
-            <div>
-               Description:???
+            <div  className={"title"}>
+               Description :  ???
 
             </div>;
            
@@ -20,10 +20,13 @@ const CharDesc = ({nameOutput, lastNameOutput, display, ageOutput, role, race}) 
    } else if(display === 'loaded') {
       displayStateMainLine = 
          <div>
-            Name:
-            <div>
-               {`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${race} ${role}.`}
-            </div>
+            <div className={"title"}>Name :</div>
+            <ul>
+               <li>
+                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${race} ${role}.`}</p>
+               </li>
+            </ul>
+
          </div>
    }
 

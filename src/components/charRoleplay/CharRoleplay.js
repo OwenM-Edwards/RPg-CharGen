@@ -6,7 +6,7 @@ import LoadingIcons from '../loadingIcons/LoadingIcons';
 const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, display}) => {
    var displayRoleplay;
    if (display === 'init') {
-      displayRoleplay = <div>Roleplay:???</div>;
+      displayRoleplay = <div className={"title"}>Roleplay Cues :  ???</div>;
 
    } else if(display === 'loading') {
       displayRoleplay = <LoadingIcons/>;
@@ -14,16 +14,12 @@ const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, displa
    } else if(display === 'loaded') {
       displayRoleplay = 
          <div>
-            Roleplay Ques:
-
-            <div>{`${roleplayOutputA}.`}</div>
-            
-
-            <div>{`${roleplayOutputB}.`}</div>
-            
-
-            <div>{`${roleplayOutputC}.`}</div>
-            
+            <div className={"title"}>Roleplay Cues :</div>
+            <ul>
+               <li><p>{`${roleplayOutputA}.`}</p></li>
+               <li><p>{`${roleplayOutputB}.`}</p></li>
+               <li><p>{`${roleplayOutputC}.`}</p></li>
+            </ul>
          </div>
    }
 

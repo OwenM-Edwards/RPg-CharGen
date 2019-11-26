@@ -6,7 +6,7 @@ import LoadingIcons from '../loadingIcons/LoadingIcons';
 const CharIntrigue = ({intrigueOutput, display}) => {
    var displayIntrigue;
    if (display === 'init') {
-      displayIntrigue = <div>Intrigue:???</div>;
+      displayIntrigue = <div className={"title"}>Intrigue :  ???</div>;
 
    } else if(display === 'loading') {
       displayIntrigue = <LoadingIcons/>;
@@ -14,8 +14,12 @@ const CharIntrigue = ({intrigueOutput, display}) => {
    } else if(display === 'loaded') {
       displayIntrigue = 
          <div>
-            Intrigue:
-            <div>{`${intrigueOutput}.`}</div>
+            <div className={"title"}>Intrigue :</div>
+            <ul>
+               <li>
+                  <p>{`${intrigueOutput}.`}</p>
+               </li>
+            </ul>
             
          </div>
    }

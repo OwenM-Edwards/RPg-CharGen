@@ -61,57 +61,48 @@ html {
   height:240px;
   width:60%;
   position: relative;
-  top:15px;
+  top:25px;
   text-align: left;
   left:20px;
 
 }
-/* .OutputDesc div{
-  padding-left:20px;
-  padding-top:20px;
-} */
+
 
 .OutputRoleplay{
   height:30%;
   width:100%;
   position: relative;
-  top:0px;
+  top:5px;
   text-align: left;
   left:20px;
   margin-bottom:80px;
 }
-/* .OutputRoleplay div{
-  padding-left:13px;
-  padding-bottom:15px;
-} */
+ul{
+  position: relative;
+  top:-15px;
+  font-size: 1.3rem;
+}
+li{
+  margin-bottom:-25px;
+}
+p{
+  font-size: 1.8rem;
+}
+
 
 .OutputIntrigue{
   height:30%;
   width:100%;
   position: relative;
-  top:0px;
+  top:-5px;
   text-align: left;
   left:20px;
 }
-/* .OutputIntrigue div {
-  padding-left:20px;
-  padding-top:20px;
-} */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+.title{
+  text-decoration: underline;
+}
 
 
 

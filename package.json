@@ -10,7 +10,8 @@
     "react-images-upload": "^1.2.7",
     "react-loading": "^2.0.3",
     "react-scripts": "3.2.0",
-    "react-select": "^3.0.8"
+    "react-select": "^3.0.8",
+    "react-tilt": "^0.1.4"
   },
   "scripts": {
     "start": "react-scripts start",

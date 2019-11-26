@@ -135,7 +135,7 @@ class App extends Component {
     return (
       <div  className="App">
             <div className="titleContainer">
-              <h1>The RPG character generator</h1>
+              <h1>The RPG NPC character generator</h1>
               <h2>Who are you looking for?</h2>
             </div>
             <div className="main">
