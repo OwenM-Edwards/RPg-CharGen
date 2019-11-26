@@ -26,17 +26,8 @@ const customStyles = {
 //({handleRoleChange, handleGenderChange, handleRaceChange,handleSystemChange}) 
 class SelectionButtons extends React.Component {
    constructor(props){
-      super(props)
-      this.state = {
-         selectedOption: null
-      };
+      super(props) 
    }
-   handleChange = selectedOption => {
-      this.setState(
-      //   { selectedOption },
-        () => console.log(`Option selected:`, this.state.selectedOption)
-      );
-   };
 
    render(){
       // const { selectedOption } = this.state;
@@ -45,7 +36,7 @@ class SelectionButtons extends React.Component {
             <Select 
                className={styles.selectContainer}
                defaultValue={optionsGender[0]}
-               onChange={this.handleChange}
+               onChange={this.props.handleGenderChange}
                isSearchable={false}
                styles={customStyles}
                options={optionsGender}
@@ -54,14 +45,14 @@ class SelectionButtons extends React.Component {
             />
             <Select className={styles.selectContainer}
                defaultValue={optionsRace[0]}
-               onChange={this.handleChange}
+               onChange={this.props.handleRaceChange}
                isSearchable={false}
                styles={customStyles}
                options={optionsRace}
             />
             <Select className={styles.selectContainer}
                defaultValue={optionsRole[0]}
-               onChange={this.handleChange}
+               onChange={this.props.handleRoleChange}
                isSearchable={false}
                styles={customStyles}
                options={optionsRole}

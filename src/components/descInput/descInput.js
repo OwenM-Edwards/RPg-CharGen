@@ -1,7 +1,8 @@
 import React from 'react';
+import styles from './descInput.module.css';
 
 
-class DescInput extends React.Component {
+class InputDesc extends React.Component {
    constructor(){
       super()
       this.state = {
@@ -80,7 +81,7 @@ class DescInput extends React.Component {
             </form>
             <form id="newName">
                Intrigue: 
-               <textarea onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
+               <textarea  onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
 
                <button type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
             </form>
@@ -90,4 +91,4 @@ class DescInput extends React.Component {
 
 }
 
-export default DescInput;
+export default InputDesc;

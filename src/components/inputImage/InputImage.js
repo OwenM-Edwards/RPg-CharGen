@@ -1,11 +1,12 @@
 import React from 'react';
 import Files from "react-butterfiles";
+import Tilt from 'react-tilt'
 
 class InputImage extends React.Component {
    constructor(){
       super()
       this.state = {
-         files:[],
+         files:'',
          errors:[],
          race:'human',
          gender:'male',
@@ -39,10 +40,28 @@ class InputImage extends React.Component {
     })
    }
 
+
    render(){
+      var imageUploadDisplay;
+      if(this.state.files === ''){
+         imageUploadDisplay = 
+         <div className="OutputImage">
+            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
+               <img src={require('../../img/blankProfile.png')} alt={''}></img>
+            </Tilt>
+         </div>
+      } else {
+         imageUploadDisplay = 
+         <div className="OutputImage">
+            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
+               <img src={this.state.files} alt={''}></img>
+            </Tilt>
+         </div>
+      }
+      
       return (
-         
          <div>
+            {imageUploadDisplay}
             <form id="newName">
                Gender: 
                   <select onChange={this.handleGender}>

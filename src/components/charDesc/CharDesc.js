@@ -3,7 +3,7 @@ import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 
 
-const CharDesc = ({nameOutput, lastNameOutput, display, ageOutput, role, race}) => {
+const CharDesc = ({nameOutput, roleOutput, lastNameOutput, display, ageOutput, raceOutput}) => {
    var displayStateMainLine;
    if (display === 'init') {
       displayStateMainLine = 
@@ -15,7 +15,7 @@ const CharDesc = ({nameOutput, lastNameOutput, display, ageOutput, role, race}) 
 
 
    } else if(display === 'loading') {
-      displayStateMainLine = <LoadingIcons/>;
+      displayStateMainLine = <div><LoadingIcons/></div>;
 
    } else if(display === 'loaded') {
       displayStateMainLine = 
@@ -23,7 +23,7 @@ const CharDesc = ({nameOutput, lastNameOutput, display, ageOutput, role, race}) 
             <div className={"title"}>Name :</div>
             <ul>
                <li>
-                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${race} ${role}.`}</p>
+                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput} ${roleOutput}.`}</p>
                </li>
             </ul>
 

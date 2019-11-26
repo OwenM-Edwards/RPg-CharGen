@@ -9,7 +9,7 @@ const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, displa
       displayRoleplay = <div className={"title"}>Roleplay Cues :  ???</div>;
 
    } else if(display === 'loading') {
-      displayRoleplay = <LoadingIcons/>;
+      displayRoleplay = <div><LoadingIcons/></div>;
 
    } else if(display === 'loaded') {
       displayRoleplay = 

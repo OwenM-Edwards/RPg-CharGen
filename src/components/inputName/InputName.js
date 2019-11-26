@@ -1,6 +1,20 @@
 import React from 'react';
-import './inputName.css'
+import styles from './inputName.module.css';
+import Select from 'react-select';
 
+const optionsGender = [
+   { value: 'male', label: 'Gender: Male' },
+   { value: 'female', label: 'Gender: Female' },
+];
+const optionsRace = [
+   { value: 'human', label: 'Race: Human' },
+   { value: 'orc', label: 'Race: Orc' },
+];
+const customStyles = {
+   menu: (provided, state) => ({
+     ...provided,
+   }),
+}
 
 class InputName extends React.Component {
    constructor(){
@@ -66,21 +80,26 @@ class InputName extends React.Component {
    render(){
       return (
          <form id="newName">
-            Gender: 
-               <select onChange={this.handleGender}>
-                  <option value = "male">Male</option>
-                  <option value = "female">Female</option>
-               </select>
-            Race: 
-               <select onChange={this.handleRace}>
-                  <option value = "human">Human</option>
-                  <option value = "orc">Orc</option>
-               </select>
-            Character Name: 
-               <input onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
-            Optional Character Last Name: 
-               <input onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="character last name"></input>
-            <button type={"button"} onClick={this.onSubmitNewName}>submit</button> 
+            Add new character name: 
+            <div>
+               <Select  className={styles.selectContainer}
+                  defaultValue={optionsGender[0]}
+                  onChange={this.props.handleGenderChange}
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={optionsGender}
+               />
+               <Select  className={styles.selectContainer}
+                  defaultValue={optionsRace[0]}
+                  onChange={this.props.handleGenderChange}
+                  isSearchable={false}
+                  styles={customStyles}
+                  options={optionsRace}
+               />
+               <input className={styles.inputField} onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
+               <input className={styles.inputField} onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
+               <button className={styles.inputSubmit} type={"button"} onClick={this.onSubmitNewName}>submit</button> 
+            </div>
          </form>
       );
    }
