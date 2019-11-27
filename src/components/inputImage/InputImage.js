@@ -42,6 +42,7 @@ class InputImage extends React.Component {
 
 
    render(){
+      const state = ({})
       var imageUploadDisplay;
       if(this.state.files === ''){
          imageUploadDisplay = 
