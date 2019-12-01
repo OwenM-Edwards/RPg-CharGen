@@ -69,7 +69,7 @@ class InputImage extends React.Component {
                      <option value = "male">Male</option>
                      <option value = "female">Female</option>
                   </select>
-               Race: 
+               Race:  
                   <select onChange={this.handleRace}>
                      <option value = "human">Human</option>
                      <option value = "orc">Orc</option>
