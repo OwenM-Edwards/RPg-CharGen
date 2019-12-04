@@ -59,6 +59,7 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
+      
       this.setState({display:'loaded'})
       this.setState({nameOutput:data[0][0].name})
       this.setState({imageOutput:data[1][0].url})
@@ -71,6 +72,7 @@ class App extends Component {
       this.setState({roleplayOutputB:data[5][1].roleplay})
       this.setState({roleplayOutputC:data[5][2].roleplay})
       this.setState({roleOutput:data[6]})
+      
       this.setState({raceOutput:data[7]})
       this.setState({genderOutput:data[8]})
       if(this.state.ageOutput < 2){

@@ -96,7 +96,7 @@ class InputName extends React.Component {
                   styles={customStyles}
                   options={optionsRace}
                />
-               <input className={styles.inputField} onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Character name"></input>
+               <input className={styles.inputField} onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="First name"></input>
                <input className={styles.inputField} onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
                <button className={styles.inputSubmit} type={"button"} onClick={this.onSubmitNewName}>submit</button> 
             </div>

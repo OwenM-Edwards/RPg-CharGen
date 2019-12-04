@@ -6,7 +6,7 @@ class InputImage extends React.Component {
    constructor(){
       super()
       this.state = {
-         files:'',
+         files:[],
          errors:[],
          race:'human',
          gender:'male',
@@ -44,7 +44,7 @@ class InputImage extends React.Component {
    render(){
       const state = ({})
       var imageUploadDisplay;
-      if(this.state.files === ''){
+      if(this.state.files){
          imageUploadDisplay = 
          <div className="OutputImage">
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
@@ -69,7 +69,7 @@ class InputImage extends React.Component {
                      <option value = "male">Male</option>
                      <option value = "female">Female</option>
                   </select>
-               Race:  
+               Race:   
                   <select onChange={this.handleRace}>
                      <option value = "human">Human</option>
                      <option value = "orc">Orc</option>
