@@ -143,13 +143,17 @@ class App extends Component {
             <button  className="submit" onClick={this.changeMain}>Return to generator</button>
           </div>
         </div>
-        <div className="outputContainer">
+        <div className="inputContainer">
+
           <div className="inputName">
             <InputName/>
           </div>
+
+          <div className="inputImage">
             <InputImage/>
-            {/* {displayStateImg} */}
-          <div className="inputRoleplay">
+          </div>
+            
+          <div className="inputDesc">
             <InputDesc/>
           </div>
           

@@ -73,17 +73,17 @@ class InputDesc extends React.Component {
    render(){
       return (
          <div>
-            <form id="newName">
+            <form className="inputRoleplayForm">
                Roleplay Que: 
-               <input onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
+               <input className="roleplayText" onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
 
-               <button type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
+               <button className="submitButton" type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
             </form>
-            <form id="newName">
+            <form className="inputIntrigueForm">
                Intrigue: 
-               <textarea  onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
+               <textarea  className="intrigueText" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
 
-               <button type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
+               <button className="submitButton" type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
             </form>
          </div>
       );

@@ -44,16 +44,16 @@ class InputImage extends React.Component {
    render(){
       const state = ({})
       var imageUploadDisplay;
-      if(this.state.files){
+      if(this.state.files.length === 0){
          imageUploadDisplay = 
-         <div className="OutputImage">
+         <div className="innputImageDiv">
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img src={require('../../img/blankProfile.png')} alt={''}></img>
             </Tilt>
          </div>
       } else {
          imageUploadDisplay = 
-         <div className="OutputImage">
+         <div className="inputImageDiv">
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img src={this.state.files} alt={''}></img>
             </Tilt>
@@ -61,8 +61,8 @@ class InputImage extends React.Component {
       }
       
       return (
-         <div>
-            {imageUploadDisplay}
+         <div className="imageInputContainer">
+            
             <form id="newName">
                Gender: 
                   <select onChange={this.handleGender}>
@@ -82,6 +82,7 @@ class InputImage extends React.Component {
                      <option value = "hunter">Hunter</option>
                   </select>
             </form>
+
             <Files
                multiple={false} 
                maxSize="60mb"
@@ -107,7 +108,8 @@ class InputImage extends React.Component {
                </>
             )}
             </Files>
-            <button onClick={this.uploadImage}>Upload Image</button>
+            <button className="imageUploadSubmit" onClick={this.uploadImage}>Upload Image</button>
+            {imageUploadDisplay}
          </div>
       )
    }
