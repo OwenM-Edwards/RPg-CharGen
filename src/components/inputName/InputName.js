@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './inputName.module.css';
 import Select from 'react-select';
 
 const optionsGender = [
@@ -82,23 +81,23 @@ class InputName extends React.Component {
          <form id="newName">
             Add new character name: 
             <div>
-               <Select  className={styles.selectContainer}
+               <Select  className="selectContainer"
                   defaultValue={optionsGender[0]}
                   onChange={this.props.handleGenderChange}
                   isSearchable={false}
                   styles={customStyles}
                   options={optionsGender}
                />
-               <Select  className={styles.selectContainer}
+               <Select  className="selectContainer"
                   defaultValue={optionsRace[0]}
                   onChange={this.props.handleGenderChange}
                   isSearchable={false}
                   styles={customStyles}
                   options={optionsRace}
                />
-               <input className={styles.inputField} onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="First name"></input>
-               <input className={styles.inputField} onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
-               <button className={styles.inputSubmit} type={"button"} onClick={this.onSubmitNewName}>submit</button> 
+               <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="First name"></input>
+               <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
+               <button className="inputSubmit" type={"button"} onClick={this.onSubmitNewName}>submit</button> 
             </div>
          </form>
       );

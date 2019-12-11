@@ -46,14 +46,14 @@ class InputImage extends React.Component {
       var imageUploadDisplay;
       if(this.state.files.length === 0){
          imageUploadDisplay = 
-         <div className="innputImageDiv">
+         <div>
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img src={require('../../img/blankProfile.png')} alt={''}></img>
             </Tilt>
          </div>
       } else {
          imageUploadDisplay = 
-         <div className="inputImageDiv">
+         <div>
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img src={this.state.files} alt={''}></img>
             </Tilt>

@@ -13,7 +13,11 @@ import CharIntrigue from './components/charIntrigue/CharIntrigue';
 
 
  
-
+/* 
+  TODO Make input submits direct to the temp moderation databases
+  TODO Add confirmation popups to submits
+  TODO CHANGED NAME DATABASES TO MIXED GENDER, NEED TO CHANGE SERVER DATABASE CALLS TO MATCH
+*/ 
 
 const initialState = {
   fullRandom: true,
@@ -145,18 +149,22 @@ class App extends Component {
         </div>
         <div className="inputContainer">
 
-          <div className="inputName">
-            <InputName/>
+          <div className="nameAndImageContainer">
+            <div className="inputName">
+              <InputName/>
+            </div>
+
+            <div className="inputImage">
+              <InputImage/>
+            </div>
           </div>
 
-          <div className="inputImage">
-            <InputImage/>
+          <div className="roleplayAndIntrigueContainer">
+            <div className="inputDesc">
+              <InputDesc/>
+            </div>
           </div>
-            
-          <div className="inputDesc">
-            <InputDesc/>
-          </div>
-          
+         
         </div>
       </div> 
 
