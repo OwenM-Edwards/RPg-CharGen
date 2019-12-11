@@ -42,17 +42,21 @@ class InputName extends React.Component {
       this.setState({race: event.target.value});
    }
    onSubmitNewName = () => {
-      if(this.state.name.length < 3){
-         console.log('problem')
-      } else {
-         fetch('http://localhost:3000/addname', {
+      if(this.state.name){
+         var firstName = this.state.name;
+      } 
+      if(this.state.lastName){
+         var lastName = this.state.lastName
+      }
+      
+      fetch('http://localhost:3000/addname', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
                "race": this.state.race,
                "gender": this.state.gender,
-               "name":this.state.name,
-               "lastname":this.state.lastName
+               "name":firstName,
+               "lastname":lastName
             })
          })
 
@@ -72,7 +76,6 @@ class InputName extends React.Component {
          .catch(err=>{
             console.log('problemo')
          })
-      }
    }
 
 
@@ -95,7 +98,7 @@ class InputName extends React.Component {
                   styles={customStyles}
                   options={optionsRace}
                />
-               <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="First name"></input>
+               <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
                <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
                <button className="inputSubmit" type={"button"} onClick={this.onSubmitNewName}>submit</button> 
             </div>
