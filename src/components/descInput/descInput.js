@@ -19,9 +19,7 @@ class InputDesc extends React.Component {
    }
 
    onSubmitRoleplay = () => {
-      if(this.state.name.roleplay < 3){
-         console.log('problem')
-      } else {
+      if(this.state.roleplay){
          fetch('http://localhost:3000/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -45,9 +43,7 @@ class InputDesc extends React.Component {
 
 
    onSubmitIntrigue = () => {
-      if(this.state.intrigue.length < 3){
-         console.log('problem')
-      } else {
+      if(this.state.intrigue){
          fetch('http://localhost:3000/addintrigue', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},

@@ -94,7 +94,7 @@ class InputImage extends React.Component {
             {({ browseFiles, getDropZoneProps }) => (
                <>
                <div {...getDropZoneProps({ className: "myDropZone" })}/>
-               <button onClick={browseFiles}>Select files...</button>
+               <button className="imageSubmitButton" onClick={browseFiles}>Select files...</button>
                <ol>
                   {this.state.files.map(file => (
                      <li key={file.name}>{file.name}</li>
@@ -108,7 +108,7 @@ class InputImage extends React.Component {
                </>
             )}
             </Files>
-            <button className="imageUploadSubmit" onClick={this.uploadImage}>Upload Image</button>
+            <button className="imageSubmitButton" onClick={this.uploadImage}>Upload Image</button>
             {imageUploadDisplay}
          </div>
       )

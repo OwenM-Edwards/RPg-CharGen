@@ -17,6 +17,10 @@ import CharIntrigue from './components/charIntrigue/CharIntrigue';
   TODO Make input submits direct to the temp moderation databases
   TODO Add confirmation popups to submits
   TODO CHANGED NAME DATABASES TO MIXED GENDER, NEED TO CHANGE SERVER DATABASE CALLS TO MATCH
+
+  DONE finish updating the intrigue and roleplay submitions
+  TODO finish up the imahge submissions
+  TODO Standardize all the different submit button css's
 */ 
 
 const initialState = {

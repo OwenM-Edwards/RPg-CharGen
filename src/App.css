@@ -28,6 +28,7 @@ html {
 
   color: var(--dark);
   height: 100%;
+  min-width: 900px;
 
 }
 
@@ -170,6 +171,11 @@ p{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.submitButton:hover{
+  background-color: rgb(58, 134, 61); /* Green */
 }
 
 
@@ -248,6 +254,19 @@ p{
   position: relative;
   top:-40px;
 }
+.imageSubmitButton{
+  width: 150px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.imageSubmitButton:hover{
+  background-color: rgb(58, 134, 61); /* Green */
+}
 
 
 
@@ -295,7 +314,12 @@ p{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.5s ease;
 }
+.inputSubmit:hover{
+  background-color: rgb(58, 134, 61); /* Green */
+}
+
 .inputField{
   width:299px;
   height:35px;
