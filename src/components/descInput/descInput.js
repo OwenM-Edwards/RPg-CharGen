@@ -20,7 +20,7 @@ class InputDesc extends React.Component {
 
    onSubmitRoleplay = () => {
       if(this.state.roleplay){
-         fetch('http://localhost:3000/addroleplay', {
+         fetch('https://safe-dawn-37731.herokuapp.com/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
@@ -44,7 +44,7 @@ class InputDesc extends React.Component {
 
    onSubmitIntrigue = () => {
       if(this.state.intrigue){
-         fetch('http://localhost:3000/addintrigue', {
+         fetch('https://safe-dawn-37731.herokuapp.com/addintrigue', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({

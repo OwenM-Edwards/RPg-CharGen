@@ -24,7 +24,7 @@ class InputImage extends React.Component {
    }
    uploadImage =() =>{
       console.log(this.state)
-      fetch('http://localhost:3000/charimage', {
+      fetch('https://safe-dawn-37731.herokuapp.com/charimage', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({

@@ -49,7 +49,7 @@ class InputName extends React.Component {
          var lastName = this.state.lastName
       }
       
-      fetch('http://localhost:3000/addname', {
+      fetch('https://safe-dawn-37731.herokuapp.com/addname', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({

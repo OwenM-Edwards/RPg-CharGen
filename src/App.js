@@ -56,7 +56,7 @@ class App extends Component {
   submit = () => {
 
     this.setState({display:'loading'})
-    fetch('http://localhost:3000/genchar', {
+    fetch('https://safe-dawn-37731.herokuapp.com/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
