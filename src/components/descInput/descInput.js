@@ -63,7 +63,7 @@ class InputDesc extends React.Component {
             console.log('problemo')
          })
       }
-   }
+   } 
 
 
    render(){

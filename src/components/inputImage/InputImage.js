@@ -56,7 +56,7 @@ class InputImage extends React.Component {
          <div>
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img src={this.state.files} alt={''}></img>
-            </Tilt>
+            </Tilt> 
          </div>
       }
       
