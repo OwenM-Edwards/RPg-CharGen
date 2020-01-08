@@ -54,8 +54,23 @@ class App extends Component {
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
+    this.setState({display:''})
+    this.setState({nameOutput:''})
+    this.setState({imageOutput:''})
+    this.setState({ageOutput:''})
+    this.setState({lastNameOutput:''})
+    this.setState({intrigueOutput:''})
+    this.setState({roleplayOutputA:''})
+    this.setState({roleplayOutputB:''})
+    this.setState({roleplayOutputC:''})
+    this.setState({roleOutput:''})
+    this.setState({raceOutput:''})
+    this.setState({genderOutput:''})
+    this.setState({display:''})
 
-    this.setState({display:'loading'})
+
+
+
     fetch('https://safe-dawn-37731.herokuapp.com/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -66,8 +81,9 @@ class App extends Component {
       })
     })
     .then(response => response.json())
+
     .then(data => {
-      
+      console.log(data)
       this.setState({display:'loaded'})
       this.setState({nameOutput:data[0][0].name})
       this.setState({imageOutput:data[1][0].url})
@@ -80,7 +96,6 @@ class App extends Component {
       this.setState({roleplayOutputB:data[5][1].roleplay})
       this.setState({roleplayOutputC:data[5][2].roleplay})
       this.setState({roleOutput:data[6]})
-      
       this.setState({raceOutput:data[7]})
       this.setState({genderOutput:data[8]})
       if(this.state.ageOutput < 2){
@@ -99,23 +114,25 @@ class App extends Component {
           
         })
       } 
-      
     })
+
     .then(this.setState({
       fullRandom: false
     }))
     .then(this.setState({
       submitted: true
     }))
+    .then(data=>{
+      console.log(this.state.nameOutput)
+    })
     .catch(err=>{
-      console.log('problemo')
+      console.log(err)
     })
   }
 
   //HANDLES DROP OPTIONS CHANGES
   handleGenderChange = (event) => {
     this.setState({gender: event.value});
-
   }
   handleRaceChange = (event) => {
     this.setState({race: event.value});
@@ -129,7 +146,6 @@ class App extends Component {
     } else {
       this.setState({addNewCharPage:true})
     }
-    
   }
 
   render() {
@@ -139,7 +155,7 @@ class App extends Component {
     var displayStateRoleplay;
     var displayStateIntrigue;
     displayStateImg = <div className="OutputImage"><CharImage imageOutput={imageOutput} display={display} /></div>;
-    displayStateDesc = <div className="OutputDesc"><CharDesc roleOutput ={roleOutput} nameOutput={nameOutput} lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} roleOutput={roleOutput} raceOutput={raceOutput}  /></div>;
+    displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={nameOutput} roleOutput ={roleOutput}  lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} raceOutput={raceOutput}  /></div>;
     displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={roleplayOutputA} roleplayOutputB={roleplayOutputB} roleplayOutputC={roleplayOutputC} display={display} /></div>
     displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
 
