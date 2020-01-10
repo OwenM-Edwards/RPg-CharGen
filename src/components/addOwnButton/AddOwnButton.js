@@ -2,10 +2,10 @@ import React from 'react';
 import styles from './addOwnButton.module.css';
 
 
-const AddOwnButton = ({changeMain}) => {
+const AddOwnButton = ({signIn}) => {
    return (
       <div className={styles.submitButtonContainer}>
-         <button  className={styles.submit} onClick={changeMain}>Add your own!</button>
+         <button  className={styles.submit} onClick={signIn}>Sign in to add your own!</button>
       </div>
    );
 }

@@ -5,7 +5,6 @@ import SubmitButtons from './components/submitButtons/SubmitButtons';
 import InputName from './components/inputName/InputName';
 import InputImage from './components/inputImage/InputImage';
 import InputDesc from './components/descInput/DescInput';
-import AddOwnButton from './components/addOwnButton/AddOwnButton';
 import CharImage from './components/charImage/CharImage';
 import CharDesc from './components/charDesc/CharDesc';
 import CharRoleplay from './components/charRoleplay/CharRoleplay';
@@ -44,7 +43,7 @@ const initialState = {
   roleplayOutputB:'',
   roleplayOutputC:'',
   addNewCharPage:false,
-  route:'signin',
+  route:'home',
   isSignedIn: false,
   user:{
     id:'',
@@ -140,14 +139,20 @@ class App extends Component {
   handleRoleChange = (event) => {
     this.setState({role: event.value});
   }
-  changeMain = () =>{
-    if(this.state.addNewCharPage){
-      this.setState({addNewCharPage:false})
-    } else {
-      this.setState({addNewCharPage:true})
-    }
+  signIn = () =>{
+    this.setState({route:'signIn'})
+  }
+  signOut = () =>{
+    this.setState({route:'home'})
+  }
+  goToRegister = () =>{
+    // this.setState({route:'register'})
+    this.setState({route:'register'})
   }
 
+
+  
+  
   render() {
     const {isSignedIn,route,intrigueOutput, roleplayOutputA, roleplayOutputB, roleplayOutputC, display, nameOutput, imageOutput, ageOutput,raceOutput,lastNameOutput,roleOutput,genderOutput } = this.state;
     var displayStateDesc;
@@ -158,13 +163,20 @@ class App extends Component {
     displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={nameOutput} roleOutput ={roleOutput}  lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} raceOutput={raceOutput}  /></div>;
     displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={roleplayOutputA} roleplayOutputB={roleplayOutputB} roleplayOutputC={roleplayOutputC} display={display} /></div>
     displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
-
+    window.onload = function(){
+      fetch('https://safe-dawn-37731.herokuapp.com/', {
+        method: 'get',
+        headers: {'Content-Type' : 'application/json'},
+      })
+      .then(response => console.log('server up'))
+      .catch(error => console.log('server down'))
+    }
     if(route === 'input'){
       var displayMainPage = 
       <div className="main">
         <div className="sidebarContainer">
           <div className="submitButtonContainer">
-            <button  className="submit" onClick={this.changeMain}>Return to generator</button>
+            <button  className="submit" onClick={this.signIn}>Return to generator</button>
           </div>
         </div>
         <div className="inputContainer">
@@ -187,17 +199,21 @@ class App extends Component {
          
         </div>
       </div> 
-
       var subTitle =
       <h2>What would you like to add?</h2>
       
-    } else if(route === 'home') {
+    } 
+    
+    
+    else if(route === 'home') {
       var displayMainPage = 
       <div className="main">
         <div className="sidebarContainer">
           <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
           <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-          <AddOwnButton changeMain={this.changeMain}/>
+          <div className="signInButtonContainer">
+            <button  className="signInButton" onClick={this.signIn}>Sign in to add your own!</button>
+          </div>
         </div>
   
         <div className="outputContainer">
@@ -211,8 +227,38 @@ class App extends Component {
 
       var subTitle =
       <h2>Who are you looking for?</h2>
-    } else if(route === 'signin'){
-      
+    } 
+    
+    else if(route === 'signIn'){
+      var displayMainPage = 
+        <div className="main">
+          <div className="sidebarContainer">
+            <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
+            <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+            <div className="signInButtonContainer">
+              <button  className="signInButton" onClick={this.signOut}>Back to main page</button>
+            </div>
+          </div>
+            <div className="outputContainer">
+              <Signin goToRegister={this.goToRegister}/>
+            </div>
+        </div>
+    }
+
+    else if(route === 'register'){
+      var displayMainPage = 
+        <div className="main">
+          <div className="sidebarContainer">
+            <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
+            <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+            <div className="signInButtonContainer">
+              <button  className="signInButton" onClick={this.signOut}>Back to main page</button>
+            </div>
+          </div>
+            <div className="outputContainer">
+              <Register/>
+            </div>
+        </div>
     }
     
     
