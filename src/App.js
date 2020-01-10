@@ -10,7 +10,8 @@ import CharImage from './components/charImage/CharImage';
 import CharDesc from './components/charDesc/CharDesc';
 import CharRoleplay from './components/charRoleplay/CharRoleplay';
 import CharIntrigue from './components/charIntrigue/CharIntrigue';
-
+import Signin from './components/Signin/Signin';
+import Register from './components/Register/Register';
 
  
 /* 
@@ -42,35 +43,37 @@ const initialState = {
   roleplayOutputA:'',
   roleplayOutputB:'',
   roleplayOutputC:'',
-  addNewCharPage:false
+  addNewCharPage:false,
+  route:'signin',
+  isSignedIn: false,
+  user:{
+    id:'',
+    name: '',
+    email: '',
+    entries: 0,
+    joined: ''
+  }
 }
 class App extends Component {
   constructor(){
     super();
     this.state = initialState;
   }
+  loadUser = (data) => {
+    this.setState({user: {
+      id:data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.join
+    }})
+  }
 
 
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
-    this.setState({display:''})
-    this.setState({nameOutput:''})
-    this.setState({imageOutput:''})
-    this.setState({ageOutput:''})
-    this.setState({lastNameOutput:''})
-    this.setState({intrigueOutput:''})
-    this.setState({roleplayOutputA:''})
-    this.setState({roleplayOutputB:''})
-    this.setState({roleplayOutputC:''})
-    this.setState({roleOutput:''})
-    this.setState({raceOutput:''})
-    this.setState({genderOutput:''})
-    this.setState({display:''})
-
-
-
-
+    this.setState({display:'loading'})
     fetch('https://safe-dawn-37731.herokuapp.com/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
@@ -83,21 +86,20 @@ class App extends Component {
     .then(response => response.json())
 
     .then(data => {
-      console.log(data)
       this.setState({display:'loaded'})
       this.setState({nameOutput:data[0][0].name})
-      this.setState({imageOutput:data[1][0].url})
+      this.setState({imageOutput:data[0][0].url})
       this.setState({
-        ageOutput:Math.floor(Math.random()*data[2][0].maxage)
+        ageOutput:Math.floor(Math.random()*data[0][0].maxage)
       })
-      this.setState({lastNameOutput:data[3][0].lastname})
-      this.setState({intrigueOutput:data[4][0].intrigue})
-      this.setState({roleplayOutputA:data[5][0].roleplay})
-      this.setState({roleplayOutputB:data[5][1].roleplay})
-      this.setState({roleplayOutputC:data[5][2].roleplay})
-      this.setState({roleOutput:data[6]})
-      this.setState({raceOutput:data[7]})
-      this.setState({genderOutput:data[8]})
+      this.setState({lastNameOutput:data[0][0].lastname})
+      this.setState({intrigueOutput:data[0][0].intrigue})
+      this.setState({roleplayOutputA:data[1][0].roleplay})
+      this.setState({roleplayOutputB:data[1][1].roleplay})
+      this.setState({roleplayOutputC:data[1][2].roleplay})
+      this.setState({roleOutput:data[2]})
+      this.setState({raceOutput:data[3]})
+      this.setState({genderOutput:data[4]})
       if(this.state.ageOutput < 2){
         this.setState({
           ageOutput:this.state.ageOutput+14
@@ -122,9 +124,7 @@ class App extends Component {
     .then(this.setState({
       submitted: true
     }))
-    .then(data=>{
-      console.log(this.state.nameOutput)
-    })
+
     .catch(err=>{
       console.log(err)
     })
@@ -149,7 +149,7 @@ class App extends Component {
   }
 
   render() {
-    const {intrigueOutput, roleplayOutputA, roleplayOutputB, roleplayOutputC, display, nameOutput, imageOutput, ageOutput,raceOutput,lastNameOutput,roleOutput,genderOutput } = this.state;
+    const {isSignedIn,route,intrigueOutput, roleplayOutputA, roleplayOutputB, roleplayOutputC, display, nameOutput, imageOutput, ageOutput,raceOutput,lastNameOutput,roleOutput,genderOutput } = this.state;
     var displayStateDesc;
     var displayStateImg;
     var displayStateRoleplay;
@@ -159,7 +159,7 @@ class App extends Component {
     displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={roleplayOutputA} roleplayOutputB={roleplayOutputB} roleplayOutputC={roleplayOutputC} display={display} /></div>
     displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
 
-    if(this.state.addNewCharPage){
+    if(route === 'input'){
       var displayMainPage = 
       <div className="main">
         <div className="sidebarContainer">
@@ -191,7 +191,7 @@ class App extends Component {
       var subTitle =
       <h2>What would you like to add?</h2>
       
-    } else {
+    } else if(route === 'home') {
       var displayMainPage = 
       <div className="main">
         <div className="sidebarContainer">
@@ -211,6 +211,8 @@ class App extends Component {
 
       var subTitle =
       <h2>Who are you looking for?</h2>
+    } else if(route === 'signin'){
+      
     }
     
     
