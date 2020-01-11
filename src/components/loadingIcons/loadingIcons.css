@@ -1,4 +1,13 @@
-.loadIcon{
+.loadIconContainer{
+   text-align: center;
+   width:100%;
+   height:100%;
+}
 
-   margin-top:0;
+
+.loadIcon{
+   width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top:30%;
 }

@@ -9,7 +9,7 @@ const SubmitButtons = ({fullRandom, submit}) => {
       <div className={styles.submitButtonContainer}>
          { fullRandom === true
           ? <button  className={styles.submit} onClick={submit}>Suprise me!</button>
-          : <button className={styles.submit} onClick={submit}>Submit</button>
+          : <button className={styles.submit} onClick={submit}>Make another NPC</button>
         }
       </div>
    );

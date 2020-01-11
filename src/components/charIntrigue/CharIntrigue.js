@@ -3,15 +3,15 @@ import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 
 
-const CharIntrigue = ({intrigueOutput, display}) => {
+const CharIntrigue = ({intrigueOutput, loadingState}) => {
    var displayIntrigue;
-   if (display === 'init') {
+   if (loadingState === 'init') {
       displayIntrigue = <div className={"title"}>Intrigue :  ???</div>;
 
-   } else if(display === 'loading') {
-      displayIntrigue = <LoadingIcons/>;
+   } else if(loadingState === 'loading') {
+      displayIntrigue = <div></div>
 
-   } else if(display === 'loaded') {
+   } else if(loadingState === 'loaded') {
       displayIntrigue = 
          <div>
             <div className={"title"}>Intrigue :</div>

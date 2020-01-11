@@ -3,8 +3,8 @@ import Files from "react-butterfiles";
 import Tilt from 'react-tilt'
 
 class InputImage extends React.Component {
-   constructor(){
-      super()
+   constructor(props){
+      super(props);
       this.state = {
          files:[],
          errors:[],
@@ -22,22 +22,35 @@ class InputImage extends React.Component {
    handleRole = (event) =>{
       this.setState({role: event.target.value});
    }
+   
    uploadImage =() =>{
-      console.log(this.state)
+      this.props.handleInputLoadingState('loading')
       fetch('https://safe-dawn-37731.herokuapp.com/charimage', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
-      body: JSON.stringify({
-        "image": this.state.files,
-        "gender":this.state.gender,
-        "race":this.state.race,
-        "role":this.state.role
+         body: JSON.stringify({
+         "image": this.state.files,
+         "gender":this.state.gender,
+         "race":this.state.race,
+         "role":this.state.role,
+         "email":this.props.email,
+         "id":this.props.id
+         })
       })
-    })
-    .then(response => response.json())
-    .catch(err=>{
-      console.log('problemo')
-    })
+      
+      .then(response => {
+         this.props.handleInputLoadingState('default')
+         if(response.status === 200){
+            
+            console.log('success')
+         } else{
+            console.log('failure')
+         }
+      })
+      
+      .catch(err=>{
+         console.log('problemo')
+      })
    }
 
 

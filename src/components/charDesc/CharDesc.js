@@ -3,9 +3,9 @@ import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 
 
-const CharDesc = ({nameOutput, roleOutput, lastNameOutput, display, ageOutput, raceOutput}) => {
+const CharDesc = ({nameOutput, roleOutput, lastNameOutput, loadingState, ageOutput, raceOutput}) => {
    var displayStateMainLine;
-   if (display === 'init') {
+   if (loadingState === 'init') {
       displayStateMainLine = 
             <div  className={"title"}>
                Description :  ???
@@ -14,10 +14,10 @@ const CharDesc = ({nameOutput, roleOutput, lastNameOutput, display, ageOutput, r
            
 
 
-   } else if(display === 'loading') {
-      displayStateMainLine = <div><LoadingIcons/></div>;
+   } else if(loadingState === 'loading') {
+      displayStateMainLine =  <div></div>
 
-   } else if(display === 'loaded') {
+   } else if(loadingState === 'loaded') {
       displayStateMainLine = 
          <div>
             <div className={"title"}>Name :</div>

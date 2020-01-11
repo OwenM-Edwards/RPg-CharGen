@@ -16,8 +16,8 @@ const customStyles = {
 }
 
 class InputName extends React.Component {
-   constructor(){
-      super()
+   constructor(props){
+      super(props)
       this.state = {
          name: '',
          lastName:'',
@@ -48,7 +48,7 @@ class InputName extends React.Component {
       if(this.state.lastName){
          var lastName = this.state.lastName
       }
-      
+      this.props.handleInputLoadingState('loading')
       fetch('https://safe-dawn-37731.herokuapp.com/addname', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -56,20 +56,18 @@ class InputName extends React.Component {
                "race": this.state.race,
                "gender": this.state.gender,
                "name":firstName,
-               "lastname":lastName
+               "lastname":lastName,
+               "email":this.props.email,
+               "id":this.props.id
             })
          })
 
-         .then(response => response.json())
-         .then(status => {
-            if(status === 'Success'){
-               console.log('Name added')
-            } else if(status === 'duplicate'){
-               console.log('Duplicate Name')
-            } else if(status === 'duplicate last name'){
-               console.log('First name added, Duplicate Last Name')
-            } else {
-               console.log('Error adding name')
+         .then(response => {
+            this.props.handleInputLoadingState('default')
+            if(response.status === 200){
+               console.log('success')
+            } else{
+               console.log('failure')
             }
          })
          

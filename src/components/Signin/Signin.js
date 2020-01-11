@@ -34,7 +34,7 @@ class Signin extends React.Component {
       .then(user => {
          if(user.id){
             this.props.loadUser(user);
-            this.props.onRouteChange('input');
+            this.props.routeChange('input');
          }
       })
    }
@@ -72,7 +72,7 @@ class Signin extends React.Component {
                      <input className="submit" 
                         type="submit" 
                         value="Register" 
-                        onClick={this.props.goToRegister}
+                        onClick={()=> this.props.routeChange('register')}
                      />
                   </div>
                </div>

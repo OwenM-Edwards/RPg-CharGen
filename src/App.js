@@ -4,13 +4,14 @@ import SelectionButtons from './components/selectionButtons/SelectionButtons';
 import SubmitButtons from './components/submitButtons/SubmitButtons';
 import InputName from './components/inputName/InputName';
 import InputImage from './components/inputImage/InputImage';
-import InputDesc from './components/descInput/DescInput';
+import InputDesc from './components/inputdesc/DescInput';
 import CharImage from './components/charImage/CharImage';
 import CharDesc from './components/charDesc/CharDesc';
 import CharRoleplay from './components/charRoleplay/CharRoleplay';
 import CharIntrigue from './components/charIntrigue/CharIntrigue';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
+import LoadingIcons from './components/loadingIcons/LoadingIcons';
 
  
 /* 
@@ -24,32 +25,36 @@ import Register from './components/Register/Register';
 */ 
 
 const initialState = {
-  fullRandom: true,
-  gender:'random',
-  genderOutput:'',
-  race: 'random',
-  raceOutput:'',
-  system: 'Random',
-  nameOutput:'',
-  imageOutput: '',
-  statsOutput:'',
-  role:'random',
-  roleOutput: '',
-  ageOutput: '',
-  lastNameOutput:'',
-  display:'init',
-  intrigueOutput:'',
-  roleplayOutputA:'',
-  roleplayOutputB:'',
-  roleplayOutputC:'',
+  inputLoadingState:'default',
+  loadingState:'init',
   addNewCharPage:false,
   route:'home',
   isSignedIn: false,
+  fullRandom: true,
+
+  charGenInfo:{
+    gender:'random',
+    race: 'random',
+    role:'random'
+  },
+
+  newChar:{
+    raceOutput:'',
+    nameOutput:'',
+    imageOutput: '',
+    roleOutput: '',
+    lastNameOutput:'',
+    intrigueOutput:'',
+    roleplayOutputA:'',
+    roleplayOutputB:'',
+    roleplayOutputC:'',
+    ageOutput: ''
+  },
+
   user:{
     id:'',
     name: '',
     email: '',
-    entries: 0,
     joined: ''
   }
 }
@@ -63,7 +68,6 @@ class App extends Component {
       id:data.id,
       name: data.name,
       email: data.email,
-      entries: data.entries,
       joined: data.join
     }})
   }
@@ -72,48 +76,49 @@ class App extends Component {
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
-    this.setState({display:'loading'})
+    this.setState({loadingState:'loading'})
     fetch('https://safe-dawn-37731.herokuapp.com/genchar', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
-        "race": this.state.race,
-        "gender": this.state.gender,
-        "role":this.state.role
+        "race": this.state.charGenInfo.race,
+        "gender": this.state.charGenInfo.gender,
+        "role":this.state.charGenInfo.role
       })
     })
     .then(response => response.json())
 
     .then(data => {
-      this.setState({display:'loaded'})
-      this.setState({nameOutput:data[0][0].name})
-      this.setState({imageOutput:data[0][0].url})
-      this.setState({
-        ageOutput:Math.floor(Math.random()*data[0][0].maxage)
-      })
-      this.setState({lastNameOutput:data[0][0].lastname})
-      this.setState({intrigueOutput:data[0][0].intrigue})
-      this.setState({roleplayOutputA:data[1][0].roleplay})
-      this.setState({roleplayOutputB:data[1][1].roleplay})
-      this.setState({roleplayOutputC:data[1][2].roleplay})
-      this.setState({roleOutput:data[2]})
-      this.setState({raceOutput:data[3]})
-      this.setState({genderOutput:data[4]})
-      if(this.state.ageOutput < 2){
-        this.setState({
+
+      this.setState({loadingState:'loaded'})
+      this.setState({newChar: {
+        nameOutput:data[0][0].name,
+        imageOutput:data[0][0].url,
+        ageOutput:Math.floor(Math.random()*data[0][0].maxage),
+        lastNameOutput:data[0][0].lastname,
+        intrigueOutput:data[0][0].intrigue,
+        roleplayOutputA:data[1][0].roleplay,
+        roleplayOutputB:data[1][1].roleplay,
+        roleplayOutputC:data[1][2].roleplay,
+        roleOutput:data[2],
+        raceOutput:data[3],
+        genderOutput:data[4], 
+      }})
+
+
+      if(this.state.newChar.ageOutput < 2){
+        this.setState({newChar: {
           ageOutput:this.state.ageOutput+14
-        })
+        }})
       } 
-      else if(this.state.ageOutput < 4){
-        this.setState({
-          ageOutput:this.state.ageOutput*7
-          
-        })
-      } else if(this.state.ageOutput < 13){
-        this.setState({
-          ageOutput:this.state.ageOutput*3
-          
-        })
+      else if(this.state.newChar.ageOutput < 4){
+        this.setState({newChar: {
+          ageOutput:this.state.ageOutput*7 
+        }})
+      } else if(this.state.newChar.ageOutput < 13){
+        this.setState({newChar: {
+          ageOutput:this.state.ageOutput*3  
+        }})
       } 
     })
 
@@ -131,13 +136,13 @@ class App extends Component {
 
   //HANDLES DROP OPTIONS CHANGES
   handleGenderChange = (event) => {
-    this.setState({gender: event.value});
+    this.setState({charGenInfo:{gender: event.value}});
   }
   handleRaceChange = (event) => {
-    this.setState({race: event.value});
+    this.setState({charGenInfo:{race: event.value}});
   }
   handleRoleChange = (event) => {
-    this.setState({role: event.value});
+    this.setState({charGenInfo:{role: event.value}});
   }
   signIn = () =>{
     this.setState({route:'signIn'})
@@ -149,20 +154,31 @@ class App extends Component {
     // this.setState({route:'register'})
     this.setState({route:'register'})
   }
+  routeChange = (newRoute) =>{
+    if(newRoute){
+      this.setState({route:newRoute})
+    } else{
+      this.setState({route:'home'})
+    }
+    
+  }
+  handleInputLoadingState = (data)=>{
+    this.setState({inputLoadingState:data})
+  }
 
 
   
   
   render() {
-    const {isSignedIn,route,intrigueOutput, roleplayOutputA, roleplayOutputB, roleplayOutputC, display, nameOutput, imageOutput, ageOutput,raceOutput,lastNameOutput,roleOutput,genderOutput } = this.state;
+    const {isSignedIn,route,loadingState,inputLoadingState} = this.state;
     var displayStateDesc;
     var displayStateImg;
     var displayStateRoleplay;
     var displayStateIntrigue;
-    displayStateImg = <div className="OutputImage"><CharImage imageOutput={imageOutput} display={display} /></div>;
-    displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={nameOutput} roleOutput ={roleOutput}  lastNameOutput={lastNameOutput} display={display} ageOutput={ageOutput} raceOutput={raceOutput}  /></div>;
-    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={roleplayOutputA} roleplayOutputB={roleplayOutputB} roleplayOutputC={roleplayOutputC} display={display} /></div>
-    displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={intrigueOutput} display={display} /></div>
+    displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
+    displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
+    displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
     window.onload = function(){
       fetch('https://safe-dawn-37731.herokuapp.com/', {
         method: 'get',
@@ -171,29 +187,29 @@ class App extends Component {
       .then(response => console.log('server up'))
       .catch(error => console.log('server down'))
     }
-    if(route === 'input'){
+    if(route === 'input' && inputLoadingState !== 'loading'){
       var displayMainPage = 
       <div className="main">
         <div className="sidebarContainer">
           <div className="submitButtonContainer">
-            <button  className="submit" onClick={this.signIn}>Return to generator</button>
+            <button  className="submit" onClick={()=> this.routeChange('home')}>Return to generator</button>
           </div>
         </div>
         <div className="inputContainer">
 
           <div className="nameAndImageContainer">
             <div className="inputName">
-              <InputName/>
+              <InputName handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
             </div>
 
             <div className="inputImage">
-              <InputImage/>
+              <InputImage handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
             </div>
           </div>
 
           <div className="roleplayAndIntrigueContainer">
             <div className="inputDesc">
-              <InputDesc/>
+              <InputDesc handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
             </div>
           </div>
          
@@ -201,8 +217,28 @@ class App extends Component {
       </div> 
       var subTitle =
       <h2>What would you like to add?</h2>
-      
     } 
+
+    else if(route === 'input' && inputLoadingState === 'loading'){
+      var displayMainPage = 
+      <div className="main">
+        <div className="sidebarContainer">
+          <div className="submitButtonContainer">
+            <button  className="submit" onClick={()=> this.routeChange('home')}>Return to generator</button>
+          </div>
+        </div>
+        <div className="outputContainer">
+          <LoadingIcons/>
+        </div>
+      </div> 
+      var subTitle =
+      <h2>What would you like to add?</h2>
+    } 
+
+
+
+
+
     
     
     else if(route === 'home') {
@@ -212,7 +248,7 @@ class App extends Component {
           <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
           <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
           <div className="signInButtonContainer">
-            <button  className="signInButton" onClick={this.signIn}>Sign in to add your own!</button>
+            <button  className="signInButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
           </div>
         </div>
   
@@ -236,11 +272,11 @@ class App extends Component {
             <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
             <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
             <div className="signInButtonContainer">
-              <button  className="signInButton" onClick={this.signOut}>Back to main page</button>
+              <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
             </div>
           </div>
             <div className="outputContainer">
-              <Signin goToRegister={this.goToRegister}/>
+              <Signin loadUser={this.loadUser} routeChange={this.routeChange}/>
             </div>
         </div>
     }
@@ -252,11 +288,11 @@ class App extends Component {
             <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
             <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
             <div className="signInButtonContainer">
-              <button  className="signInButton" onClick={this.signOut}>Back to main page</button>
+              <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
             </div>
           </div>
             <div className="outputContainer">
-              <Register/>
+              <Register routeChange={this.routeChange} loadUser={this.loadUser} />
             </div>
         </div>
     }
