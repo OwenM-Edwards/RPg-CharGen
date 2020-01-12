@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './descInput.module.css';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 
 class InputDesc extends React.Component {
@@ -8,6 +8,8 @@ class InputDesc extends React.Component {
       this.state = {
          roleplay:'',
          intrigue:'',
+         roleplayLoading:'default',
+         intrigueLoading:'default'
       }
    }
 
@@ -17,10 +19,16 @@ class InputDesc extends React.Component {
    handleIntrigue = (event) =>{
       this.setState({intrigue: event.target.value});
    }
+   handleRoleplayLoading=(data)=>{
+      this.setState({roleplayLoading: data});
+   }
+   handleIntrigueLoading=(data)=>{
+      this.setState({intrigueLoading: data});
+   }
 
    onSubmitRoleplay = () => {
       if(this.state.roleplay){
-         this.props.handleInputLoadingState('loading')
+         this.handleRoleplayLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -32,7 +40,7 @@ class InputDesc extends React.Component {
          })
          .then(response => response.json())
          .then(status => {
-            this.props.handleInputLoadingState('default')
+            this.handleRoleplayLoading('default')
             if(status === 'Success'){
                console.log('Roleplay added')
             } else {
@@ -48,7 +56,7 @@ class InputDesc extends React.Component {
 
    onSubmitIntrigue = () => {
       if(this.state.intrigue){
-         this.props.handleInputLoadingState('loading')
+         this.handleIntrigueLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addintrigue', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -60,7 +68,7 @@ class InputDesc extends React.Component {
          })
          .then(response => response.json())
          .then(status => {
-            this.props.handleInputLoadingState('default')
+            this.handleIntrigueLoading('default')
             if(status === 'Success'){
                console.log('Intrigue added')
             } else {
@@ -75,20 +83,39 @@ class InputDesc extends React.Component {
 
 
    render(){
+      let displayRoleplay = '';
+      let displayIntrigue = '';
+      if(this.state.roleplayLoading === 'loading'){
+         displayRoleplay = <LoadingIcons/>
+      } else {
+         displayRoleplay =
+         <form className="inputRoleplayForm">
+            Roleplay Que: 
+            <input className="roleplayText" onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
+
+            <button className="submitButton" type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
+         </form>
+      }
+
+      if(this.state.intrigueLoading === 'loading'){
+         displayIntrigue = <LoadingIcons/>
+      } else {
+         displayIntrigue =
+         <form className="inputIntrigueForm">
+            Intrigue: 
+            <textarea  className="intrigueText" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
+
+            <button className="submitButton" type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
+         </form>
+      }
+
+
+      
+      
       return (
          <div>
-            <form className="inputRoleplayForm">
-               Roleplay Que: 
-               <input className="roleplayText" onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
-
-               <button className="submitButton" type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
-            </form>
-            <form className="inputIntrigueForm">
-               Intrigue: 
-               <textarea  className="intrigueText" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
-
-               <button className="submitButton" type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
-            </form>
+            {displayRoleplay}
+            {displayIntrigue} 
          </div>
       );
    }

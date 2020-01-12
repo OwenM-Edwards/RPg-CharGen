@@ -1,6 +1,6 @@
 import React from 'react';
-import Files from "react-butterfiles";
-import Tilt from 'react-tilt'
+import Tilt from 'react-tilt';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 class InputImage extends React.Component {
    constructor(props){
@@ -10,7 +10,10 @@ class InputImage extends React.Component {
          errors:[],
          race:'human',
          gender:'male',
-         role:'merchant'
+         role:'merchant',
+         loading:'default',
+         displayFile:null,
+         previewSrc: ''
       }
    }
    handleRace = (event)=>{
@@ -22,14 +25,18 @@ class InputImage extends React.Component {
    handleRole = (event) =>{
       this.setState({role: event.target.value});
    }
+   handleLoading=(data)=>{
+      this.setState({loading: data});
+   }
    
+
    uploadImage =() =>{
-      this.props.handleInputLoadingState('loading')
+      this.handleLoading('loading')
       fetch('https://safe-dawn-37731.herokuapp.com/charimage', {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
          body: JSON.stringify({
-         "image": this.state.files,
+         "image": this.state.previewSrc,
          "gender":this.state.gender,
          "race":this.state.race,
          "role":this.state.role,
@@ -37,9 +44,8 @@ class InputImage extends React.Component {
          "id":this.props.id
          })
       })
-      
       .then(response => {
-         this.props.handleInputLoadingState('default')
+         this.handleLoading('default')
          if(response.status === 200){
             
             console.log('success')
@@ -47,33 +53,39 @@ class InputImage extends React.Component {
             console.log('failure')
          }
       })
-      
       .catch(err=>{
          console.log('problemo')
       })
    }
 
 
-   render(){
-      const state = ({})
-      var imageUploadDisplay;
-      if(this.state.files.length === 0){
-         imageUploadDisplay = 
-         <div>
-            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
-               <img src={require('../../img/blankProfile.png')} alt={''}></img>
-            </Tilt>
-         </div>
-      } else {
-         imageUploadDisplay = 
-         <div>
-            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
-               <img src={this.state.files} alt={''}></img>
-            </Tilt> 
-         </div>
+   handlePreview = (data) => {
+      data.preventDefault();
+  
+      let file = data.target.files[0];
+      let reader = new FileReader();
+  
+      if (data.target.files.length === 0) {
+        return;
       }
-      
-      return (
+      reader.onloadend = (data) => {
+         this.setState({
+           previewSrc: [reader.result]
+         });
+       }
+   
+       reader.readAsDataURL(file);
+     }
+
+
+   render(){
+      let display = '';
+
+
+      if(this.state.loading === 'loading'){
+         display = <LoadingIcons/>
+      } else {
+         display =
          <div className="imageInputContainer">
             
             <form id="newName">
@@ -96,34 +108,20 @@ class InputImage extends React.Component {
                   </select>
             </form>
 
-            <Files
-               multiple={false} 
-               maxSize="60mb"
-               accept={["application/pdf","image/jpg","image/jpeg", "image/png"]}
-               onSuccess={files => this.setState({ files })}
-               onError={errors => this.setState({ errors })}
-               convertToBase64={true}
-            >
-            {({ browseFiles, getDropZoneProps }) => (
-               <>
-               <div {...getDropZoneProps({ className: "myDropZone" })}/>
-               <button className="imageSubmitButton" onClick={browseFiles}>Select files...</button>
-               <ol>
-                  {this.state.files.map(file => (
-                     <li key={file.name}>{file.name}</li>
-                  ))}
-                  {this.state.errors.map(error => (
-                     <li key={error.file.name}>
-                     {error.file.name} - {error.type}
-                     </li>
-                  ))}
-               </ol>
-               </>
-            )}
-            </Files>
+
+            <input type="file" onChange={this.handlePreview} />
+
+            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
+               <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
+            </Tilt>
+
+
+            
             <button className="imageSubmitButton" onClick={this.uploadImage}>Upload Image</button>
-            {imageUploadDisplay}
          </div>
+         }
+      return (
+         display
       )
    }
 }

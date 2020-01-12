@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
@@ -22,7 +23,8 @@ class InputName extends React.Component {
          name: '',
          lastName:'',
          gender: 'male',
-         race: 'human'
+         race: 'human',
+         loading:'default'
       }
    }
 
@@ -41,6 +43,10 @@ class InputName extends React.Component {
    handleRace = (event)=>{
       this.setState({race: event.target.value});
    }
+   handleLoading=(data)=>{
+      this.setState({loading: data});
+   }
+
    onSubmitNewName = () => {
       if(this.state.name){
          var firstName = this.state.name;
@@ -48,7 +54,7 @@ class InputName extends React.Component {
       if(this.state.lastName){
          var lastName = this.state.lastName
       }
-      this.props.handleInputLoadingState('loading')
+      this.handleLoading('loading')
       fetch('https://safe-dawn-37731.herokuapp.com/addname', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -63,7 +69,7 @@ class InputName extends React.Component {
          })
 
          .then(response => {
-            this.props.handleInputLoadingState('default')
+            this.handleLoading('default')
             if(response.status === 200){
                console.log('success')
             } else{
@@ -73,12 +79,16 @@ class InputName extends React.Component {
          
          .catch(err=>{
             console.log('problemo')
-         })
+         }) 
    }
 
 
    render(){
-      return (
+      let displayName = '';
+      if(this.state.loading === 'loading'){
+         displayName = <LoadingIcons/>
+      } else {
+         displayName =
          <form id="newName">
             Add new character name: 
             <div>
@@ -101,9 +111,11 @@ class InputName extends React.Component {
                <button className="inputSubmit" type={"button"} onClick={this.onSubmitNewName}>submit</button> 
             </div>
          </form>
+      }
+      return (
+         displayName
       );
    }
-
 }
 
 export default InputName;

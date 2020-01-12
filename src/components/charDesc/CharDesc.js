@@ -1,5 +1,4 @@
 import React from 'react';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 
 

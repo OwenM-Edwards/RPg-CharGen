@@ -8,7 +8,8 @@ class Signin extends React.Component {
       super(props);
       this.state = {
          signInEmail: '',
-         signInPassword: ''
+         signInPassword: '',
+         loading:'default'
       }
    }
    onEmailChange = (event) => {
@@ -20,10 +21,13 @@ class Signin extends React.Component {
    sayHello = () =>{
       console.log('hello')
    }
+   handleLoading = (data)=>{
+      this.setState({loading:data}) 
+   }
 
 
    onSubmitSignIn = () => {
-      this.props.handleInputLoadingState('loading')
+      this.handleLoading('loading')
       fetch('https://safe-dawn-37731.herokuapp.com/signin', {
          method: 'post',
          headers: {'Content-Type' : 'application/json'},
@@ -34,7 +38,7 @@ class Signin extends React.Component {
       })
       .then(response => response.json())
       .then(user => {
-         this.props.handleInputLoadingState('default')
+         this.handleLoading('default')
          this.props.changeSubTitle('What would you like to add?')
          if(user.id){
             this.props.loadUser(user);
@@ -46,15 +50,15 @@ class Signin extends React.Component {
 
 
    render() {
-      var displayMainPage;
-      if(this.props.inputLoadingState === 'loading'){
-         var displayMainPage = 
+      let displayMainPage = '';
+      if(this.state.loading === 'loading'){
+         displayMainPage = 
             <div className="outputContainer">
                <LoadingIcons/>
             </div>
       }
-      else if(this.props.inputLoadingState !== 'loading'){
-         var displayMainPage = 
+      else if(this.state.loading !== 'loading'){
+          displayMainPage = 
             <div className="outputContainer">
                <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
                   <main className="pa4 black-80">

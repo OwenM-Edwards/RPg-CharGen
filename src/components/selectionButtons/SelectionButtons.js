@@ -25,9 +25,6 @@ const customStyles = {
 }
 //({handleRoleChange, handleGenderChange, handleRaceChange,handleSystemChange}) 
 class SelectionButtons extends React.Component {
-   constructor(props){
-      super(props) 
-   }
 
    render(){
       // const { selectedOption } = this.state;

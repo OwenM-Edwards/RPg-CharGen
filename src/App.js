@@ -26,10 +26,9 @@ import LoadingIcons from './components/loadingIcons/LoadingIcons';
 
 const initialState = {
   subTitle:'Who are you looking for?',
-  inputLoadingState:'default',
   loadingState:'init',
   addNewCharPage:false,
-  route:'home',
+  route:'input',
   isSignedIn: false,
   fullRandom: true,
 
@@ -139,26 +138,12 @@ class App extends Component {
   handleRoleChange = (event) => {
     this.setState({charGenInfo:{role: event.value}});
   }
-  signIn = () =>{
-    this.setState({route:'signIn'})
-  }
-  signOut = () =>{
-    this.setState({route:'home'})
-  }
-  goToRegister = () =>{
-    // this.setState({route:'register'})
-    this.setState({route:'register'})
-  }
   routeChange = (newRoute) =>{
     if(newRoute){
       this.setState({route:newRoute})
     } else{
       this.setState({route:'home'})
-    }
-    
-  }
-  handleInputLoadingState = (data)=>{
-    this.setState({inputLoadingState:data})
+    }   
   }
   changeSubTitle = (data)=>{
     this.setState({subTitle:data})
@@ -169,10 +154,9 @@ class App extends Component {
   }
 
 
-  
-  
+
   render() {
-    const {subTitle,isSignedIn,route,loadingState,inputLoadingState} = this.state;
+    const {subTitle,isSignedIn,route,loadingState} = this.state;
     let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
     let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
     let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
@@ -185,6 +169,7 @@ class App extends Component {
       .then(response => console.log('server up'))
       .catch(error => console.log('server down'))
     }
+
 
     return (
       <div  className="App">
@@ -204,11 +189,9 @@ class App extends Component {
                   </div>
               </div>
               
-              <Register inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} inputLoadingState={this.inputLoadingState}/>
+              <Register handleInputLoadingState={this.handleInputLoadingState}/>
             </div>
           ) 
-
-
 
 
           : (
@@ -220,11 +203,11 @@ class App extends Component {
                 </div>
               </div>
 
-              <Signin changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+              <Signin isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
             </div>
-            
-
           ) 
+
+
           : (
           route === 'input' ? (
             <div className="main">
@@ -237,26 +220,26 @@ class App extends Component {
               <div className="inputContainer">
                 <div className="nameAndImageContainer">
                   <div className="inputName">
-                    <InputName handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                    <InputName id={this.state.user.id} email={this.state.user.email}/>
                   </div>
 
                   <div className="inputImage">
-                    <InputImage handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                    <InputImage id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 </div>
 
                 <div className="roleplayAndIntrigueContainer">
                   <div className="inputDesc">
-                    <InputDesc handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                    <InputDesc id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 </div>
               
               </div>
             </div>
-          ) : (
+          ) 
+          
 
-
-
+          : (
             <div className="main">
               <div className="sidebarContainer">
                 <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
