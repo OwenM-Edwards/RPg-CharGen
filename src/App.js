@@ -25,6 +25,7 @@ import LoadingIcons from './components/loadingIcons/LoadingIcons';
 */ 
 
 const initialState = {
+  subTitle:'Who are you looking for?',
   inputLoadingState:'default',
   loadingState:'init',
   addNewCharPage:false,
@@ -87,9 +88,7 @@ class App extends Component {
       })
     })
     .then(response => response.json())
-
     .then(data => {
-
       this.setState({loadingState:'loaded'})
       this.setState({newChar: {
         nameOutput:data[0][0].name,
@@ -104,8 +103,6 @@ class App extends Component {
         raceOutput:data[3],
         genderOutput:data[4], 
       }})
-
-
       if(this.state.newChar.ageOutput < 2){
         this.setState({newChar: {
           ageOutput:this.state.ageOutput+14
@@ -121,14 +118,12 @@ class App extends Component {
         }})
       } 
     })
-
     .then(this.setState({
       fullRandom: false
     }))
     .then(this.setState({
       submitted: true
     }))
-
     .catch(err=>{
       console.log(err)
     })
@@ -165,20 +160,23 @@ class App extends Component {
   handleInputLoadingState = (data)=>{
     this.setState({inputLoadingState:data})
   }
+  changeSubTitle = (data)=>{
+    this.setState({subTitle:data})
+  }
+  returnFromInput=()=>{
+    this.setState({subTitle:'Who are you looking for?'})
+    this.setState({route:'home'})
+  }
 
 
   
   
   render() {
-    const {isSignedIn,route,loadingState,inputLoadingState} = this.state;
-    var displayStateDesc;
-    var displayStateImg;
-    var displayStateRoleplay;
-    var displayStateIntrigue;
-    displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
-    displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
-    displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
-    displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
+    const {subTitle,isSignedIn,route,loadingState,inputLoadingState} = this.state;
+    let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
+    let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+    let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
+    let displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
     window.onload = function(){
       fetch('https://safe-dawn-37731.herokuapp.com/', {
         method: 'get',
@@ -187,128 +185,102 @@ class App extends Component {
       .then(response => console.log('server up'))
       .catch(error => console.log('server down'))
     }
-    if(route === 'input' && inputLoadingState !== 'loading'){
-      var displayMainPage = 
-      <div className="main">
-        <div className="sidebarContainer">
-          <div className="submitButtonContainer">
-            <button  className="submit" onClick={()=> this.routeChange('home')}>Return to generator</button>
-          </div>
-        </div>
-        <div className="inputContainer">
-
-          <div className="nameAndImageContainer">
-            <div className="inputName">
-              <InputName handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
-            </div>
-
-            <div className="inputImage">
-              <InputImage handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
-            </div>
-          </div>
-
-          <div className="roleplayAndIntrigueContainer">
-            <div className="inputDesc">
-              <InputDesc handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
-            </div>
-          </div>
-         
-        </div>
-      </div> 
-      var subTitle =
-      <h2>What would you like to add?</h2>
-    } 
-
-    else if(route === 'input' && inputLoadingState === 'loading'){
-      var displayMainPage = 
-      <div className="main">
-        <div className="sidebarContainer">
-          <div className="submitButtonContainer">
-            <button  className="submit" onClick={()=> this.routeChange('home')}>Return to generator</button>
-          </div>
-        </div>
-        <div className="outputContainer">
-          <LoadingIcons/>
-        </div>
-      </div> 
-      var subTitle =
-      <h2>What would you like to add?</h2>
-    } 
-
-
-
-
-
-    
-    
-    else if(route === 'home') {
-      var displayMainPage = 
-      <div className="main">
-        <div className="sidebarContainer">
-          <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-          <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-          <div className="signInButtonContainer">
-            <button  className="signInButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
-          </div>
-        </div>
-  
-        <div className="outputContainer">
-          {displayStateDesc}
-          {displayStateImg}
-  
-          {displayStateRoleplay}
-          {displayStateIntrigue}
-        </div>
-      </div>
-
-      var subTitle =
-      <h2>Who are you looking for?</h2>
-    } 
-    
-    else if(route === 'signIn'){
-      var displayMainPage = 
-        <div className="main">
-          <div className="sidebarContainer">
-            <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-            <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-            <div className="signInButtonContainer">
-              <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
-            </div>
-          </div>
-            <div className="outputContainer">
-              <Signin loadUser={this.loadUser} routeChange={this.routeChange}/>
-            </div>
-        </div>
-    }
-
-    else if(route === 'register'){
-      var displayMainPage = 
-        <div className="main">
-          <div className="sidebarContainer">
-            <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-            <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-            <div className="signInButtonContainer">
-              <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
-            </div>
-          </div>
-            <div className="outputContainer">
-              <Register routeChange={this.routeChange} loadUser={this.loadUser} />
-            </div>
-        </div>
-    }
-    
-    
-    
-
 
     return (
       <div  className="App">
-            <div className="titleContainer">
-              <h1>The RPG NPC character generator</h1>
-              {subTitle}
+        <div className="titleContainer">
+          <h1>The RPG NPC character generator</h1>
+          <h2>{subTitle}</h2>
+        </div>
+
+
+          { route === 'register' ? (
+            <div className="main">
+              <div className="sidebarContainer">
+                  <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
+                  <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+                  <div className="signInButtonContainer">
+                    <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                  </div>
+              </div>
+              
+              <Register inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} inputLoadingState={this.inputLoadingState}/>
             </div>
-            {displayMainPage}
-      </div>
+          ) 
+
+
+
+
+          : (
+          route === 'signIn' ? (
+            <div  className="main">
+              <div className="sidebarContainer">
+                <div className="signInButtonContainer">
+                  <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                </div>
+              </div>
+
+              <Signin changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+            </div>
+            
+
+          ) 
+          : (
+          route === 'input' ? (
+            <div className="main">
+              <div className="sidebarContainer">
+                <div className="submitButtonContainer">
+                  <button  className="submit" onClick={()=> this.returnFromInput()}>Return to generator</button>
+                </div>
+              </div>
+
+              <div className="inputContainer">
+                <div className="nameAndImageContainer">
+                  <div className="inputName">
+                    <InputName handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                  </div>
+
+                  <div className="inputImage">
+                    <InputImage handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                  </div>
+                </div>
+
+                <div className="roleplayAndIntrigueContainer">
+                  <div className="inputDesc">
+                    <InputDesc handleInputLoadingState={this.handleInputLoadingState} id={this.state.user.id} email={this.state.user.email}/>
+                  </div>
+                </div>
+              
+              </div>
+            </div>
+          ) : (
+
+
+
+            <div className="main">
+              <div className="sidebarContainer">
+                <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
+                <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
+                <div className="signInButtonContainer">
+                  <button  className="signInButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
+                </div>
+              </div>
+                { loadingState === 'loading' ? (
+                  <div className="outputContainer">
+                    <LoadingIcons/>
+                  </div>
+                ) : (
+                  <div className="outputContainer">
+                    {displayStateDesc}
+                    {displayStateImg}
+            
+                    {displayStateRoleplay}
+                    {displayStateIntrigue}
+                  </div>
+                )}
+            </div>
+          )))}
+        </div>
     );
   }
 }
