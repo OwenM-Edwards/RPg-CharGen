@@ -25,10 +25,27 @@ class InputDesc extends React.Component {
    handleIntrigueLoading=(data)=>{
       this.setState({intrigueLoading: data});
    }
+   handleSubmitCheckRoleplay=()=>{
+      if(this.state.roleplay){
+         this.onSubmitRoleplay();
+      } 
+      else if(!this.state.roleplay){
+
+      }
+   }
+   handleSubmitCheckIntrigue=()=>{
+      if(this.state.intrigue){
+         this.onSubmitIntrigue();
+      } 
+      else if(!this.state.intrigue){
+
+      }
+   }
 
    onSubmitRoleplay = () => {
       if(this.state.roleplay){
          this.handleRoleplayLoading('loading')
+         this.handleIntrigueLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -41,13 +58,20 @@ class InputDesc extends React.Component {
          .then(response => response.json())
          .then(status => {
             this.handleRoleplayLoading('default')
+            this.handleIntrigueLoading('default')
             if(status === 'Success'){
-               console.log('Roleplay added')
+               this.props.modalMessageChange('Roleplay added, thank you for your contribution!');
+               this.props.openModal();
             } else {
-               console.log('Error adding roleplay')
+               this.props.modalMessageChange('Error Adding Roleplay');
+               this.props.openModal();
             }
          })
          .catch(err=>{
+            this.handleRoleplayLoading('default')
+            this.handleIntrigueLoading('default')
+            this.props.modalMessageChange('Error Adding Roleplay');
+            this.props.openModal();
             console.log('problemo')
          })
       }
@@ -56,6 +80,7 @@ class InputDesc extends React.Component {
 
    onSubmitIntrigue = () => {
       if(this.state.intrigue){
+         this.handleRoleplayLoading('loading')
          this.handleIntrigueLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addintrigue', {
             method: 'post',
@@ -68,14 +93,21 @@ class InputDesc extends React.Component {
          })
          .then(response => response.json())
          .then(status => {
+            this.handleRoleplayLoading('default')
             this.handleIntrigueLoading('default')
             if(status === 'Success'){
-               console.log('Intrigue added')
+               this.props.modalMessageChange('Intrigue added, thank you for your contribution!');
+               this.props.openModal();
             } else {
-               console.log('Error adding intrigue')
+               this.props.modalMessageChange('Error Adding Intrigue');
+               this.props.openModal();
             }
          })
          .catch(err=>{
+            this.handleRoleplayLoading('default')
+            this.handleIntrigueLoading('default')
+            this.props.modalMessageChange('Error Adding Intrigue');
+            this.props.openModal();
             console.log('problemo')
          })
       }
@@ -83,17 +115,20 @@ class InputDesc extends React.Component {
 
 
    render(){
+      const isRoleplayEnabled = this.state.roleplay.length > 0 ;
+      const isIntrigueEnabled = this.state.intrigue.length > 0 ;
       let displayRoleplay = '';
       let displayIntrigue = '';
       if(this.state.roleplayLoading === 'loading'){
          displayRoleplay = <LoadingIcons/>
       } else {
          displayRoleplay =
-         <form className="inputRoleplayForm">
+         <form onSubmit={this.handleSubmitCheckRoleplay} className="inputRoleplayForm">
             Roleplay Que: 
             <input className="roleplayText" onChange={this.handleRP} minLength="3" maxLength="20" required="required" type="text" name="charName" placeholder="Roleplay Q"></input>
-
-            <button className="submitButton" type={"button"} onClick={this.onSubmitRoleplay}>submit</button> 
+            <div className="imageDescInputButtonContainer">
+               <button disabled={!isRoleplayEnabled} className="submitButton" type={"submit"}>submit</button> 
+            </div>
          </form>
       }
 
@@ -101,11 +136,13 @@ class InputDesc extends React.Component {
          displayIntrigue = <LoadingIcons/>
       } else {
          displayIntrigue =
-         <form className="inputIntrigueForm">
+         <form onSubmit={this.handleSubmitCheckIntrigue} className="inputIntrigueForm">
             Intrigue: 
-            <textarea  className="intrigueText" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
-
-            <button className="submitButton" type={"button"} onClick={this.onSubmitIntrigue}>submit</button> 
+            <textarea  className="intrigueText" placeholder="Character Intrigue" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
+            <div className="imageDescInputButtonContainer">
+               <button disabled={!isIntrigueEnabled} className="submitButton" type={"submit"}>submit</button> 
+            </div>
+            
          </form>
       }
 

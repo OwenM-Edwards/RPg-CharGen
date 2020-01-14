@@ -161,28 +161,7 @@ p{
   background-color: var(--dark);
 }
 
-.submitButton{
-  width: 100px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
 
-.submitButton:hover{
-  background-color: rgb(58, 134, 61); /* Green */
-}
-
-
-
-.submitButtonContainer{
-  width:100%;
-  margin-top:auto;
-}
 
 .submit{
   width:100%;
@@ -197,6 +176,7 @@ p{
   font-size: 16px;
   transition: background-color 0.5s ease;
   border-radius:5%;
+  cursor: pointer;
 }
 
 .submit:hover{
@@ -232,14 +212,14 @@ p{
   text-align: left;
   width:48%;
   max-height: 100%;
-  border:0.2px solid var(--dark);
+  /* border:0.2px solid var(--dark); */
   border-radius: 10px;
   padding-left:10px;
 }
 .inputImage{
   width:50%;
   max-height: 100%;
-  border:0.2px solid var(--dark);
+  /* border:0.2px solid var(--dark); */
   border-radius: 10px;
 }
 .inputImage img{
@@ -252,30 +232,13 @@ p{
   -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
 }
-.imageUploadSubmit{
-  position: relative;
-  top:-40px;
-}
-.imageSubmitButton{
-  width: 150px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-.imageSubmitButton:hover{
-  background-color: rgb(58, 134, 61); /* Green */
-}
 
 
 
 .roleplayAndIntrigueContainer{
   width:100%;
   height:300px;
-  border:0.2px solid var(--dark);
+  /* border:0.2px solid var(--dark); */
   border-radius: 10px;
 }
 .inputDesc{
@@ -306,22 +269,8 @@ p{
 
 .selectContainer{
   width:300px;
-}
-.inputSubmit{
-  width: 200px;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-.inputSubmit:hover{
-  background-color: rgb(58, 134, 61); /* Green */
-}
 
+}
 .inputField{
   width:299px;
   height:35px;
@@ -350,8 +299,164 @@ p{
   font-size: 16px;
   transition: background-color 0.5s ease;
   border-radius:5%;
+  cursor: pointer;
 }
 
 .signInButton:hover{
   background-color: rgb(58, 134, 61); /* Green */
+}
+
+
+.signInContainer{
+  margin:0 auto;
+  margin-top:20%;
+}
+.registerContainer{
+  margin:0 auto;
+  margin-top:20%;
+}
+
+
+
+.Modal {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  right: auto;
+  bottom: auto;
+  margin-right:-50%;
+  background-color: var(--light);
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  /* transform: 'translate(-50%, -50%)' */
+}
+
+.ModalText{
+  color: var(--dark) !important;
+  padding:50px;
+  padding-top:0px;
+}
+
+
+.ModalButton{
+  border: none;
+  background-color: var(--dark); /* Green */
+  color: var(--light);
+  border-radius: 20px;
+  margin:20px;
+  transition: background-color 0.9s ease;
+  transition: color 0.9s ease;
+}
+.ModalButton:hover{
+  border: none;
+  background-color: var(--light); /* Green */
+  color: var(--dark);
+  border-radius: 20px;
+  margin:20px;
+}
+
+
+.imageInputButton{
+  width:1px;
+  height:1px;
+  display:none;
+}
+
+.imageInputPreview{
+  height:200px;
+  width:auto;
+}
+.imageSubmitBox{
+  width:300px;
+  height:100px;
+  display:flex;
+  flex-wrap:none;
+  padding-top:140px;
+  padding-left:40px;
+}
+.imageSubmitButton{
+  margin: 0 auto;
+  width:50%;
+  max-width: 200px;
+  height:40px;
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.imageInputButtonContainer{
+  margin: 0 auto;
+  width:50%;
+  height:40px;
+  max-width: 200px;
+  
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-align: center;
+}
+.imageInputButtonContainer p{
+  margin-top:5px;
+  font-size: 16px;
+}
+
+.inputSubmit{
+  position: relative;
+  top:-130px;
+  left:-80px;
+  width:100%;
+  max-width: 200px;
+  height:40px;
+  margin:0 auto;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.inputSubmit:hover{
+  background-color: rgb(58, 134, 61); /* Green */
+}
+
+
+.imageSubmitButton:hover{
+  background-color: rgb(58, 134, 61); /* Green */
+}
+
+.submitButton{
+  width: 100%;
+  max-width: 200px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.submitButton:hover{
+  background-color: rgb(58, 134, 61); /* Green */
+}
+
+
+
+.submitButtonContainer{
+  width:100%;
+  margin-top:auto;
 }

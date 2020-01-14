@@ -47,6 +47,15 @@ class InputName extends React.Component {
       this.setState({loading: data});
    }
 
+   handleSubmitCheck=()=>{
+      if(this.state.name || this.state.lastName){
+         this.onSubmitNewName();
+      } 
+      else if(!this.state.name && !this.state.lastName){
+
+      }
+   }
+
    onSubmitNewName = () => {
       if(this.state.name){
          var firstName = this.state.name;
@@ -69,27 +78,34 @@ class InputName extends React.Component {
          })
 
          .then(response => {
-            this.handleLoading('default')
+            this.handleLoading('default');
+            
             if(response.status === 200){
-               console.log('success')
+               this.props.modalMessageChange('Name added, thank you for your contribution!');
+               this.props.openModal();
             } else{
-               console.log('failure')
+               this.props.modalMessageChange('Error Adding Name');
+               this.props.openModal();
             }
          })
          
          .catch(err=>{
+            this.handleLoading('default')
+            this.props.modalMessageChange('Error Adding Name');
+            this.props.openModal();
             console.log('problemo')
          }) 
    }
 
 
    render(){
+      const isEnabled = this.state.name.length > 0 || this.state.lastName.length > 0;
       let displayName = '';
       if(this.state.loading === 'loading'){
          displayName = <LoadingIcons/>
       } else {
          displayName =
-         <form id="newName">
+         <form id="newName" onSubmit={this.handleSubmitCheck}> 
             Add new character name: 
             <div>
                <Select  className="selectContainer"
@@ -108,7 +124,9 @@ class InputName extends React.Component {
                />
                <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
                <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
-               <button className="inputSubmit" type={"button"} onClick={this.onSubmitNewName}>submit</button> 
+               <div className="imageSubmitBox">
+                  <button disabled={!isEnabled} className="inputSubmit" type={"submit"}>submit</button> 
+               </div>
             </div>
          </form>
       }

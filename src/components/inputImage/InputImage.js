@@ -28,7 +28,13 @@ class InputImage extends React.Component {
    handleLoading=(data)=>{
       this.setState({loading: data});
    }
-   
+   handleSubmitCheck=()=>{
+      if(this.state.previewSrc){
+         this.uploadImage();
+      } 
+      else{
+      }
+   }
 
    uploadImage =() =>{
       this.handleLoading('loading')
@@ -47,14 +53,17 @@ class InputImage extends React.Component {
       .then(response => {
          this.handleLoading('default')
          if(response.status === 200){
-            
-            console.log('success')
+            this.props.modalMessageChange('Image added, thank you for your contribution!');
+            this.props.openModal();
          } else{
-            console.log('failure')
+            this.props.modalMessageChange('Error Adding Image');
+            this.props.openModal();
          }
       })
       .catch(err=>{
-         console.log('problemo')
+         this.handleLoading('default')
+         this.props.modalMessageChange('Error Adding Name');
+         this.props.openModal();
       })
    }
 
@@ -79,6 +88,7 @@ class InputImage extends React.Component {
 
 
    render(){
+      const isEnabled = this.state.previewSrc;
       let display = '';
 
 
@@ -108,16 +118,22 @@ class InputImage extends React.Component {
                   </select>
             </form>
 
-
-            <input type="file" onChange={this.handlePreview} />
-
+            <div className="imageSubmitBox">
             <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
                <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
             </Tilt>
 
+            <label class="imageInputButtonContainer">
+               <p>Select Image</p>
+               <input className="imageInputButton" type="file" onChange={this.handlePreview} />
+            </label>
+
+            <button disabled={!isEnabled}  className="imageSubmitButton" onClick={this.handleSubmitCheck}>Upload Image</button>
+            
+            </div>
 
             
-            <button className="imageSubmitButton" onClick={this.uploadImage}>Upload Image</button>
+            
          </div>
          }
       return (

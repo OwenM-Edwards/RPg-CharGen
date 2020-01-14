@@ -12,6 +12,7 @@ import CharIntrigue from './components/charIntrigue/CharIntrigue';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import LoadingIcons from './components/loadingIcons/LoadingIcons';
+import Modal from 'react-modal';
 
  
 /* 
@@ -26,9 +27,11 @@ import LoadingIcons from './components/loadingIcons/LoadingIcons';
 
 const initialState = {
   subTitle:'Who are you looking for?',
+  modalIsOpen: false,
+  modalMessage:'',
   loadingState:'init',
   addNewCharPage:false,
-  route:'input',
+  route:'signIn',
   isSignedIn: false,
   fullRandom: true,
 
@@ -58,10 +61,26 @@ const initialState = {
     joined: ''
   }
 }
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
+
 class App extends Component {
   constructor(){
     super();
     this.state = initialState;
+    this.openModal = this.openModal.bind(this);
+    this.afterOpenModal = this.afterOpenModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
   loadUser = (data) => {
     this.setState({user: {
@@ -153,10 +172,36 @@ class App extends Component {
     this.setState({route:'home'})
   }
 
+  // MODALSTUFF
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+  afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    this.subtitle.style.color = '#fff';
+  }
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+  modalMessageChange=(data)=>{
+    this.setState({modalMessage:data});
+  }
+
 
 
   render() {
-    const {subTitle,isSignedIn,route,loadingState} = this.state;
+    const {modalMessage,subTitle,isSignedIn,route,loadingState} = this.state;
+    let modalBox = 
+    <Modal
+      isOpen={this.state.modalIsOpen}
+      onAfterOpen={this.afterOpenModal}
+      onRequestClose={this.closeModal}
+      className="Modal"
+      >
+      <button className="ModalButton" onClick={this.closeModal}>X</button>
+      <h2 className="ModalText" ref={subtitle => this.subtitle = subtitle}>{this.state.modalMessage}</h2>
+      
+    </Modal>
     let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
     let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
     let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
@@ -174,7 +219,7 @@ class App extends Component {
     return (
       <div  className="App">
         <div className="titleContainer">
-          <h1>The RPG NPC character generator</h1>
+          <h1>The RPG-NPC character generator</h1>
           <h2>{subTitle}</h2>
         </div>
 
@@ -189,7 +234,7 @@ class App extends Component {
                   </div>
               </div>
               
-              <Register handleInputLoadingState={this.handleInputLoadingState}/>
+              <Register openModal={this.openModal} modalMessageChange={this.modalMessageChange} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
             </div>
           ) 
 
@@ -197,13 +242,14 @@ class App extends Component {
           : (
           route === 'signIn' ? (
             <div  className="main">
+              {modalBox}
               <div className="sidebarContainer">
                 <div className="signInButtonContainer">
                   <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                 </div>
               </div>
 
-              <Signin isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+              <Signin openModal={this.openModal} modalMessageChange={this.modalMessageChange} isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
             </div>
           ) 
 
@@ -211,6 +257,8 @@ class App extends Component {
           : (
           route === 'input' ? (
             <div className="main">
+              {modalBox}
+
               <div className="sidebarContainer">
                 <div className="submitButtonContainer">
                   <button  className="submit" onClick={()=> this.returnFromInput()}>Return to generator</button>
@@ -220,24 +268,22 @@ class App extends Component {
               <div className="inputContainer">
                 <div className="nameAndImageContainer">
                   <div className="inputName">
-                    <InputName id={this.state.user.id} email={this.state.user.email}/>
+                    <InputName modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email} openModal={this.openModal}/>
                   </div>
 
                   <div className="inputImage">
-                    <InputImage id={this.state.user.id} email={this.state.user.email}/>
+                    <InputImage openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 </div>
 
                 <div className="roleplayAndIntrigueContainer">
                   <div className="inputDesc">
-                    <InputDesc id={this.state.user.id} email={this.state.user.email}/>
+                    <InputDesc openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 </div>
-              
               </div>
             </div>
           ) 
-          
 
           : (
             <div className="main">
