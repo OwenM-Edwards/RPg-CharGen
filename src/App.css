@@ -47,11 +47,13 @@ html {
 
 
 .outputContainer{
+  border:2px solid black;
   width:78%;
   height:100%;
 
   display:flex;
   flex-wrap:wrap;
+  overflow: scroll;
 }
 
 
@@ -459,4 +461,34 @@ p{
 .submitButtonContainer{
   width:100%;
   margin-top:auto;
+}
+
+
+.homepageContainer{
+  max-width:100%;
+  min-width:99%;
+  min-height:100%;
+  border:2px solid red;
+}
+.homepageContainerButton{
+  height:50px;
+  width:50px;
+}
+
+
+.listContainer{
+  width:99%;
+  height:99%;
+}
+
+
+.homePageListItem{
+  width:99%;
+  height:100px;
+  display:flex;
+  flex-wrap: nowrap;
+  border:1px solid black;
+}
+.homePageListItem h2{
+  margin-right:30px;
 }

@@ -13,6 +13,7 @@ import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
 import LoadingIcons from './components/loadingIcons/LoadingIcons';
 import Modal from 'react-modal';
+import UserHomePage from './components/userHomePage/UserHomePage';
 
  
 /* 
@@ -61,17 +62,6 @@ const initialState = {
     joined: ''
   }
 }
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
 
 
 class App extends Component {
@@ -190,7 +180,7 @@ class App extends Component {
 
 
   render() {
-    const {modalMessage,subTitle,isSignedIn,route,loadingState} = this.state;
+    const {subTitle,isSignedIn,route,loadingState,user} = this.state;
     let modalBox = 
     <Modal
       isOpen={this.state.modalIsOpen}
@@ -235,6 +225,21 @@ class App extends Component {
               </div>
               
               <Register openModal={this.openModal} modalMessageChange={this.modalMessageChange} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+            </div>
+          ) 
+
+
+          : (
+            route === 'homepage' ? (
+            <div  className="main">
+              {modalBox}
+              <div className="sidebarContainer">
+                <div className="signInButtonContainer">
+                  <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                </div>
+              </div>
+              <UserHomePage user={user}/>
+              
             </div>
           ) 
 
@@ -308,7 +313,7 @@ class App extends Component {
                   </div>
                 )}
             </div>
-          )))}
+          ))))}
         </div>
     );
   }

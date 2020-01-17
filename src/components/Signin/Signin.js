@@ -46,7 +46,7 @@ class Signin extends React.Component {
                this.handleLoading('default')
                this.props.changeSubTitle('What would you like to add?')
                this.props.loadUser(user);
-               this.props.routeChange('input');
+               this.props.routeChange('homepage');
             }
             else{
                this.setState({signInPassword:false}) 
