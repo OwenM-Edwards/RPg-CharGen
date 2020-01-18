@@ -14,6 +14,7 @@ import Register from './components/Register/Register';
 import LoadingIcons from './components/loadingIcons/LoadingIcons';
 import Modal from 'react-modal';
 import UserHomePage from './components/userHomePage/UserHomePage';
+import SignedUserTab from './components/signedUserTab/SignedUserTab';
 
  
 /* 
@@ -137,6 +138,10 @@ class App extends Component {
     })
   }
 
+  //Changes state if user is signed in or out
+  handleSignIn=(signInStatus)=>{
+    this.setState({isSignedIn:signInStatus})
+  }
   //HANDLES DROP OPTIONS CHANGES
   handleGenderChange = (event) => {
     this.setState({charGenInfo:{gender: event.value}});
@@ -234,10 +239,13 @@ class App extends Component {
             <div  className="main">
               {modalBox}
               <div className="sidebarContainer">
+                <SignedUserTab isSignedIn={isSignedIn} user={user}/>
+                
                 <div className="signInButtonContainer">
                   <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                 </div>
               </div>
+              
               <UserHomePage user={user}/>
               
             </div>
@@ -254,7 +262,7 @@ class App extends Component {
                 </div>
               </div>
 
-              <Signin openModal={this.openModal} modalMessageChange={this.modalMessageChange} isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+              <Signin handleSignIn={this.handleSignIn} openModal={this.openModal} modalMessageChange={this.modalMessageChange} isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
             </div>
           ) 
 
@@ -269,6 +277,8 @@ class App extends Component {
                   <button  className="submit" onClick={()=> this.returnFromInput()}>Return to generator</button>
                 </div>
               </div>
+
+              
 
               <div className="inputContainer">
                 <div className="nameAndImageContainer">

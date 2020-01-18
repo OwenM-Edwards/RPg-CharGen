@@ -46,6 +46,7 @@ class Signin extends React.Component {
                this.handleLoading('default')
                this.props.changeSubTitle('What would you like to add?')
                this.props.loadUser(user);
+               this.props.handleSignIn('SignedIn')
                this.props.routeChange('homepage');
             }
             else{
