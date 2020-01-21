@@ -33,7 +33,7 @@ const initialState = {
   modalMessage:'',
   loadingState:'init',
   addNewCharPage:false,
-  route:'signIn',
+  route:'input',
   isSignedIn: false,
   fullRandom: true,
 
@@ -222,10 +222,8 @@ class App extends Component {
           { route === 'register' ? (
             <div className="main">
               <div className="sidebarContainer">
-                  <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-                  <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-                  <div className="signInButtonContainer">
-                    <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                  <div className="standardButtonContainer">
+                    <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                   </div>
               </div>
               
@@ -241,8 +239,8 @@ class App extends Component {
               <div className="sidebarContainer">
                 <SignedUserTab isSignedIn={isSignedIn} user={user}/>
                 
-                <div className="signInButtonContainer">
-                  <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                <div className="homepageStandardButtonContainer">
+                  <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                 </div>
               </div>
               
@@ -257,8 +255,8 @@ class App extends Component {
             <div  className="main">
               {modalBox}
               <div className="sidebarContainer">
-                <div className="signInButtonContainer">
-                  <button  className="signInButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                <div className="standardButtonContainer">
+                  <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                 </div>
               </div>
 
@@ -271,26 +269,20 @@ class App extends Component {
           route === 'input' ? (
             <div className="main">
               {modalBox}
-
               <div className="sidebarContainer">
-                <div className="submitButtonContainer">
-                  <button  className="submit" onClick={()=> this.returnFromInput()}>Return to generator</button>
+                <div className="standardButtonContainer">
+                  <button  className="standardButton" onClick={()=> this.returnFromInput()}>Return to generator</button>
                 </div>
               </div>
-
-              
-
               <div className="inputContainer">
                 <div className="nameAndImageContainer">
                   <div className="inputName">
                     <InputName modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email} openModal={this.openModal}/>
                   </div>
-
                   <div className="inputImage">
                     <InputImage openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 </div>
-
                 <div className="roleplayAndIntrigueContainer">
                   <div className="inputDesc">
                     <InputDesc openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
@@ -304,9 +296,14 @@ class App extends Component {
             <div className="main">
               <div className="sidebarContainer">
                 <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-                <SubmitButtons submit={this.submit} fullRandom={this.state.fullRandom} submitted={this.state.submitted} />
-                <div className="signInButtonContainer">
-                  <button  className="signInButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
+                <div className="standardButtonContainer">
+                  { this.state.fullRandom === true
+                    ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
+                    : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
+                  }
+                </div>
+                <div className="standardButtonContainer">
+                  <button  className="standardButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
                 </div>
               </div>
                 { loadingState === 'loading' ? (

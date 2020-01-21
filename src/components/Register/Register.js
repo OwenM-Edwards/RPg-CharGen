@@ -81,44 +81,35 @@ class Register extends React.Component {
          displayMainPage = 
             <div className="outputContainer">
                <form className="registerContainer" onSubmit={this.onSubmitRegister}>
-               <article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
-                  <main className="pa4 black-80">
-                     <div className="measure">
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                           <legend className="f2 center fw6 ph0 mh0">Register</legend>
-                           <div className="mt3">
-                              <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                              <input 
-                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                 type="text" name="name"  id="name" 
-                                 onChange = {this.onNameChange} />
-                           </div>
-                           <div className="mt3">
-                              <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
-                              <input 
-                                 className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                 type="email" name="email-address"  id="email-address" 
-                                 onChange = {this.onEmailChange} />
-                           </div>
-                           <div className="mv3">
-                              <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
-                              <input 
-                                 className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
-                                 type="password" name="password"  id="password" 
-                                 onChange = {this.onPasswordChange} />
-                           </div>
-                           <div className="submitButtonContainer">
-                              <input className="submit" 
-                                 type="submit" 
-                                 value="Register" 
-                                 disabled={!isEnabled}
-                                 />
-                           </div>
-                        </fieldset>
-                        
+                  <fieldset >
+                     <legend >Register</legend>
+                        <input 
+                           placeholder="Username"
+                           className="registerInput"
+                           type="text" name="name"  id="name" 
+                           onChange = {this.onNameChange} />
+                     <div>
+                        <input 
+                           placeholder="Email"
+                           className="registerInput"
+                           type="email" name="email-address"  id="email-address" 
+                           onChange = {this.onEmailChange} />
                      </div>
-                  </main>
-               </article>
+                     <div>          
+                        <input 
+                           placeholder="Password"
+                           className="registerInput"
+                           type="password" name="password"  id="password" 
+                           onChange = {this.onPasswordChange} />
+                     </div>
+                     <div className="registerStandardButtonContainer">
+                        <input className="standardButton" 
+                           type="submit" 
+                           value="Register" 
+                           disabled={!isEnabled}
+                           />
+                     </div>
+                  </fieldset>
                </form>
                
             </div>

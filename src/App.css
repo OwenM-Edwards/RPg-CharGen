@@ -18,45 +18,253 @@ html {
 }
 .App {
   text-align: center;
-  
   width:99%;
-  display:flex;
-  flex-wrap:wrap;
+  /* display:flex;
+  flex-wrap:wrap; */
   margin:0 auto;
   font-family: 'Amatic SC', cursive;
   font-size: 1.8rem;
-
+  -moz-box-sizing: border-box;    
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box;
   color: var(--dark);
-  height: 100%;
   min-width: 900px;
+  height:90vh;
 
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
 }
-
-.bigArrow{
-  width:130px;
-  position: relative;
-  left:-220px;
-  top:-100px;
-  z-index: 1;
-
+/* MAIN LAYOUT */
+/* Title of the App, also contains the subtitle */
+.titleContainer{
+  grid-area: 1 / 1 / 2 / 2;
 }
-
-
-
-
-
-
-.outputContainer{
-  border:2px solid black;
-  width:78%;
+/* The App window  */
+.main {
+  grid-area: 2 / 1 / 4 / 2;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+  max-width: 1200px;
+  margin:0 auto;
+  width:97vw;
   height:100%;
+
+}
+/* The vertical side and navbar */
+.sidebarContainer {
+  grid-area: 1 / 1 / 2 / 2;
+  margin:0 auto;
+  border-radius:5px;
+  padding:5px;
+  background-color: var(--dark);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width:100%;
+}
+.outputContainer{
+  grid-area: 1 / 2 / 2 / 6;
+  border:5px solid var(--dark);
+  border-radius: 5px;
+  display:flex;
+  flex-wrap:wrap;
+}
+
+
+/* 
+THE MAIN PAGE SIDE BAR
+*/
+.standardButtonContainer:nth-of-type(2){
+  margin-top:auto;
+  height:60%;
+  width: 100%;
+  -moz-box-sizing: border-box;    
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box; 
+  grid-area: 4 / 1 / 5 / 2;
+}
+.standardButtonContainer:nth-of-type(3){
+  margin-top:auto;
+  height:60%;
+  width: 100%;
+  -moz-box-sizing: border-box;    
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box; 
+  grid-area: 5 / 1 / 6 / 2;
+}
+.standardButtonContainer{
+  margin-top:auto;
+  height:60%;
+  width: 100%;
+  -moz-box-sizing: border-box;    
+  -webkit-box-sizing: border-box; 
+  box-sizing: border-box; 
+  grid-area: 5 / 1 / 6 / 2;
+}
+
+
+/* 
+SIGN-IN PAGE
+*/
+.signInFormContainer{
+  margin:0 auto;
+  margin-top:20%;
+}
+.signinStandardButtonContainer{
+  height:30px;
+  width: 50%;
+  margin:10px auto;
+}
+.signinInput{
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+/* 
+REGISTER PAGE
+*/
+.registerContainer{
+  margin:0 auto;
+  margin-top:20%;
+}
+.registerInput{
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.registerStandardButtonContainer{
+ height:30px;
+  width: 100%;
+  margin:10px auto;
+}
+
+
+/* 
+USER INPUT PAGE
+ */
+.inputContainer{
+  grid-area: 1 / 2 / 2 / 6;
+  border:5px solid var(--dark);
+  border-radius: 5px;
 
   display:flex;
   flex-wrap:wrap;
-  overflow: scroll;
+}
+.nameAndImageContainer{
+  width:100%;
+  height:300px;
+  display:flex;
+  flex-wrap:wrap;
+}
+.inputName{
+  text-align: left;
+  width:48%;
+  max-height: 100%;
+  /* border:0.2px solid var(--dark); */
+  border-radius: 10px;
+  padding-left:10px;
+}
+.inputImage{
+  width:50%;
+  max-height: 100%;
+  /* border:0.2px solid var(--dark); */
+  border-radius: 10px;
+}
+.inputImage img{
+  display:block;
+  position: relative;
+  left:40%;
+  top:20px;
+  height:110px;
+  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+}
+
+/* Roleplay and Intrigue Inputs */
+.roleplayAndIntrigueContainer{
+  width:100%;
+  height:300px;
+  /* border:0.2px solid var(--dark); */
+  border-radius: 10px;
+}
+.inputDesc{
+  display:flex;
+  flex-wrap:wrap;
+  width:100%;
+  height:100%;
+  justify-content: left;
+  text-align: left;
+  padding-left:10px;
+}
+.roleplayText{
+  width:100%;
+  height:5vh;
+  border-radius: 4px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.intrigueText{
+  width:100%;
+  height:5vh;
+  border-radius: 4px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.roleplayDescStandardButtonContainer{
+  height:30px;
+  width: 100px;
+  margin-bottom:20px;
+}
+
+/* SELECT CONTAINER FOR INPUT NAMES */
+.selectContainer{
+  width:300px;
+}
+/* INPUT BOXES FOR INPUT NAMES */
+.inputField{
+  width:299px;
+  height:35px;
+  border-radius: 4px;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+.nameStandardButtonContainer{
+  height:30px;
+  width: 100px;
+  margin-bottom:20px;
 }
 
 
+
+
+
+
+
+
+.title{
+  text-decoration: underline;
+}
 .OutputImage{
   /* border:2px solid var(--dark); */
   height:240px;
@@ -123,202 +331,6 @@ p{
 }
 
 
-.title{
-  text-decoration: underline;
-}
-
-
-
-.titleContainer{
-  width:100%;
-  height:20vh;
-  margin-bottom:70px;
-}
-
-
-.main {
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  min-height:600px;
-  /* border:1px solid black; */
-  max-width: 1000px;
-  max-height: 100%;
-  margin:0 auto;
-  height:60vh;
-  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-}
-
-.sidebarContainer {
-  width:20%;
-  max-width: 20%;
-  margin:0 auto;
-  display:flex;
-  flex-wrap:wrap;
-
-  border-radius:5px;
-  padding:5px;
-  background-color: var(--dark);
-}
-
-
-
-.submit{
-  width:100%;
-  height:80px;
-  background-color: #b30000; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition: background-color 0.5s ease;
-  border-radius:5%;
-  cursor: pointer;
-}
-
-.submit:hover{
-  background-color:#7a0000; /* Green */
-}
-
-
-
-
-
-
-
-.inputContainer{
-  width:78%;
-  height:100%;
-
-  /* display: grid;
-  grid-template-columns: 65% 35% 65%;
-  grid-template-rows: 50% 100% 50%; */
-
-  display:flex;
-  flex-wrap:wrap;
-}
-
-
-.nameAndImageContainer{
-  width:100%;
-  height:300px;
-  display:flex;
-  flex-wrap:wrap;
-}
-.inputName{
-  text-align: left;
-  width:48%;
-  max-height: 100%;
-  /* border:0.2px solid var(--dark); */
-  border-radius: 10px;
-  padding-left:10px;
-}
-.inputImage{
-  width:50%;
-  max-height: 100%;
-  /* border:0.2px solid var(--dark); */
-  border-radius: 10px;
-}
-.inputImage img{
-  display:block;
-  position: relative;
-  left:40%;
-  top:20px;
-  height:110px;
-  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-}
-
-
-
-.roleplayAndIntrigueContainer{
-  width:100%;
-  height:300px;
-  /* border:0.2px solid var(--dark); */
-  border-radius: 10px;
-}
-.inputDesc{
-  display:flex;
-  flex-wrap:wrap;
-  width:100%;
-  height:100%;
-  justify-content: left;
-  text-align: left;
-  padding-left:10px;
-}
-.roleplayText{
-  width:100%;
-  height:5vh;
-  border-radius: 4px;
-  padding: 12px 20px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-.intrigueText{
-  width:100%;
-  height:5vh;
-  border-radius: 4px;
-  padding: 12px 20px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.selectContainer{
-  width:300px;
-
-}
-.inputField{
-  width:299px;
-  height:35px;
-  border-radius: 4px;
-  padding: 12px 20px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-
-.signInButtonContainer{
-  width:100%;
-  margin-top:auto;
-}
-
-.signInButton{
-  width:100%;
-  height:80px;
-  background-color: #b30000; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition: background-color 0.5s ease;
-  border-radius:5%;
-  cursor: pointer;
-}
-
-.signInButton:hover{
-  background-color: #7a0000; /* Green */
-}
-
-
-.signInContainer{
-  margin:0 auto;
-  margin-top:20%;
-}
-.registerContainer{
-  margin:0 auto;
-  margin-top:20%;
-}
-
-
 
 .Modal {
   position: absolute;
@@ -334,14 +346,143 @@ p{
   box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   /* transform: 'translate(-50%, -50%)' */
 }
-
 .ModalText{
   color: var(--dark) !important;
   padding:50px;
   padding-top:0px;
 }
+.imageInputPreview{
+  height:200px;
+  width:auto;
+}
 
 
+
+
+
+/* BUTTON CONTAINERS */
+
+
+.submitButtonContainer{
+  width:100%;
+  margin-top:auto;
+
+}
+
+.inputStandardButtonContainer{
+  max-height:100px;
+  width: 100%;
+}
+
+.homepageStandardButtonContainer{
+  height:100px;
+  width: 100%;
+  margin-top:100%;
+}
+/* BUTTON STYLES */
+.standardButton{
+  background-color:#fc8c03;
+  width: 100%;
+  height:100%;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+  float: bottom;
+}
+.standardButton:hover{
+  background-color: #ba6700; 
+}
+
+
+
+.submitButton:hover{
+  background-color: #ba6700; /* Green */
+}
+.imageSubmitBox{
+  width:300px;
+  height:100px;
+  display:flex;
+  flex-wrap:none;
+  padding-top:140px;
+  padding-left:40px;
+}
+.imageSubmitButton{
+  margin: 0 auto;
+  width:50%;
+  max-width: 200px;
+  height:40px;
+  background-color:#fc8c03;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+}
+.imageInputButtonContainer{
+  margin: 0 auto;
+  width:50%;
+  height:40px;
+  max-width: 200px;
+  background-color:#fc8c03; 
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-align: center;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+}
+.imageInputButtonContainer p{
+  margin-top:5px;
+  font-size: 16px;
+}
+.inputSubmit{
+  position: relative;
+  top:-130px;
+  left:-80px;
+  width:100%;
+  max-width: 200px;
+  height:40px;
+  margin:0 auto;
+  background-color: #fc8c03;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+.inputSubmit:hover{
+  background-color:#ba6700; /* Green */
+}
+.imageSubmitButton:hover{
+  background-color:#ba6700; /* Green */
+}
+.submitButton{
+  width: 100%;
+  max-width: 200px;
+  background-color: #fc8c03;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+}
 .ModalButton{
   border: none;
   background-color: var(--dark); /* Green */
@@ -358,157 +499,80 @@ p{
   border-radius: 20px;
   margin:20px;
 }
-
-
 .imageInputButton{
   width:1px;
   height:1px;
   display:none;
 }
 
-.imageInputPreview{
-  height:200px;
-  width:auto;
-}
-.imageSubmitBox{
-  width:300px;
-  height:100px;
-  display:flex;
-  flex-wrap:none;
-  padding-top:140px;
-  padding-left:40px;
-}
-.imageSubmitButton{
-  margin: 0 auto;
-  width:50%;
-  max-width: 200px;
-  height:40px;
-  background-color: #b30000;
+.signInButton{
+  width:100%;
+  height:80px;
+  background-color:#fc8c03; /* Green */
   border: none;
   color: white;
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
+  display: inline-block;
   font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
   transition: background-color 0.5s ease;
+  border-radius:5%;
+  cursor: pointer;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
 }
-.imageInputButtonContainer{
-  margin: 0 auto;
-  width:50%;
-  height:40px;
-  max-width: 200px;
-  
-  background-color: #b30000; 
+.signInButton:hover{
+  background-color: #ba6700; /* Green */
+}
+.submit{
+  width:100%;
+  height:80px;
+  background-color: #fc8c03; /* Green */
   border: none;
   color: white;
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
+  display: inline-block;
   font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
   transition: background-color 0.5s ease;
-  text-align: center;
-}
-.imageInputButtonContainer p{
-  margin-top:5px;
-  font-size: 16px;
-}
-
-.inputSubmit{
-  position: relative;
-  top:-130px;
-  left:-80px;
-  width:100%;
-  max-width: 200px;
-  height:40px;
-  margin:0 auto;
-  background-color: #b30000;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  border-radius:5%;
   cursor: pointer;
-  transition: background-color 0.5s ease;
 }
-.inputSubmit:hover{
-  background-color:#7a0000; /* Green */
-}
-
-
-.imageSubmitButton:hover{
-  background-color:#7a0000; /* Green */
-}
-
-.submitButton{
-  width: 100%;
-  max-width: 200px;
-  background-color: #b30000;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-
-.submitButton:hover{
-  background-color: #7a0000; /* Green */
+.submit:hover{
+  background-color:#ba6700; /* Green */
 }
 
 
-
-.submitButtonContainer{
-  width:100%;
-  margin-top:auto;
-}
-
-
-.homepageContainer{
-  max-width:100%;
-  min-width:102%;
-  min-height:100%;
-  position: relative;
-  left:-30px;
-}
-.homepageContainerButton{
-  height:50px;
-  width:50px;
-}
-
-
+/* SIGNED IN TAB  */
 .tabContainer{
   width:200px;
   height:100px;
-  background-color: #b30000;
+  background-color: #fc8c03;
   margin-bottom:auto;
   margin-top:-30%;
   z-index: -1;
   border-radius: 1px;
   border:5px solid var(--dark);
   color: var(--light);
-
 }
 
 
-
+/* USER HOME PAGE STUFF */
 .listContainer{
   width:99%;
-  height:99%;
+  max-height:99%;
 }
 .homePageListItem{
   width:99%;
   height:100px;
-
 }
-
 .homePageItemLi{
   width:33%;
   height:125%;
   margin: auto;
   vertical-align: middle;
 }
-
 .homePageListUl{
   border:5px solid var(--dark);
   background-color: var(--light);
@@ -523,4 +587,24 @@ p{
   -webkit-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   -moz-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
+}
+.homepageOutputContainer{
+  border:5px solid var(--dark);
+  border-radius: 5px;
+  width:78%;
+  height:100%;
+  display:flex;
+  flex-wrap:wrap;
+  overflow: scroll;
+}
+.homepageContainer{
+  max-width:100%;
+  min-width:102%;
+  min-height:100%;
+  position: relative;
+  left:-30px;
+}
+.homepageContainerButton{
+  height:50px;
+  width:50px;
 }

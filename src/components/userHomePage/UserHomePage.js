@@ -139,7 +139,7 @@ class UserHomePage extends React.Component {
       }
       return (
 
-         <div className="outputContainer">
+         <div className="homepageOutputContainer">
             <div className="homepageContainer">
                <div className="listContainer">
                   {displayListStatus}

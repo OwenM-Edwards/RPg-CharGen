@@ -124,8 +124,8 @@ class InputName extends React.Component {
                />
                <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
                <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
-               <div className="imageSubmitBox">
-                  <button disabled={!isEnabled} className="inputSubmit" type={"submit"}>submit</button> 
+               <div className="nameStandardButtonContainer">
+                  <button disabled={!isEnabled} className="standardButton" type={"submit"}>submit</button> 
                </div>
             </div>
          </form>

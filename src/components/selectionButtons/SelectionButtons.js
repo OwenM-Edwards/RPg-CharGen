@@ -56,40 +56,6 @@ class SelectionButtons extends React.Component {
             />
          </div>
 
-
-
-
-         // <form>
-         //    <div className={styles.selectContainer}>
-         //       <select className={styles.selection} onChange={handleGenderChange}>
-         //          <option value = "Random">Random</option>
-         //          <option value = "male">Male</option>
-         //          <option value = "female">Female</option>
-         //       </select>
-
-
-
-         //       <select className={styles.selection} onChange={handleRaceChange}>
-         //          <option value = "human">Random</option>
-         //          <option value = "human">Human</option>
-         //          <option value = "Orc">Orc</option>
-         //       </select>
-
-         //       <select className={styles.selection} onChange={handleRoleChange}>
-         //          <option value = "merchant">Random</option>
-         //          <option value = "merchant">Merchant</option>
-         //          <option value = "guard">Guard</option>
-         //       </select>
-
-
-
-         //       <select className={styles.selection} onChange={handleSystemChange}>
-         //          <option value = "Random">Random</option>
-         //          <option value = "Dnd 5e">DnD 5e</option>
-         //       </select>
-         //    </div>
-         // </form>
-
       );
    }
 }
