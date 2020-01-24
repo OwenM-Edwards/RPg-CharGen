@@ -105,8 +105,7 @@ class InputName extends React.Component {
          displayName = <LoadingIcons/>
       } else {
          displayName =
-         <form id="newName" onSubmit={this.handleSubmitCheck}> 
-            Add new character name: 
+         <form className="inputNameFormContainer" id="newName" onSubmit={this.handleSubmitCheck}> 
             <div>
                <Select  className="selectContainer"
                   defaultValue={optionsGender[0]}
@@ -125,7 +124,7 @@ class InputName extends React.Component {
                <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
                <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
                <div className="nameStandardButtonContainer">
-                  <button disabled={!isEnabled} className="standardButton" type={"submit"}>submit</button> 
+                  <button disabled={!isEnabled} className="standardButton" type={"submit"}>Submit</button> 
                </div>
             </div>
          </form>

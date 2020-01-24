@@ -1,6 +1,24 @@
 import React from 'react';
 import Tilt from 'react-tilt';
 import LoadingIcons from '../loadingIcons/LoadingIcons';
+import Select from 'react-select';
+const optionsGender = [
+   { value: 'male', label: 'Gender: Male' },
+   { value: 'female', label: 'Gender: Female' },
+];
+const optionsRace = [
+   { value: 'human', label: 'Race: Human' },
+   { value: 'orc', label: 'Race: Orc' },
+];
+const optionsRole = [
+   { value: 'merchant', label: 'Role: Merchant' },
+   { value: 'wizard', label: 'Role: Wizard' },
+];
+const customStyles = {
+   menu: (provided, state) => ({
+     ...provided,
+   }),
+}
 
 class InputImage extends React.Component {
    constructor(props){
@@ -96,45 +114,52 @@ class InputImage extends React.Component {
          display = <LoadingIcons/>
       } else {
          display =
-         <div className="imageInputContainer">
-            
-            <form id="newName">
-               Gender: 
-                  <select onChange={this.handleGender}>
-                     <option value = "male">Male</option>
-                     <option value = "female">Female</option>
-                  </select>
-               Race:   
-                  <select onChange={this.handleRace}>
-                     <option value = "human">Human</option>
-                     <option value = "orc">Orc</option>
-                  </select>  
-               Role:
-                  <select onChange={this.handleRole}>
-                     <option value = "merchant">Merchant</option>
-                     <option value = "guard">Guard</option>
-                     <option value = "magic">Magic User</option>
-                     <option value = "hunter">Hunter</option>
-                  </select>
-            </form>
+            <form className="newImageSelectContainer">
+               <div>
+                  <Select  className="selectContainer"
+                     defaultValue={optionsGender[0]}
+                     onChange={this.handleGender}
+                     isSearchable={false}
+                     styles={customStyles}
+                     options={optionsGender}
+                  />
+                  <Select  className="selectContainer"
+                     defaultValue={optionsRace[0]}
+                     onChange={this.handleRace}
+                     isSearchable={false}
+                     styles={customStyles}
+                     options={optionsRace}
+                  />
+                  <Select  className="selectContainer"
+                     defaultValue={optionsRole[0]}
+                     onChange={this.handleRole}
+                     isSearchable={false}
+                     styles={customStyles}
+                     options={optionsRole}
+                  />
+               </div>
+
 
             <div className="imageSubmitBox">
-            <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
+               <div className="imageButtonContainer">
+                  <div className="imageButtonBox">
+                     <input className="hiddenFileInput" id="file" type="file" onChange={this.handlePreview} />
+                     <label htmlFor="file" className="imageButtonLabel" >
+                     <div>Select Image</div>
+                     </label>
+                     
+                  </div>
+
+                  <div className="imageButtonBox">
+                     <button disabled={!isEnabled}  className="standardButton" onClick={this.handleSubmitCheck}>Upload Image</button>
+                  </div>
+               </div>
+               
+            </div>
+            <Tilt className="Tilt" options={{ max : 30 }} >
                <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
             </Tilt>
-
-            <label class="imageInputButtonContainer">
-               <p>Select Image</p>
-               <input className="imageInputButton" type="file" onChange={this.handlePreview} />
-            </label>
-
-            <button disabled={!isEnabled}  className="imageSubmitButton" onClick={this.handleSubmitCheck}>Upload Image</button>
-            
-            </div>
-
-            
-            
-         </div>
+         </form>
          }
       return (
          display

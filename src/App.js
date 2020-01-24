@@ -275,18 +275,14 @@ class App extends Component {
                 </div>
               </div>
               <div className="inputContainer">
-                <div className="nameAndImageContainer">
-                  <div className="inputName">
+                  <div className="inputNameContainer">
                     <InputName modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email} openModal={this.openModal}/>
                   </div>
-                  <div className="inputImage">
+                  <div className="inputImageContainer">
                     <InputImage openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
                   </div>
-                </div>
                 <div className="roleplayAndIntrigueContainer">
-                  <div className="inputDesc">
                     <InputDesc openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
-                  </div>
                 </div>
               </div>
             </div>

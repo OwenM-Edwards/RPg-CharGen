@@ -124,10 +124,10 @@ class InputDesc extends React.Component {
       } else {
          displayRoleplay =
          <form onSubmit={this.handleSubmitCheckRoleplay} className="inputRoleplayForm">
-            Roleplay Que: 
-            <textarea  className="intrigueText" placeholder="Roleplay Cue" onChange={this.handleRP} type="text" required="required" rows="4" cols="50" minLength="3" maxLength="20"></textarea>
+            Roleplay Cue: 
+            <textarea  className="roleplayText" placeholder="Roleplay Cue" onChange={this.handleRP} type="text" required="required" minLength="3" maxLength="40"></textarea>
             <div className="roleplayDescStandardButtonContainer">
-               <button disabled={!isRoleplayEnabled} className="standardButton" type={"submit"}>submit</button> 
+               <button disabled={!isRoleplayEnabled} className="standardButton" type={"submit"}>Submit</button> 
             </div>
          </form>
       }
@@ -139,9 +139,9 @@ class InputDesc extends React.Component {
          <form onSubmit={this.handleSubmitCheckIntrigue} className="inputIntrigueForm">
             Intrigue: 
             
-            <textarea  className="intrigueText" placeholder="Character Intrigue" onChange={this.handleIntrigue} rows="4" cols="50"></textarea>
+            <textarea  name="hello" className="intrigueText" placeholder="Character Intrigue" onChange={this.handleIntrigue} maxLength="60"></textarea>
             <div className="roleplayDescStandardButtonContainer">
-               <button disabled={!isIntrigueEnabled} className="standardButton" type={"submit"}>submit</button> 
+               <button disabled={!isIntrigueEnabled} className="standardButton" type={"submit"}>Submit</button> 
             </div>
             
          </form>
@@ -151,7 +151,7 @@ class InputDesc extends React.Component {
       
       
       return (
-         <div>
+         <div className="inputDescContainer">
             {displayRoleplay}
             {displayIntrigue} 
          </div>
