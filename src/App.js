@@ -33,7 +33,7 @@ const initialState = {
   modalMessage:'',
   loadingState:'init',
   addNewCharPage:false,
-  route:'input',
+  route:'homepage',
   isSignedIn: false,
   fullRandom: true,
 
@@ -222,9 +222,11 @@ class App extends Component {
           { route === 'register' ? (
             <div className="main">
               <div className="sidebarContainer">
-                  <div className="standardButtonContainer">
+                <div className="sidebarButtonContainer">
+                  <div className="signInSidebarStandardButtonContainer">
                     <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
                   </div>
+                </div>
               </div>
               
               <Register openModal={this.openModal} modalMessageChange={this.modalMessageChange} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
@@ -233,34 +235,36 @@ class App extends Component {
 
 
           : (
+            route === 'signIn' ? (
+            <div  className="main">
+              {modalBox}
+              <div className="sidebarContainer">
+                <div className="sidebarButtonContainer">
+                <div className="signInSidebarStandardButtonContainer">
+                  <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                </div>
+                </div>
+              </div>
+              <Signin handleSignIn={this.handleSignIn} openModal={this.openModal} modalMessageChange={this.modalMessageChange} isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+            </div>
+          )
+          
+
+          : (
             route === 'homepage' ? (
             <div  className="main">
               {modalBox}
               <div className="sidebarContainer">
-                <SignedUserTab isSignedIn={isSignedIn} user={user}/>
-                
-                <div className="homepageStandardButtonContainer">
-                  <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                <div className="sidebarButtonContainer">
+                  <div className="homepageSidebarStandardButtonContainer">
+                    <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                  </div>
                 </div>
               </div>
-              
-              <UserHomePage user={user}/>
-              
-            </div>
-          ) 
-
-
-          : (
-          route === 'signIn' ? (
-            <div  className="main">
-              {modalBox}
-              <div className="sidebarContainer">
-                <div className="standardButtonContainer">
-                  <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
-                </div>
+              <div className="outputContainer">
+                <UserHomePage user={user}/>
               </div>
-
-              <Signin handleSignIn={this.handleSignIn} openModal={this.openModal} modalMessageChange={this.modalMessageChange} isSignedIn={isSignedIn} changeSubTitle={this.changeSubTitle} inputLoadingState={this.state.inputLoadingState} handleInputLoadingState={this.handleInputLoadingState} loadUser={this.loadUser} routeChange={this.routeChange}/>
+              
             </div>
           ) 
 
@@ -288,18 +292,25 @@ class App extends Component {
             </div>
           ) 
 
+
           : (
             <div className="main">
               <div className="sidebarContainer">
-                <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
-                <div className="standardButtonContainer">
-                  { this.state.fullRandom === true
-                    ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
-                    : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
-                  }
+                {/* <SignedUserTab isSignedIn={isSignedIn} user={user}/> */}
+                <div className="sidebarSelectionContainer">
+                  <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
                 </div>
-                <div className="standardButtonContainer">
-                  <button  className="standardButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
+                
+                <div className="sidebarButtonContainer">
+                  <div className="standardButtonContainer">
+                    { this.state.fullRandom === true
+                      ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
+                      : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
+                    }
+                  </div>
+                  <div className="standardButtonContainer">
+                    <button  className="standardButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
+                  </div>
                 </div>
               </div>
                 { loadingState === 'loading' ? (
@@ -308,11 +319,13 @@ class App extends Component {
                   </div>
                 ) : (
                   <div className="outputContainer">
-                    {displayStateDesc}
-                    {displayStateImg}
-            
-                    {displayStateRoleplay}
-                    {displayStateIntrigue}
+                    <div className="charOutputItems">
+                      {displayStateDesc}
+                      {displayStateImg}
+              
+                      {displayStateRoleplay}
+                      {displayStateIntrigue}
+                    </div>
                   </div>
                 )}
             </div>

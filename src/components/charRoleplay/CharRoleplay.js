@@ -13,7 +13,7 @@ const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, loadin
    } else if(loadingState === 'loaded') {
       displayRoleplay = 
          <div>
-            <div className={"title"}>Roleplay Cues :</div>
+            <div className="roleplayItems">Roleplay Cues :</div>
             <ul>
                <li><p>{`${roleplayOutputA}.`}</p></li>
                <li><p>{`${roleplayOutputB}.`}</p></li>

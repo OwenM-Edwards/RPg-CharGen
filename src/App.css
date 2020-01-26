@@ -15,115 +15,112 @@ html {
   --dark:#333;
   --light:#fbfbfb ;
   background-color: var(--light);
+  height: 100%;
+  overflow-y:hidden;
+}
+body{
+  max-height:100%;
+
+  overflow:hidden;
 }
 .App {
   text-align: center;
-  width:99%;
-  /* display:flex;
-  flex-wrap:wrap; */
-  margin:0 auto;
   font-family: 'Amatic SC', cursive;
   font-size: 1.8rem;
-  -moz-box-sizing: border-box;    
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box;
   color: var(--dark);
-  min-width: 900px;
-  height:90vh;
-
+  min-height:90vh;
+  min-width: 100vw;
+  border:1px solid blue;
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px; 
 }
-/* MAIN LAYOUT */
 /* Title of the App, also contains the subtitle */
 .titleContainer{
   grid-area: 1 / 1 / 2 / 2;
 }
-/* The App window  */
 .main {
-  grid-area: 2 / 1 / 4 / 2;
+  grid-area: 2 / 1 / 5 / 2;
+
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 1fr;
-  grid-column-gap: 0px;
+  grid-column-gap: 5px;
   grid-row-gap: 0px; 
-  max-width: 1200px;
-  margin:0 auto;
-  width:97vw;
-  height:100%;
-  max-height: 100%;
 
+  margin:0 auto;
+  height: 100%;
+  width:100%;
+  max-width: 1200px;
+  max-height:100%;
 }
+/* MAIN LAYOUT */
 /* The vertical side and navbar */
 .sidebarContainer {
   grid-area: 1 / 1 / 2 / 2;
-  margin:0 auto;
+
   border-radius:5px;
-  padding:5px;
   background-color: var(--dark);
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
   width:100%;
+  min-height: 100%;
+  max-height:100%;
+
+  display: flex;
+  flex-direction:column;
+  border:5px solid var(--dark);
+}
+.sidebarSelectionContainer{
+  width:100%;
+  height:auto;
+  align-self:flex-start;
+}
+.sidebarButtonContainer{
+  width:100%;
+  height:100px;
+  margin-top:auto;
 }
 .outputContainer{
   grid-area: 1 / 2 / 2 / 6;
   border:5px solid var(--dark);
   border-radius: 5px;
-  display:flex;
-  flex-wrap:wrap;
-}
-
-
-/* 
-THE MAIN PAGE SIDE BAR
-*/
-.standardButtonContainer:nth-of-type(2){
-  margin-top:auto;
-  height:60%;
-  width: 100%;
-  -moz-box-sizing: border-box;    
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box; 
-  grid-area: 4 / 1 / 5 / 2;
-}
-.standardButtonContainer:nth-of-type(3){
-  margin-top:auto;
-  height:60%;
-  width: 100%;
-  -moz-box-sizing: border-box;    
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box; 
-  grid-area: 5 / 1 / 6 / 2;
+  max-height: 100%;
+  min-height: 100%;
+  overflow: scroll;
 }
 .standardButtonContainer{
-  margin-top:auto;
-  height:60%;
+  height:50%;
   width: 100%;
-  -moz-box-sizing: border-box;    
-  -webkit-box-sizing: border-box; 
-  box-sizing: border-box; 
-  grid-area: 5 / 1 / 6 / 2;
+}
+/* SIGNED IN TAB  */
+.tabContainer{
+  width:200px;
+  height:100px;
+  background-color: #fc8c03;
+  margin-bottom:auto;
+  margin-top:-30%;
+  z-index: -1;
+  border-radius: 1px;
+  border:5px solid var(--dark);
+  color: var(--light);
 }
 
 
 /* 
-SIGN-IN PAGE
+SIGN-IN and REGISTER PAGES
 */
+/* The Sidebar */
+.signInSidebarStandardButtonContainer{
+  height:100%;
+  width: 100%;
+}
+/* Main display window */
 .signInFormContainer{
   margin:0 auto;
   margin-top:20%;
-}
-.signinStandardButtonContainer{
-  height:30px;
-  width: 50%;
-  margin:10px auto;
+  width:50%;
 }
 .signinInput{
   padding: 12px 20px;
@@ -133,27 +130,9 @@ SIGN-IN PAGE
   border-radius: 4px;
   box-sizing: border-box;
 }
-
-
-/* 
-REGISTER PAGE
-*/
-.registerContainer{
+.signinStandardButtonContainer{
+  width:180px;
   margin:0 auto;
-  margin-top:20%;
-}
-.registerInput{
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-.registerStandardButtonContainer{
- height:30px;
-  width: 100%;
-  margin:10px auto;
 }
 
 
@@ -274,7 +253,6 @@ input[type="file"] {
 }
 
 
-
 /* Roleplay and Intrigue Inputs */
 .roleplayAndIntrigueContainer{
   grid-area: 2 / 1 / 3 / 2;
@@ -368,13 +346,22 @@ input[type="file"] {
 /* 
   CHARGEN OUTPUT PAGE
  */
+
+.charOutputItems{
+  width:100%;
+  height:70%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+}
 .OutputImage{
-  /* border:2px solid var(--dark); */
-  height:240px;
-  width:30%;
-  margin-left:auto;
+  grid-area: 1 / 2 / 3 / 3;
+  padding-left:auto;
 }
 .OutputImage img{
+
   padding:10px;
   max-width: 85%;
   height: auto;
@@ -390,43 +377,103 @@ input[type="file"] {
   top:15px;
 }
 .OutputDesc{
-  /* border:2px solid var(--dark); */
-  height:240px;
+  grid-area: 1 / 1 / 2 / 2;
+  padding-right:60%;
+  /* height:240px;
   width:60%;
   position: relative;
   top:25px;
   text-align: left;
-  left:20px;
+  left:20px; */
 
 }
 /* Roleplay outputs three items in an unordered list */
 .OutputRoleplay{
-  height:30%;
+  grid-area: 2 / 1 / 3 / 2;
+  padding-right:60%;
+  /* height:30%;
   width:100%;
   position: relative;
   top:5px;
   text-align: left;
   left:20px;
-  margin-bottom:80px;
+  margin-bottom:80px; */
 }
-ul{
+.roleplayItems ul{
   position: relative;
   top:-15px;
   font-size: 1.3rem;
 }
-li{
+.roleplayItems li{
   margin-bottom:-25px;
 }
-p{
+.roleplayItems p{
+  font-size: 1.8rem;
+}
+
+.intrigueItems ul{
+  position: relative;
+  top:-15px;
+  font-size: 1.3rem;
+}
+.intrigueItems li{
+  margin-bottom:-25px;
+}
+.intrigueItems p{
   font-size: 1.8rem;
 }
 .OutputIntrigue{
-  height:30%;
+  grid-area: 3 / 1 / 4 / 2;
+  padding-right:60%;
+  /* height:30%;
   width:100%;
   position: relative;
   top:-5px;
   text-align: left;
-  left:20px;
+  left:20px; */
+}
+
+
+/* 
+  USER HOME PAGE STUFF
+ */
+.homepageSidebarStandardButtonContainer{
+  height:100%;
+  width: 100%;
+}
+.homepageOutputContainer{
+  border:5px solid var(--dark);
+  border-radius: 5px;
+}
+.listContainer{
+  width:100%;
+}
+
+
+.homePageListItem{
+  width:99%;
+  height:100px;
+}
+.homePageItemLi{
+  width:33%;
+  margin: auto;
+  vertical-align: middle;
+}
+.homePageListUl{
+  border:5px solid var(--dark);
+  background-color: var(--light);
+  display:flex;
+  flex-wrap:wrap;
+  height:100%;
+  max-width:100%;
+  list-style:none;
+  -webkit-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
+  box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
+}
+.homepageContainerButton{
+  height:50px;
+  width:50px;
 }
 
 
@@ -504,70 +551,4 @@ MODAL BOX STUFF
 }
 .submitButton:hover{
   background-color: #ba6700; /* Green */
-}
-
-
-/* SIGNED IN TAB  */
-.tabContainer{
-  width:200px;
-  height:100px;
-  background-color: #fc8c03;
-  margin-bottom:auto;
-  margin-top:-30%;
-  z-index: -1;
-  border-radius: 1px;
-  border:5px solid var(--dark);
-  color: var(--light);
-}
-
-
-/* USER HOME PAGE STUFF */
-.listContainer{
-  width:99%;
-  max-height:99%;
-}
-.homePageListItem{
-  width:99%;
-  height:100px;
-}
-.homePageItemLi{
-  width:33%;
-  height:125%;
-  margin: auto;
-  vertical-align: middle;
-}
-.homePageListUl{
-  border:5px solid var(--dark);
-  background-color: var(--light);
-  display:flex;
-  flex-wrap:wrap;
-  height:100%;
-  width:98%;
-  position: relative;
-  left:-15px;
-  align-content: center;
-  list-style:none;
-  -webkit-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
-  -moz-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
-  box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
-}
-.homepageOutputContainer{
-  border:5px solid var(--dark);
-  border-radius: 5px;
-  width:78%;
-  height:100%;
-  display:flex;
-  flex-wrap:wrap;
-  overflow: scroll;
-}
-.homepageContainer{
-  max-width:100%;
-  min-width:102%;
-  min-height:100%;
-  position: relative;
-  left:-30px;
-}
-.homepageContainerButton{
-  height:50px;
-  width:50px;
 }

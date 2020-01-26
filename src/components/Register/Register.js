@@ -80,34 +80,41 @@ class Register extends React.Component {
       else if(this.state.loading !== 'loading'){
          displayMainPage = 
             <div className="outputContainer">
-               <form className="registerContainer" onSubmit={this.onSubmitRegister}>
+               <form className="signInFormContainer" onSubmit={this.onSubmitRegister}>
                   <fieldset >
                      <legend >Register</legend>
                         <input 
                            placeholder="Username"
-                           className="registerInput"
+                           className="signinInput"
                            type="text" name="name"  id="name" 
                            onChange = {this.onNameChange} />
                      <div>
                         <input 
                            placeholder="Email"
-                           className="registerInput"
+                           className="signinInput"
                            type="email" name="email-address"  id="email-address" 
-                           onChange = {this.onEmailChange} />
+                            onChange = {this.onEmailChange} />
                      </div>
                      <div>          
                         <input 
                            placeholder="Password"
-                           className="registerInput"
+                           className="signinInput"
                            type="password" name="password"  id="password" 
                            onChange = {this.onPasswordChange} />
                      </div>
-                     <div className="registerStandardButtonContainer">
+                     <div className="signinStandardButtonContainer">
                         <input className="standardButton" 
                            type="submit" 
                            value="Register" 
                            disabled={!isEnabled}
                            />
+                     </div>
+                     <div className="signinStandardButtonContainer">
+                        <input className="standardButton" 
+                           type="submit" 
+                           value="Sign In" 
+                           onClick={()=> this.props.routeChange('signIn')}
+                        />
                      </div>
                   </fieldset>
                </form>

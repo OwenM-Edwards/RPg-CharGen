@@ -21,7 +21,7 @@ class SignedUserTab extends React.Component {
             </div>
          );
       } else {
-         display = 'Hello'
+         display = 'Not Signed In'
          return (
             <div className="tabContainer">
                {display}
