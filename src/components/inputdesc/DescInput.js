@@ -125,7 +125,7 @@ class InputDesc extends React.Component {
          displayRoleplay =
          <form onSubmit={this.handleSubmitCheckRoleplay} className="inputRoleplayForm">
             Roleplay Cue: 
-            <textarea  className="roleplayText" placeholder="Roleplay Cue" onChange={this.handleRP} type="text" required="required" minLength="3" maxLength="40"></textarea>
+            <textarea  className="roleplayText" placeholder="Roleplay Cue" onChange={this.handleRP} type="text" required="required" minLength="3" maxLength="50"></textarea>
             <div className="roleplayDescStandardButtonContainer">
                <button disabled={!isRoleplayEnabled} className="standardButton" type={"submit"}>Submit</button> 
             </div>

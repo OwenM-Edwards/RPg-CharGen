@@ -12,13 +12,15 @@ const customStyles = {
      ...provided,
    }),
 }
+let currentGender = { value: 'male', label: 'Gender: Male' };
+let currentRace = { value: 'human', label: 'Race: Human' };
 
 class InputName extends React.Component {
    constructor(props){
       super(props)
       this.state = {
-         name: '',
-         lastName:'',
+         name: false,
+         lastName:false,
          gender: 'male',
          race: 'human',
          loading:'default'
@@ -26,20 +28,25 @@ class InputName extends React.Component {
       this.props.changeSubTitle('What would you like to add?')
    }
 
-   handleGender = (event) =>{
-      this.setState({gender: event.value});
-   }
+
    handleName = (event) => {
-      let str = event.target.value.replace(/\s+/g, '');
-      this.setState({name: str});
+      let frststr = event.target.value.replace(/\s+/g, '');
+      this.setState({name: frststr});
    }
    handleLastName =(event)=>{
-      let str = event.target.value.replace(/\s+/g, '');
-      this.setState({lastName: str});
+      let lststr = event.target.value.replace(/\s+/g, '');
+      this.setState({lastName: lststr});
 
+   }
+   handleGender = (event) =>{
+      this.setState({gender: event.value});
+      currentGender.value = event.value;
+      currentGender.label = 'Gender:'+event.value;
    }
    handleRace = (event)=>{
       this.setState({race: event.value});
+      currentRace.value = event.value;
+      currentRace.label = 'Race:'+event.value;
    }
    handleLoading=(data)=>{
       this.setState({loading: data});
@@ -81,9 +88,13 @@ class InputName extends React.Component {
             if(response.status === 200){
                this.props.modalMessageChange('Name added, thank you for your contribution!');
                this.props.openModal();
+               this.setState({lastName: false});
+               this.setState({name: false});
             } else{
                this.props.modalMessageChange('Error Adding Name');
                this.props.openModal();
+               this.setState({lastName: false});
+               this.setState({name: false});
             }
          })
          
@@ -91,6 +102,8 @@ class InputName extends React.Component {
             this.handleLoading('default')
             this.props.modalMessageChange('Error Adding Name');
             this.props.openModal();
+            this.setState({lastName: false});
+            this.setState({name: false});
             console.log('problemo')
          }) 
    }
@@ -106,21 +119,21 @@ class InputName extends React.Component {
          <form className="inputNameFormContainer" id="newName" onSubmit={this.handleSubmitCheck}> 
             <div>
                <Select  className="selectContainer"
-                  defaultValue={optionsGender[0]}
+                  defaultValue={currentGender}
                   onChange={this.handleGender}
                   isSearchable={false}
                   styles={customStyles}
                   options={optionsGender}
                />
                <Select  className="selectContainer"
-                  defaultValue={this.props.optionsRace[0]}
+                  defaultValue={currentRace}
                   onChange={this.handleRace}
                   isSearchable={false}
                   styles={customStyles}
                   options={this.props.optionsRace}
                />
                <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
-               <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>
+               <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name - gender neutral"></input>
                <div className="nameStandardButtonContainer">
                   <button disabled={!isEnabled} className="standardButton" type={"submit"}>Submit</button> 
                </div>

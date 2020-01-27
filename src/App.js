@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import SelectionButtons from './components/selectionButtons/SelectionButtons';
-import SubmitButtons from './components/submitButtons/SubmitButtons';
 import InputName from './components/inputName/InputName';
 import InputImage from './components/inputImage/InputImage';
 import InputDesc from './components/inputdesc/DescInput';
@@ -15,7 +13,7 @@ import LoadingIcons from './components/loadingIcons/LoadingIcons';
 import Modal from 'react-modal';
 import UserHomePage from './components/userHomePage/UserHomePage';
 import SignedUserTab from './components/signedUserTab/SignedUserTab';
-
+import Select from 'react-select';
  
 /* 
   TODO Make input submits direct to the temp moderation databases
@@ -37,16 +35,28 @@ const initialState = {
   addNewCharPage:false,
   isSignedIn: false,
   fullRandom: true,
-
-  charGenInfo:{
-    gender:'random',
-    race: 'random'
-  },
+  charGenrace: 'random',
+  charGengender:'random',
   optionsRace:[
     { value: 'human', label: 'Race: Human' },
     { value: 'orc', label: 'Race: Orc' },
     { value: 'elf', label: 'Race: Elf' },
     { value: 'halfling', label: 'Race: Halfling' },
+    { value: 'dwarf', label: 'Race: Dwarf' },
+  ],
+
+  optionsGender:[
+    { value: 'random', label: 'Random Gender' },
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+  ],
+  optionsRace:[
+    { value: 'random', label: 'Random Race' },
+    { value: 'human', label: 'Human' },
+    { value: 'orc', label: 'Orc' },
+    { value: 'elf', label: 'Elf' },
+    { value: 'halfling', label: 'Halfling' },
+    { value: 'dwarf', label: 'Dwarf' },
   ],
 
   newChar:{
@@ -68,6 +78,13 @@ const initialState = {
     email: '',
     joined: ''
   }
+}
+
+
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+  }),
 }
 
 
@@ -98,8 +115,8 @@ class App extends Component {
       method: 'post',
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
-        "race": this.state.charGenInfo.race,
-        "gender": this.state.charGenInfo.gender
+        "race": this.state.charGenrace,
+        "gender": this.state.charGengender
       })
     })
     .then(response => response.json())
@@ -149,11 +166,11 @@ class App extends Component {
     this.setState({isSignedIn:signInStatus})
   }
   //HANDLES DROP OPTIONS CHANGES
-  handleGenderChange = (event) => {
-    this.setState({charGenInfo:{gender: event.value}});
+  handleGender = (event) => {
+    this.setState({charGengender: event.value});
   }
-  handleRaceChange = (event) => {
-    this.setState({charGenInfo:{race: event.value}});
+  handleRace = (event) => {
+    this.setState({charGenrace: event.value});
   }
   routeChange = (newRoute) =>{
     if(newRoute){
@@ -301,24 +318,39 @@ class App extends Component {
 
           : (
             <div className="main">
-              <div className="sidebarContainer">
-                {/* <SignedUserTab isSignedIn={isSignedIn} user={user}/> */}
-                <div className="sidebarSelectionContainer">
-                  <SelectionButtons optionsRace={this.state.optionsRace} handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} />
-                </div>
-                
-                <div className="sidebarButtonContainer">
-                  <div className="standardButtonContainer">
-                    { this.state.fullRandom === true
-                      ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
-                      : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
-                    }
+                <div className="sidebarContainer">
+                  {/* <SignedUserTab isSignedIn={isSignedIn} user={user}/> */}
+                  <div className="sidebarSelectionContainer">
+                    <div className="selectMainContainer">
+                      <Select 
+                        className="selectContainer"
+                        defaultValue={this.state.optionsGender[0]}
+                        onChange={this.handleGender}
+                        isSearchable={false}
+                        styles={customStyles}
+                        options={this.state.optionsGender}
+                      />
+                      <Select className="selectContainer"
+                        defaultValue={this.state.optionsRace[0]}
+                        onChange={this.handleRace}
+                        isSearchable={false}
+                        styles={customStyles}
+                        options={this.state.optionsRace}
+                      />
+                    </div>
                   </div>
-                  <div className="standardButtonContainer">
-                    <button  className="standardButton" onClick={()=> {this.routeChange('signIn');this.changeSubTitle('');}}>Sign in to add your own!</button>
+                  <div className="sidebarButtonContainer">
+                    <div className="standardButtonContainer">
+                      { this.state.fullRandom === true
+                        ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
+                        : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
+                      }
+                    </div>
+                    <div className="standardButtonContainer">
+                      <button  className="standardButton" onClick={()=> {this.routeChange('signIn');this.changeSubTitle('');}}>Sign in to add your own!</button>
+                    </div>
                   </div>
                 </div>
-              </div>
                 { loadingState === 'loading' ? (
                   <div className="outputContainer">
                     <LoadingIcons/>

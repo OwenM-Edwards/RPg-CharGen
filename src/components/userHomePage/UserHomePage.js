@@ -16,12 +16,21 @@ class UserHomePage extends React.Component {
       this.state = {
          returnedSubHumanName:'',
          returnedSubOrcName:'',
+         returnedSubDwarfName:'',
+         returnedSubElfName:'',
+         returnedSubHalflingName:'',
 
          returnedSubHumanLastName:'',
          returnedSubOrcLastName:'',
+         returnedSubDwarfLastName:'',
+         returnedSubElfLastName:'',
+         returnedSubHalflingLastName:'',
 
          returnedSubHumanImg:'',
          returnedSubOrcImg:'',
+         returnedSubDwarfImg:'',
+         returnedSubElfImg:'',
+         returnedSubHalflingImg:'',
 
          returnedSubRoleplay:'',
          returnedSubOrcIntrigue:'',
@@ -45,15 +54,24 @@ class UserHomePage extends React.Component {
       .then(res => {
          this.setState({returnedSubHumanName:res[0]})
          this.setState({returnedSubOrcName:res[1]})
+         this.setState({returnedSubDwarfName:res[2]})
+         this.setState({returnedSubElfName:res[3]})
+         this.setState({returnedSubHalflingName:res[4]})
 
-         this.setState({returnedSubHumanImg:res[2]})
-         this.setState({returnedSubOrcImg:res[3]})
+         this.setState({returnedSubHumanImg:res[5]})
+         this.setState({returnedSubOrcImg:res[6]})
+         this.setState({returnedSubDwarfImg:res[7]})
+         this.setState({returnedSubElfImg:res[8]})
+         this.setState({returnedSubHalflingImg:res[9]})
 
-         this.setState({returnedSubHumanLastName:res[4]})
-         this.setState({returnedSubOrcLastName:res[5]})
+         this.setState({returnedSubHumanLastName:res[10]})
+         this.setState({returnedSubOrcLastName:res[11]})
+         this.setState({returnedSubDwarfLastName:res[12]})
+         this.setState({returnedSubElfLastName:res[13]})
+         this.setState({returnedSubHalflingLastName:res[14]})
 
-         this.setState({returnedSubRoleplay:res[6]})
-         this.setState({returnedSubIntrigue:res[7]})
+         this.setState({returnedSubRoleplay:res[15]})
+         this.setState({returnedSubIntrigue:res[16]})
 
 
          this.sortSubmissionArrNames();
@@ -80,6 +98,15 @@ class UserHomePage extends React.Component {
       this.state.returnedSubOrcName.forEach(element=>{
          SubmissionArr.push(element);
       })
+      this.state.returnedSubDwarfName.forEach(element=>{
+         SubmissionArr.push(element);
+      })
+      this.state.returnedSubElfName.forEach(element=>{
+         SubmissionArr.push(element);
+      })
+      this.state.returnedSubHalflingName.forEach(element=>{
+         SubmissionArr.push(element);
+      })
       this.setState({SubmissionArr:SubmissionArr});
    } 
    sortSubmissionArrLastNames=()=>{
@@ -90,6 +117,15 @@ class UserHomePage extends React.Component {
       this.state.returnedSubOrcLastName.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
+      this.state.returnedSubDwarfLastName.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
+      this.state.returnedSubElfLastName.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
+      this.state.returnedSubHalflingLastName.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
    } 
    sortSubmissionArrImages=()=>{
       this.state.SubmissionArr.push('Images');
@@ -97,6 +133,15 @@ class UserHomePage extends React.Component {
          this.state.SubmissionArr.push(element);
       })
       this.state.returnedSubOrcImg.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
+      this.state.returnedSubDwarfImg.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
+      this.state.returnedSubElfImg.forEach(element=>{
+         this.state.SubmissionArr.push(element);
+      })
+      this.state.returnedSubHalflingImg.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
    } 

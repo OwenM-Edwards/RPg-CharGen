@@ -531,3 +531,19 @@ MODAL BOX STUFF
 .submitButton:hover{
   background-color: #ba6700; /* Green */
 }
+
+
+
+.selectMainContainer{
+  width:100%;
+}
+
+.selectContainer{
+
+  width:100%;
+}
+
+.selection{
+  width:100%;
+
+}

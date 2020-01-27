@@ -6,13 +6,14 @@ const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
    { value: 'female', label: 'Gender: Female' },
 ];
-
-
 const customStyles = {
    menu: (provided, state) => ({
      ...provided,
    }),
 }
+let currentGender = { value: 'male', label: 'Gender: Male' };
+let currentRace = { value: 'human', label: 'Race: Human' };
+
 
 class InputImage extends React.Component {
    constructor(props){
@@ -28,10 +29,14 @@ class InputImage extends React.Component {
       }
    }
    handleRace = (event)=>{
-      this.setState({race: event.target.value});
+      this.setState({race: event.value});
+      currentRace.value = event.value;
+      currentRace.label = 'Race:'+event.value;
    }
    handleGender = (event) =>{
-      this.setState({gender: event.target.value});
+      this.setState({gender: event.value});
+      currentGender.value = event.value;
+      currentGender.label = 'Gender:'+event.value;
    }
    handleLoading=(data)=>{
       this.setState({loading: data});
@@ -106,14 +111,14 @@ class InputImage extends React.Component {
             <form className="newImageSelectContainer">
                <div>
                   <Select  className="selectContainer"
-                     defaultValue={optionsGender[0]}
+                     defaultValue={currentGender}
                      onChange={this.handleGender}
                      isSearchable={false}
                      styles={customStyles}
                      options={optionsGender}
                   />
                   <Select  className="selectContainer"
-                     defaultValue={this.props.optionsRace[0]}
+                     defaultValue={currentRace}
                      onChange={this.handleRace}
                      isSearchable={false}
                      styles={customStyles}
@@ -138,9 +143,7 @@ class InputImage extends React.Component {
                </div>
                
             </div>
-            <Tilt className="Tilt" options={{ max : 30 }} >
-               <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
-            </Tilt>
+            <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
          </form>
          }
       return (
