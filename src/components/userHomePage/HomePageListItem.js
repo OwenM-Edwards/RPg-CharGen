@@ -37,6 +37,7 @@ const  HomePageListItem = ({items}) => {
             {(items.url) ? <li className={"homePageItemLi"}><p>Image Link: {items.url}</p></li> : <div></div>}
             {(items.roleplay) ? <li className={"homePageItemLi"}><p>Roleplay: {items.roleplay}</p></li> : <div></div>}
             {(items.intrigue) ? <li className={"homePageItemLi"}><p>Intrigue: {items.intrigue}</p></li> : <div></div>}
+            {(items.race) ? <li className={"homePageItemLi"}><p>Race: {items.race}</p></li> : <div></div>}
             {(gender) ? <li className={"homePageItemLi"}><p>{gender}</p></li> : <div></div>}
             {(moderation) ? <li className={"homePageItemLi"}><p>{moderation}</p></li> : <div></div>}
             </ul>
