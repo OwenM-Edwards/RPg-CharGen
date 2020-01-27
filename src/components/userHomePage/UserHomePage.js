@@ -134,11 +134,8 @@ class UserHomePage extends React.Component {
       if(this.state.displayList === true){
          displayListStatus =this.getSubmissionArrDisplay()
       }
-      else{
-         displayListStatus = ''
-      }
       return (
-         <div className="listContainer">
+         <div className="userListContainer">
             {displayListStatus}
          </div>
       );

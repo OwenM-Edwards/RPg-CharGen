@@ -25,7 +25,7 @@ const CharImage = ({loadingState,imageOutput}) => {
 
 
    return (
-      <div>{displayStateImage} </div>
+      <span>{displayStateImage} </span>
    )
 }
 

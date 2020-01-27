@@ -28,12 +28,13 @@ import SignedUserTab from './components/signedUserTab/SignedUserTab';
 */ 
 
 const initialState = {
+  route:'main',
+
   subTitle:'Who are you looking for?',
   modalIsOpen: false,
   modalMessage:'',
   loadingState:'init',
   addNewCharPage:false,
-  route:'homepage',
   isSignedIn: false,
   fullRandom: true,
 
@@ -252,8 +253,7 @@ class App extends Component {
 
           : (
             route === 'homepage' ? (
-            <div  className="main">
-              {modalBox}
+            <div className="main">
               <div className="sidebarContainer">
                 <div className="sidebarButtonContainer">
                   <div className="homepageSidebarStandardButtonContainer">
