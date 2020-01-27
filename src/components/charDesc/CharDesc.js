@@ -18,12 +18,7 @@ const CharDesc = ({nameOutput, interestOutput, lastNameOutput, loadingState, age
    } else if(loadingState === 'loaded') {
       displayStateMainLine = 
          <div>
-            <div className={"title"}>Name :</div>
-            <ul>
-               <li>
-                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput}, with an interest in ${interestOutput}.`}</p>
-               </li>
-            </ul>
+            <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput}, with an interest in ${interestOutput}.`}</p>
 
          </div>
    }
