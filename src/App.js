@@ -63,13 +63,12 @@ const initialState = {
     raceOutput:'',
     nameOutput:'',
     imageOutput: '',
-    interestOutput: '',
     lastNameOutput:'',
     intrigueOutput:'',
     roleplayOutputA:'',
     roleplayOutputB:'',
     roleplayOutputC:'',
-    ageOutput: ''
+    genderOutput:''
   },
 
   user:{
@@ -121,34 +120,24 @@ class App extends Component {
     })
     .then(response => response.json())
     .then(data => {
+      if(data[4]===true){
+        data[4]='male'
+      } else{
+        data[4]='female'
+      }
       this.setState({loadingState:'loaded'})
       this.setState({newChar: {
         nameOutput:data[0][0].name,
         imageOutput:data[0][0].url,
-        ageOutput:Math.floor(Math.random()*data[0][0].maxage),
         lastNameOutput:data[0][0].lastname,
         intrigueOutput:data[0][0].intrigue,
         roleplayOutputA:data[1][0].roleplay,
         roleplayOutputB:data[1][1].roleplay,
         roleplayOutputC:data[1][2].roleplay,
-        interestOutput:data[2],
         raceOutput:data[3],
-        genderOutput:data[4], 
+        genderOutput:data[4]
       }})
-      if(this.state.newChar.ageOutput < 2){
-        this.setState({newChar: {
-          ageOutput:this.state.ageOutput+14
-        }})
-      } 
-      else if(this.state.newChar.ageOutput < 4){
-        this.setState({newChar: {
-          ageOutput:this.state.ageOutput*7 
-        }})
-      } else if(this.state.newChar.ageOutput < 13){
-        this.setState({newChar: {
-          ageOutput:this.state.ageOutput*3  
-        }})
-      } 
+      
     })
     .then(this.setState({
       fullRandom: false
@@ -214,7 +203,8 @@ class App extends Component {
       
     </Modal>
     let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
-    let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} interestOutput={this.state.newChar.interestOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+    
+    let displayStateDesc = <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
     let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
     let displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
     window.onload = function(){

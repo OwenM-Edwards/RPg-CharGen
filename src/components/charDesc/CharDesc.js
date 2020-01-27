@@ -2,7 +2,37 @@ import React from 'react';
 
 
 
-const CharDesc = ({nameOutput, interestOutput, lastNameOutput, loadingState, ageOutput, raceOutput}) => {
+const CharDesc = ({genderOutput, nameOutput, lastNameOutput, loadingState, raceOutput}) => {
+   const randomInterestArr = 
+   [
+      'pottery',
+      'hunting',
+      'fishing',
+      'swimming',
+      'brewing',
+      'geology',
+      'astronomy',
+      'lockpicking',
+      'literature',
+      'botany',
+      'fine rugs',
+      'whiskey',
+      'archery',
+      'mushroom hunting',
+      'travelling',
+      'leather crafting',
+      'knife throwing',
+      'drawing',
+      'boxing',
+      'dancing',
+      'puzzles',
+      'people watching',
+      'woodworking',
+      'martial arts'
+   ];
+   let interest = randomInterestArr[Math.floor(Math.random()*randomInterestArr.length)];
+
+
    var displayStateMainLine;
    if (loadingState === 'init') {
       displayStateMainLine = 
@@ -18,7 +48,7 @@ const CharDesc = ({nameOutput, interestOutput, lastNameOutput, loadingState, age
    } else if(loadingState === 'loaded') {
       displayStateMainLine = 
          <div>
-            <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput}, with an interest in ${interestOutput}.`}</p>
+            <p>{`${nameOutput} ${lastNameOutput} is a ${genderOutput} ${raceOutput}, with an interest in ${interest}.`}</p>
 
          </div>
    }
