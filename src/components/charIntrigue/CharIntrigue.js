@@ -5,7 +5,7 @@ import React from 'react';
 const CharIntrigue = ({intrigueOutput, loadingState}) => {
    var displayIntrigue;
    if (loadingState === 'init') {
-      displayIntrigue =<div>Intrigue : ???</div>;
+      displayIntrigue =<div className="intrigueTextDefault">Intrigue : ???</div>;
 
    } else if(loadingState === 'loading') {
       displayIntrigue = <div></div>;

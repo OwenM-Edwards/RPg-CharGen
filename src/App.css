@@ -287,6 +287,10 @@ input[type="file"] {
   box-sizing: border-box;
   resize: none;
 }
+.roleplayTextDefault{
+  position: relative;
+  top:-100px;
+}
 .intrigueText{
   
   width:65%;
@@ -299,6 +303,10 @@ input[type="file"] {
   border: 1px solid #ccc;
   box-sizing: border-box;
   resize: none;
+}
+.intrigueTextDefault{
+  position: relative;
+  top:-100px;
 }
 .roleplayDescStandardButtonContainer{
   height:30px;

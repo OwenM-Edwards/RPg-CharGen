@@ -5,7 +5,7 @@ import React from 'react';
 const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, loadingState}) => {
    var displayRoleplay;
    if (loadingState === 'init') {
-      displayRoleplay = <div className={"title"}>Roleplay Cues :  ???</div>;
+      displayRoleplay = <div className="roleplayTextDefault">Roleplay Cues :  ???</div>;
 
    } else if(loadingState === 'loading') {
       displayRoleplay = <div></div>;
