@@ -11,23 +11,20 @@ const optionsGender = [
 const optionsRace = [
    { value: 'random', label: 'Random Race' },
    { value: 'human', label: 'Human' },
-   { value: 'orc', label: 'Orc' }
+   { value: 'orc', label: 'Orc' },
+   { value: 'elf', label: 'Elf' },
+   { value: 'halfling', label: 'Halfling' },
 ];
-const optionsRole = [
-   { value: 'random', label: 'Random Role' },
-   { value: 'merchant', label: 'Merchant' },
-   { value: 'hunter', label: 'Hunter' }
-];
+
 const customStyles = {
    menu: (provided, state) => ({
      ...provided,
    }),
 }
-//({handleRoleChange, handleGenderChange, handleRaceChange,handleSystemChange}) 
+
 class SelectionButtons extends React.Component {
 
    render(){
-      // const { selectedOption } = this.state;
       return (
          <div className={styles.selectMainContainer}>
             <Select 
@@ -37,8 +34,6 @@ class SelectionButtons extends React.Component {
                isSearchable={false}
                styles={customStyles}
                options={optionsGender}
-
-
             />
             <Select className={styles.selectContainer}
                defaultValue={optionsRace[0]}
@@ -46,13 +41,6 @@ class SelectionButtons extends React.Component {
                isSearchable={false}
                styles={customStyles}
                options={optionsRace}
-            />
-            <Select className={styles.selectContainer}
-               defaultValue={optionsRole[0]}
-               onChange={this.props.handleRoleChange}
-               isSearchable={false}
-               styles={customStyles}
-               options={optionsRole}
             />
          </div>
 

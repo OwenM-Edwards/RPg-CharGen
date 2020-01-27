@@ -142,24 +142,23 @@ USER INPUT PAGE
  */
 .inputContainer{
   grid-area: 1 / 2 / 2 / 6;
+  height: 100%;
+  max-height: 100%;
+
+  
+  overflow: hidden;
+
   border:5px solid var(--dark);
   border-radius: 5px;
-
-  /* display:flex;
-  flex-wrap:wrap; */
-
-  max-height: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px; 
 }
-.nameAndImageContainer{
-  width:100%;
-  height:300px;
-  display:flex;
-  flex-wrap:wrap;
+.inputSidebarStandardButtonContainer{
+  height:50%;
+  width: 100%;
 }
 
 
@@ -168,12 +167,10 @@ USER INPUT PAGE
   grid-area: 1 / 2 / 3 / 3;
   width:100%;
   height:100%;
-  border-left:3px solid var(--dark);
-  
+  border-left:3px solid var(--dark); 
 }
 .inputImage img{
   display:block;
-
   height:110px;
   -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
@@ -422,50 +419,55 @@ input[type="file"] {
   USER HOME PAGE STUFF
 */
 .homepageSidebarStandardButtonContainer{
-  height:100%;
+  height:50%;
   width: 100%;
 }
-.homepageOutputContainer{
-  border:5px solid var(--dark);
-  border-radius: 5px;
-}
-
 
 .userListContainer{
-  width:100%;
-
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  background-color: var(--dark);
 }
 .homePageListUl{
-
-  border:5px solid var(--dark);
-  background-color: var(--light);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  border:5px solid var(--light);
+  background-color: var(--dark);
+  color:var(--light);
   display:flex;
-  flex-wrap:wrap;
-  height:100%;
-  max-width:100%;
-  list-style:none;
+  flex-direction: row;
+  max-height:90px;
+  max-width:90%;
+  text-align: left;
+  list-style-type: none;
+
+  margin-left:auto;
+  margin-right:20px;
+  padding: 0;
   -webkit-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   -moz-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
+
+  transition: all .2s ease-in-out;
+  font-style: normal;
 }
-
-
-
-
-
+.homePageListUl:hover{
+  transform: scale(1.05);
+  color: #fc8c03;
+}
 .homePageItemLi{
-  /* width:33%;
+
   margin: auto;
-  vertical-align: middle; */
+  vertical-align: middle;
+  border:1px solid white;
+}
+.homePageSubHeading{
+  font-family: Arial, Helvetica, sans-serif;
+  border:5px solid var(--dark);
+  background-color: var(--light);
+  font-size: 2rem;
 }
 
-.homepageContainerButton{
-  /* height:50px;
-  width:50px; */
-}
+
+
 
 
 /* 
@@ -507,16 +509,6 @@ MODAL BOX STUFF
   margin:20px;
 }
 
-
-/* BUTTON CONTAINERS */
-.submitButtonContainer{
-  width:100%;
-  margin-top:auto;
-}
-.inputStandardButtonContainer{
-  max-height:100px;
-  width: 100%;
-}
 
 /* BUTTON STYLES */
 .standardButton{

@@ -6,10 +6,7 @@ const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
    { value: 'female', label: 'Gender: Female' },
 ];
-const optionsRace = [
-   { value: 'human', label: 'Race: Human' },
-   { value: 'orc', label: 'Race: Orc' },
-];
+
 const customStyles = {
    menu: (provided, state) => ({
      ...provided,
@@ -26,10 +23,11 @@ class InputName extends React.Component {
          race: 'human',
          loading:'default'
       }
+      this.props.changeSubTitle('What would you like to add?')
    }
 
    handleGender = (event) =>{
-      this.setState({gender: event.target.value});
+      this.setState({gender: event.value});
    }
    handleName = (event) => {
       let str = event.target.value.replace(/\s+/g, '');
@@ -41,7 +39,7 @@ class InputName extends React.Component {
 
    }
    handleRace = (event)=>{
-      this.setState({race: event.target.value});
+      this.setState({race: event.value});
    }
    handleLoading=(data)=>{
       this.setState({loading: data});
@@ -109,17 +107,17 @@ class InputName extends React.Component {
             <div>
                <Select  className="selectContainer"
                   defaultValue={optionsGender[0]}
-                  onChange={this.props.handleGenderChange}
+                  onChange={this.handleGender}
                   isSearchable={false}
                   styles={customStyles}
                   options={optionsGender}
                />
                <Select  className="selectContainer"
-                  defaultValue={optionsRace[0]}
-                  onChange={this.props.handleGenderChange}
+                  defaultValue={this.props.optionsRace[0]}
+                  onChange={this.handleRace}
                   isSearchable={false}
                   styles={customStyles}
-                  options={optionsRace}
+                  options={this.props.optionsRace}
                />
                <input className="inputField" onChange={this.handleName} minLength="3" maxLength="20" type="text" name="charName" placeholder="First name"></input>
                <input className="inputField" onChange={this.handleLastName} minLength="3" maxLength="20" type="text" name="charName" placeholder="Optional last name"></input>

@@ -30,6 +30,7 @@ class UserHomePage extends React.Component {
          displayList:false
       }
       this.getSubmissions();
+      this.props.changeSubTitle('Your Submissions');
    }
 
    getSubmissions = () => {
@@ -72,47 +73,42 @@ class UserHomePage extends React.Component {
    
    sortSubmissionArrNames=()=>{
       let SubmissionArr = []
-      SubmissionArr.push('Start of Names');
+      SubmissionArr.push('First Names');
       this.state.returnedSubHumanName.forEach(element=>{
          SubmissionArr.push(element);
       })
       this.state.returnedSubOrcName.forEach(element=>{
          SubmissionArr.push(element);
       })
-      SubmissionArr.push('End of Names');
       this.setState({SubmissionArr:SubmissionArr});
    } 
    sortSubmissionArrLastNames=()=>{
-      this.state.SubmissionArr.push('Start of Last Names');
+      this.state.SubmissionArr.push('Last Names');
       this.state.returnedSubHumanLastName.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
       this.state.returnedSubOrcLastName.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
-      this.state.SubmissionArr.push('End of Last Names'); 
    } 
    sortSubmissionArrImages=()=>{
-      this.state.SubmissionArr.push('Start of Images');
+      this.state.SubmissionArr.push('Images');
       this.state.returnedSubHumanImg.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
       this.state.returnedSubOrcImg.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
-      this.state.SubmissionArr.push('End of Images');
    } 
    sortSubmissionArrDesc=()=>{
-      this.state.SubmissionArr.push('Start of Roleplay');
+      this.state.SubmissionArr.push('Roleplay Cues');
       this.state.returnedSubRoleplay.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
-      this.state.SubmissionArr.push('End of Roleplay');
-      this.state.SubmissionArr.push('Start of Intrigue');
+      this.state.SubmissionArr.push('Intrigues');
       this.state.returnedSubIntrigue.forEach(element=>{
          this.state.SubmissionArr.push(element);
       })
-      this.state.SubmissionArr.push('End of Intrigue');
    } 
 
 

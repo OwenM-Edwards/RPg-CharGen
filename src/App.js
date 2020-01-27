@@ -40,15 +40,20 @@ const initialState = {
 
   charGenInfo:{
     gender:'random',
-    race: 'random',
-    role:'random'
+    race: 'random'
   },
+  optionsRace:[
+    { value: 'human', label: 'Race: Human' },
+    { value: 'orc', label: 'Race: Orc' },
+    { value: 'elf', label: 'Race: Elf' },
+    { value: 'halfling', label: 'Race: Halfling' },
+  ],
 
   newChar:{
     raceOutput:'',
     nameOutput:'',
     imageOutput: '',
-    roleOutput: '',
+    interestOutput: '',
     lastNameOutput:'',
     intrigueOutput:'',
     roleplayOutputA:'',
@@ -84,6 +89,7 @@ class App extends Component {
   }
 
 
+
   //HANDLES SUBMIT BUTTON
 
   submit = () => {
@@ -93,8 +99,7 @@ class App extends Component {
       headers: {'Content-Type' : 'application/json'},
       body: JSON.stringify({
         "race": this.state.charGenInfo.race,
-        "gender": this.state.charGenInfo.gender,
-        "role":this.state.charGenInfo.role
+        "gender": this.state.charGenInfo.gender
       })
     })
     .then(response => response.json())
@@ -109,7 +114,7 @@ class App extends Component {
         roleplayOutputA:data[1][0].roleplay,
         roleplayOutputB:data[1][1].roleplay,
         roleplayOutputC:data[1][2].roleplay,
-        roleOutput:data[2],
+        interestOutput:data[2],
         raceOutput:data[3],
         genderOutput:data[4], 
       }})
@@ -150,9 +155,6 @@ class App extends Component {
   handleRaceChange = (event) => {
     this.setState({charGenInfo:{race: event.value}});
   }
-  handleRoleChange = (event) => {
-    this.setState({charGenInfo:{role: event.value}});
-  }
   routeChange = (newRoute) =>{
     if(newRoute){
       this.setState({route:newRoute})
@@ -162,10 +164,6 @@ class App extends Component {
   }
   changeSubTitle = (data)=>{
     this.setState({subTitle:data})
-  }
-  returnFromInput=()=>{
-    this.setState({subTitle:'Who are you looking for?'})
-    this.setState({route:'home'})
   }
 
   // MODALSTUFF
@@ -199,7 +197,7 @@ class App extends Component {
       
     </Modal>
     let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
-    let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} roleOutput ={this.state.newChar.roleOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+    let displayStateDesc = <div className="OutputDesc"><CharDesc nameOutput={this.state.newChar.nameOutput} interestOutput={this.state.newChar.interestOutput}  lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
     let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
     let displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
     window.onload = function(){
@@ -257,12 +255,15 @@ class App extends Component {
               <div className="sidebarContainer">
                 <div className="sidebarButtonContainer">
                   <div className="homepageSidebarStandardButtonContainer">
-                    <button  className="standardButton" onClick={()=> this.routeChange('home')}>Back to main page</button>
+                    <button  className="standardButton" onClick={()=> this.routeChange('input')}>Add your own!</button>
+                  </div>
+                  <div className="homepageSidebarStandardButtonContainer">
+                    <button  className="standardButton" onClick={()=> {this.routeChange('home');this.changeSubTitle('Who are you looking for?');}}>Back to main page</button>
                   </div>
                 </div>
               </div>
               <div className="outputContainer">
-                <UserHomePage user={user}/>
+                <UserHomePage changeSubTitle={this.changeSubTitle} user={user}/>
               </div>
               
             </div>
@@ -274,16 +275,21 @@ class App extends Component {
             <div className="main">
               {modalBox}
               <div className="sidebarContainer">
-                <div className="standardButtonContainer">
-                  <button  className="standardButton" onClick={()=> this.returnFromInput()}>Return to generator</button>
+                <div className="sidebarButtonContainer">
+                  <div className="inputSidebarStandardButtonContainer">
+                    <button  className="standardButton" onClick={()=> this.routeChange('homepage')}>View your submissions</button>
+                  </div>
+                  <div className="inputSidebarStandardButtonContainer">
+                    <button  className="standardButton" onClick={()=> {this.routeChange('main');this.changeSubTitle('Who are you looking for?');}}>Return to generator</button>
+                  </div>
                 </div>
               </div>
               <div className="inputContainer">
                   <div className="inputNameContainer">
-                    <InputName modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email} openModal={this.openModal}/>
+                    <InputName optionsRace={this.state.optionsRace} changeSubTitle={this.changeSubTitle} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email} openModal={this.openModal}/>
                   </div>
                   <div className="inputImageContainer">
-                    <InputImage openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
+                    <InputImage optionsRace={this.state.optionsRace} openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
                   </div>
                 <div className="roleplayAndIntrigueContainer">
                     <InputDesc openModal={this.openModal} modalMessageChange={this.modalMessageChange} id={this.state.user.id} email={this.state.user.email}/>
@@ -298,7 +304,7 @@ class App extends Component {
               <div className="sidebarContainer">
                 {/* <SignedUserTab isSignedIn={isSignedIn} user={user}/> */}
                 <div className="sidebarSelectionContainer">
-                  <SelectionButtons handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} handleRoleChange={this.handleRoleChange}/>
+                  <SelectionButtons optionsRace={this.state.optionsRace} handleGenderChange={this.handleGenderChange} handleRaceChange={this.handleRaceChange} />
                 </div>
                 
                 <div className="sidebarButtonContainer">
@@ -309,7 +315,7 @@ class App extends Component {
                     }
                   </div>
                   <div className="standardButtonContainer">
-                    <button  className="standardButton" onClick={()=> this.routeChange('signIn')}>Sign in to add your own!</button>
+                    <button  className="standardButton" onClick={()=> {this.routeChange('signIn');this.changeSubTitle('');}}>Sign in to add your own!</button>
                   </div>
                 </div>
               </div>

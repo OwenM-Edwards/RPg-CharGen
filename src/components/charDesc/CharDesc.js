@@ -2,14 +2,13 @@ import React from 'react';
 
 
 
-const CharDesc = ({nameOutput, roleOutput, lastNameOutput, loadingState, ageOutput, raceOutput}) => {
+const CharDesc = ({nameOutput, interestOutput, lastNameOutput, loadingState, ageOutput, raceOutput}) => {
    var displayStateMainLine;
    if (loadingState === 'init') {
       displayStateMainLine = 
-            <div  className={"title"}>
-               Description :  ???
-
-            </div>;
+         <div  className={"title"}>
+            Description :  ???
+         </div>;
            
 
 
@@ -22,7 +21,7 @@ const CharDesc = ({nameOutput, roleOutput, lastNameOutput, loadingState, ageOutp
             <div className={"title"}>Name :</div>
             <ul>
                <li>
-                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput} ${roleOutput}.`}</p>
+                  <p>{`${nameOutput} ${lastNameOutput} is a ${ageOutput} year old ${raceOutput}, with an interest in ${interestOutput}.`}</p>
                </li>
             </ul>
 

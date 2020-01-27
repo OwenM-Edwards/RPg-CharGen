@@ -6,14 +6,8 @@ const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
    { value: 'female', label: 'Gender: Female' },
 ];
-const optionsRace = [
-   { value: 'human', label: 'Race: Human' },
-   { value: 'orc', label: 'Race: Orc' },
-];
-const optionsRole = [
-   { value: 'merchant', label: 'Role: Merchant' },
-   { value: 'wizard', label: 'Role: Wizard' },
-];
+
+
 const customStyles = {
    menu: (provided, state) => ({
      ...provided,
@@ -28,7 +22,6 @@ class InputImage extends React.Component {
          errors:[],
          race:'human',
          gender:'male',
-         role:'merchant',
          loading:'default',
          displayFile:null,
          previewSrc: ''
@@ -39,9 +32,6 @@ class InputImage extends React.Component {
    }
    handleGender = (event) =>{
       this.setState({gender: event.target.value});
-   }
-   handleRole = (event) =>{
-      this.setState({role: event.target.value});
    }
    handleLoading=(data)=>{
       this.setState({loading: data});
@@ -63,7 +53,6 @@ class InputImage extends React.Component {
          "image": this.state.previewSrc,
          "gender":this.state.gender,
          "race":this.state.race,
-         "role":this.state.role,
          "email":this.props.email,
          "id":this.props.id
          })
@@ -124,18 +113,11 @@ class InputImage extends React.Component {
                      options={optionsGender}
                   />
                   <Select  className="selectContainer"
-                     defaultValue={optionsRace[0]}
+                     defaultValue={this.props.optionsRace[0]}
                      onChange={this.handleRace}
                      isSearchable={false}
                      styles={customStyles}
-                     options={optionsRace}
-                  />
-                  <Select  className="selectContainer"
-                     defaultValue={optionsRole[0]}
-                     onChange={this.handleRole}
-                     isSearchable={false}
-                     styles={customStyles}
-                     options={optionsRole}
+                     options={this.props.optionsRace}
                   />
                </div>
 
