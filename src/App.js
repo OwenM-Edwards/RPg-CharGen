@@ -26,7 +26,7 @@ import Select from 'react-select';
 */ 
 
 const initialState = {
-  route:'main',
+  route:'signIn',
 
   subTitle:'Who are you looking for?',
   modalIsOpen: false,
@@ -37,13 +37,6 @@ const initialState = {
   fullRandom: true,
   charGenrace: 'random',
   charGengender:'random',
-  optionsRace:[
-    { value: 'human', label: 'Race: Human' },
-    { value: 'orc', label: 'Race: Orc' },
-    { value: 'elf', label: 'Race: Elf' },
-    { value: 'halfling', label: 'Race: Halfling' },
-    { value: 'dwarf', label: 'Race: Dwarf' },
-  ],
 
   optionsGender:[
     { value: 'random', label: 'Random Gender' },
@@ -74,9 +67,13 @@ const initialState = {
   user:{
     id:'',
     name: '',
-    email: '',
-    joined: ''
-  }
+    email: ''
+  },
+  selectedUserSub:{
+    type:'',
+    value:''
+  },
+  editedUserSub:''
 }
 
 
@@ -99,8 +96,7 @@ class App extends Component {
     this.setState({user: {
       id:data.id,
       name: data.name,
-      email: data.email,
-      joined: data.join
+      email: data.email
     }})
   }
 
@@ -186,22 +182,104 @@ class App extends Component {
   modalMessageChange=(data)=>{
     this.setState({modalMessage:data});
   }
-
+  setCurrentUserSubmission=(data)=>{
+    this.setState({selectedUserSub: {
+      type:data[0],
+      value:data[1]
+    }})
+  }
+  handleEditedUserSub=(event)=>{
+    this.setState({editedUserSub:event.target.value})
+  }
+  submitEditedUserSub=()=>{
+    if(this.state.editedUserSub===''){
+      console.log('Edit first')
+    } else {
+      this.setState({loadingState:'loading'})
+      fetch('https://safe-dawn-37731.herokuapp.com/edit', {
+        method: 'put',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          "entryType": this.state.selectedUserSub.type.textContent,
+          "entryData": this.state.editedUserSub,
+          "userEmail": this.state.user.email,
+          "originalSub":this.state.selectedUserSub.value.textContent
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({loadingState:'loaded'});
+        this.closeModal();
+        this.routeChange('input');
+        this.routeChange('homepage');
+      })
+      .catch(err=>{
+        this.setState({loadingState:'loaded'});
+        this.closeModal();
+        this.routeChange('homepage');
+      })
+    }
+  }
+  submitDeletedUserSub=()=>{
+    this.setState({loadingState:'loading'})
+    fetch('https://safe-dawn-37731.herokuapp.com/delete', {
+      method: 'delete',
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify({
+        "entryType": this.state.selectedUserSub.type.textContent,
+        "userEmail": this.state.user.email,
+        "originalSub":this.state.selectedUserSub.value.textContent
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState({loadingState:'loaded'});
+      this.closeModal();
+      this.routeChange('input');
+      this.routeChange('homepage');
+    })
+    .catch(err=>{
+      this.setState({loadingState:'loaded'});
+      this.closeModal();
+      this.routeChange('homepage');
+    })
+  }
+  
 
 
   render() {
     const {subTitle,isSignedIn,route,loadingState,user} = this.state;
-    let modalBox = 
-    <Modal
-      isOpen={this.state.modalIsOpen}
-      onAfterOpen={this.afterOpenModal}
-      onRequestClose={this.closeModal}
-      className="Modal"
-      >
-      <button className="ModalButton" onClick={this.closeModal}>X</button>
-      <h2 className="ModalText" ref={subtitle => this.subtitle = subtitle}>{this.state.modalMessage}</h2>
+    if(this.state.route==='homepage'){
+      var modalBox = 
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onRequestClose={this.closeModal}
+        className="editModal"
+        >
+        <button className="editModalCloseButton" onClick={this.closeModal} >X</button>
+
+        <textarea className="editModalTextArea" onChange={this.handleEditedUserSub} defaultValue={this.state.selectedUserSub.value.textContent}minLenth="3" maxLength="80"></textarea>
+        <button className="editModalEditButton" onClick={this.submitEditedUserSub}>Submit Changes</button>
+        <button className="editModalDeleteButton" onClick={this.submitDeletedUserSub}>Delete Submission</button>
       
-    </Modal>
+      
+      </Modal>
+    } else{
+      var modalBox = 
+      <Modal
+        isOpen={this.state.modalIsOpen}
+        onAfterOpen={this.afterOpenModal}
+        onRequestClose={this.closeModal}
+        className="Modal"
+        >
+
+        <button className="ModalButton" onClick={this.closeModal}>X</button>
+        <h2 className="ModalText" ref={subtitle => this.subtitle = subtitle}>{this.state.modalMessage}</h2>
+      
+      </Modal>
+    }
+      
+    
     let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
     
     let displayStateDesc = <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
@@ -259,6 +337,7 @@ class App extends Component {
           : (
             route === 'homepage' ? (
             <div className="main">
+              {modalBox}
               <div className="sidebarContainer">
                 <div className="sidebarButtonContainer">
                   <div className="homepageSidebarStandardButtonContainer">
@@ -270,7 +349,7 @@ class App extends Component {
                 </div>
               </div>
               <div className="outputContainer">
-                <UserHomePage changeSubTitle={this.changeSubTitle} user={user}/>
+                <UserHomePage setCurrentUserSubmission={this.setCurrentUserSubmission} openModal={this.openModal} user={user} changeSubTitle={this.changeSubTitle} user={user}/>
               </div>
               
             </div>

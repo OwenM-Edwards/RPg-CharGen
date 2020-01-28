@@ -36,12 +36,13 @@ class UserHomePage extends React.Component {
          returnedSubOrcIntrigue:'',
 
          SubmissionArr:'',
-         displayList:false
+         displayList:false,
+
+         user:this.props.user
       }
       this.getSubmissions();
       this.props.changeSubTitle('Your Submissions');
    }
-
    getSubmissions = () => {
       fetch('https://safe-dawn-37731.herokuapp.com/getsubmissions', {
          method: 'post',
@@ -156,13 +157,39 @@ class UserHomePage extends React.Component {
       })
    } 
 
-
+   // Selects primary information from user submission, adds user login data to it. Then sent to database for editing for deleting
+   handleCheck =(e)=> {
+      if(e.target.nodeName==="UL"){
+         if(e.target.childNodes[0].childNodes[0].childNodes[0].textContent.includes('Image Link')){
+         } else{
+            this.props.setCurrentUserSubmission(e.target.childNodes[0].childNodes[0].childNodes)
+            this.props.openModal();
+         }
+      } else if(e.target.nodeName==="P"){
+         if(e.target.parentNode.parentNode.childNodes[0].childNodes[0].childNodes[0].textContent.includes('Image Link')){
+         } else{
+            this.props.setCurrentUserSubmission(e.target.parentNode.parentNode.childNodes[0].childNodes[0].childNodes)
+            this.props.openModal();
+         }
+      } else if(e.target.nodeName==="LI"){
+         if(e.target.parentNode.childNodes[0].childNodes[0].childNodes[0].textContent.includes('Image Link')){
+         } else{
+         this.props.setCurrentUserSubmission(e.target.parentNode.childNodes[0].childNodes[0].childNodes)
+         this.props.openModal();
+         } 
+      }
+      else{
+      }
+   }
 
    getSubmissionArrDisplay= () =>{
       let SubmissionDisplayList = [];
       let keyCounter = 0;
       this.state.SubmissionArr.forEach(element=>{
-         SubmissionDisplayList.push(<HomePageListItem key={keyCounter} items={element}/>);
+         SubmissionDisplayList.push(
+         <span  className="listItemSpan" key={keyCounter}>
+            <HomePageListItem items={element} handleCheck={this.handleCheck}/>
+         </span>);
          keyCounter++
       })
       return SubmissionDisplayList
@@ -170,7 +197,6 @@ class UserHomePage extends React.Component {
 
 
    render() {
-
       let displayListStatus = '';
       if(this.state.displayList === true){
          displayListStatus =this.getSubmissionArrDisplay()

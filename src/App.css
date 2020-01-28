@@ -443,24 +443,23 @@ input[type="file"] {
   display:flex;
   flex-direction: row;
   max-height:90px;
-  max-width:90%;
+  max-width:94%;
   text-align: left;
   list-style-type: none;
-
+  cursor: pointer;
   margin-left:auto;
   margin-right:20px;
   padding: 0;
   -webkit-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   -moz-box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
   box-shadow: -1px 10px 16px -11px rgba(0,0,0,0.75);
-
   transition: all .2s ease-in-out;
   font-style: normal;
 }
-.homePageListUl:hover{
+/* .homePageListUl:hover{
   transform: scale(1.05);
   color: #fc8c03;
-}
+} */
 .homePageItemLi{
 
   margin: auto;
@@ -472,6 +471,16 @@ input[type="file"] {
   background-color: var(--light);
   font-size: 2rem;
 }
+.listItemSpan{
+  transition: all .2s ease-in-out;
+
+}
+
+.listItemSpan:hover .homePageListUl{
+  transform: scale(1.05);
+  color: #fc8c03;
+}
+
 
 
 
@@ -493,8 +502,7 @@ MODAL BOX STUFF
   -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   /* transform: 'translate(-50%, -50%)' */
-}
-.ModalText{
+}.ModalText{
   color: var(--dark) !important;
   padding:50px;
   padding-top:0px;
@@ -515,6 +523,98 @@ MODAL BOX STUFF
   border-radius: 20px;
   margin:20px;
 }
+
+
+.editModal{
+  width: 50%;
+  height:300px;
+  max-width: 600px;
+  z-index: 2;
+  position: relative;
+  left: 38%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+  background-color: var(--dark);
+  border-radius: 20px;
+  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  /* transform: 'translate(-50%, -50%)' */
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+}
+.editModalTextArea{
+  grid-area: 1 / 1 / 4 / 3;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  margin: 30px;
+  padding:10px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: none;
+  background-color: var(--light);
+
+}
+.editModalEditButton{
+  grid-area: 4 / 1 / 5 / 2;
+  background-color:#fc8c03;
+  width: 100%;
+  height:80%;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+  margin-top:auto;
+}
+.editModalDeleteButton{
+  grid-area: 4 / 2 / 5 / 3;
+  background-color:#fc8c03;
+  width: 100%;
+  height:80%;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+  margin-top:auto;
+}
+.editModalEditButton:hover{
+  background-color: #ba6700; 
+}
+.editModalDeleteButton:hover{
+  background-color: #ba6700; 
+}
+.editModalCloseButton{
+  position: absolute;
+  background-color:#fc8c03;
+  border-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-shadow: 0px 0px 5px rgb(109, 83, 0);
+}
+.editModalCloseButton:hover{
+  background-color: #ba6700; 
+}
+
 
 
 /* BUTTON STYLES */

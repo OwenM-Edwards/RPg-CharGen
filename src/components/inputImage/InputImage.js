@@ -1,5 +1,4 @@
 import React from 'react';
-import Tilt from 'react-tilt';
 import LoadingIcons from '../loadingIcons/LoadingIcons';
 import Select from 'react-select';
 const optionsGender = [
