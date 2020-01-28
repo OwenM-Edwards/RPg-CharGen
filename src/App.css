@@ -115,9 +115,11 @@ h2{
   border-radius: 5px;
   height: 70vh;
   max-height: 70vh;
-  font-size: 1.3rem;
+  font-size: 1.7rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-family: 'Amatic SC', cursive;
+  font-weight: bold;
 }
 .standardButtonContainer{
   height:50%;
@@ -428,7 +430,7 @@ input[type="file"] {
   padding-left:30px;
   padding-top:20px;
   padding-bottom:30px;
-  margin-top:10%;
+  margin-top:-5%;
 }
 .roleplayItems ul{
   position: relative;
@@ -447,8 +449,7 @@ input[type="file"] {
   grid-area: 3 / 1 / 4 / 3;
   padding-left:30px;
   padding-top:-10px;
-  margin-bottom:50%;
-  margin-top:10%;
+  margin-top:7%;
 }
 .intrigueItems ul{
   position: relative;
@@ -473,6 +474,7 @@ input[type="file"] {
 
 .userListContainer{
   background-color: var(--dark);
+  font-family: 'Alegreya', serif;
 }
 .homePageListUl{
   font-size: 1rem;
