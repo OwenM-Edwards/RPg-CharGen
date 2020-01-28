@@ -428,7 +428,7 @@ input[type="file"] {
   padding-left:30px;
   padding-top:20px;
   padding-bottom:30px;
-  margin-top:auto;
+  margin-top:10%;
 }
 .roleplayItems ul{
   position: relative;
@@ -447,7 +447,8 @@ input[type="file"] {
   grid-area: 3 / 1 / 4 / 3;
   padding-left:30px;
   padding-top:-10px;
-  margin-top:auto;
+  margin-bottom:50%;
+  margin-top:10%;
 }
 .intrigueItems ul{
   position: relative;
