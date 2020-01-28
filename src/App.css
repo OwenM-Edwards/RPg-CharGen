@@ -449,7 +449,7 @@ input[type="file"] {
   grid-area: 3 / 1 / 4 / 3;
   padding-left:30px;
   padding-top:-10px;
-  margin-top:7%;
+  margin-top:0%;
 }
 .intrigueItems ul{
   position: relative;
