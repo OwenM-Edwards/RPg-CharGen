@@ -33,16 +33,16 @@ body{
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0px;
-  grid-row-gap: 0px; 
+  grid-row-gap: 0px;  
 }
 /* Title of the App, also contains the subtitle */
 .titleContainer{
   grid-area: 1 / 1 / 2 / 2;
 }
 .main {
-  grid-area: 2 / 1 / 5 / 2;
+  grid-area: 2 / 1 / 7 / 2;
 
   display: grid;
   grid-template-columns: repeat(5, 1fr);
