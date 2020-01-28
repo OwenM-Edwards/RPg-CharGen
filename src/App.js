@@ -416,7 +416,7 @@ class App extends Component {
                       }
                     </div>
                     <div className="standardButtonContainer">
-                      <button  className="standardButton" onClick={()=> {this.routeChange('signIn');this.changeSubTitle('');}}>Sign in to add your own!</button>
+                      <button  className="standardButton" onClick={()=> {this.routeChange('signIn');this.changeSubTitle('Sign in to submit');}}>Sign in to add your own!</button>
                     </div>
                   </div>
                 </div>
