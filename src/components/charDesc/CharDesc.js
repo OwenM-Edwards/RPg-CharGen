@@ -48,7 +48,8 @@ const CharDesc = ({genderOutput, nameOutput, lastNameOutput, loadingState, raceO
    } else if(loadingState === 'loaded') {
       displayStateMainLine = 
          <div>
-            <p>{`${nameOutput} ${lastNameOutput} is a ${genderOutput} ${raceOutput}, with an interest in ${interest}.`}</p>
+            <span className="descNameSpan">{`${nameOutput} ${lastNameOutput} `}</span> 
+            <p className="descNameP">{`is a ${genderOutput} ${raceOutput}, with an interest in ${interest}.`}</p>
 
          </div>
    }

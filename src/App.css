@@ -26,7 +26,8 @@ body{
 }
 .App {
   text-align: center;
-  font-family: 'Amatic SC', cursive;
+  
+  font-family: 'Alegreya', serif;
   font-size: 1.8rem;
   color: var(--dark);
   height:90vh;
@@ -42,18 +43,31 @@ body{
 /* Title of the App, also contains the subtitle */
 .titleContainer{
   grid-area: Title;
+  font-family: 'Amatic SC', cursive;
 }
 h1{
   position: relative;
   left:20px;
   max-height: 70px;
   font-size: 3.3rem;
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none; 
+            user-select: none;
 }
 h2{
   position: relative;
   left:20px;
   max-height: 60px;
   font-size: 2.3rem;
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none; 
+            user-select: none;
 }
 .main {
   grid-area: Main;
@@ -101,7 +115,7 @@ h2{
   border-radius: 5px;
   height: 70vh;
   max-height: 70vh;
-
+  font-size: 1.6rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -159,7 +173,7 @@ USER INPUT PAGE
   grid-area: 1 / 2 / 2 / 6;
   height: 70vh;
   max-height: 70vh;
-
+  font-size: 1.2rem;
   
   overflow: hidden;
 
@@ -397,13 +411,23 @@ input[type="file"] {
   grid-area: 1 / 1 / 2 / 3;
   padding-left:30px;
   padding-top:30px;
-
+}
+.descNameSpan{
+  font-weight:bold;
+  font-size: 2.3rem;
+  margin-bottom:-20px;
+}
+.descNameP{
+  position: relative;
+  left:25px;
+  bottom:15px;
 }
 /* Roleplay outputs three items in an unordered list */
 .OutputRoleplay{
   grid-area: 2 / 1 / 3 / 3;
   padding-left:30px;
-  padding-top:30px;
+  padding-top:20px;
+  padding-bottom:30px;
   margin-top:auto;
 }
 .roleplayItems ul{
@@ -422,7 +446,7 @@ input[type="file"] {
 .OutputIntrigue{
   grid-area: 3 / 1 / 4 / 3;
   padding-left:30px;
-  padding-top:30px;
+  padding-top:-10px;
   margin-top:auto;
 }
 .intrigueItems ul{
@@ -450,7 +474,6 @@ input[type="file"] {
   background-color: var(--dark);
 }
 .homePageListUl{
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
   border:5px solid var(--light);
   background-color: var(--dark);
@@ -481,7 +504,6 @@ input[type="file"] {
   vertical-align: middle;
 }
 .homePageSubHeading{
-  font-family: Arial, Helvetica, sans-serif;
   border:5px solid var(--dark);
   background-color: var(--light);
   font-size: 2rem;
@@ -545,7 +567,7 @@ MODAL BOX STUFF
   margin:20px;
 }
 
-.ModalButton::-moz-focus-inner{
+.editModalEditButton::-moz-focus-inner{
   outline: 0 !important;
   outline-style: none;
   border: none;
@@ -563,7 +585,7 @@ MODAL BOX STUFF
   top: 50%;
   margin-top: -50px;
   background-color: var(--dark);
-  border-radius: 20px;
+  border-radius: 10px;
   -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
@@ -577,6 +599,7 @@ MODAL BOX STUFF
   outline: 0 !important;
   outline-style: none;
   border: none;
+  font-family: 'Alegreya', serif;
 }
 .editModalTextArea{
   grid-area: 1 / 1 / 4 / 3;
@@ -593,8 +616,9 @@ MODAL BOX STUFF
 .editModalEditButton{
   grid-area: 4 / 1 / 5 / 2;
   background-color:#fc8c03;
-  width: 100%;
-  height:80%;
+  width: 85%;
+  height:70%;
+  margin:0 auto;
   border-color: black;
   color: white;
   text-align: center;
@@ -608,12 +632,16 @@ MODAL BOX STUFF
   outline: 0 !important;
   outline-style: none;
   border: none;
+  font-family: 'Alegreya', serif;
+  position: relative;
+  top:-5px;
 }
 .editModalDeleteButton{
   grid-area: 4 / 2 / 5 / 3;
   background-color:#fc8c03;
-  width: 100%;
-  height:80%;
+  width: 85%;
+  height:70%;
+  margin:0 auto;
   border-color: black;
   color: white;
   text-align: center;
@@ -627,6 +655,10 @@ MODAL BOX STUFF
   outline: 0 !important;
   outline-style: none;
   border: none;
+  font-family: 'Alegreya', serif;
+  position: relative;
+  top:-5px;
+
 }
 .editModalEditButton:hover{
   background-color: #ba6700; 
@@ -646,6 +678,7 @@ MODAL BOX STUFF
   cursor: pointer;
   transition: background-color 0.5s ease;
   text-shadow: 0px 0px 5px rgb(109, 83, 0);
+  font-family: 'Alegreya', serif;
 }
 .editModalCloseButton:hover{
   background-color: #ba6700; 
@@ -683,6 +716,7 @@ MODAL BOX STUFF
   transition: background-color 0.5s ease;
   text-shadow: 0px 0px 5px rgb(109, 83, 0);
   outline:none;
+  font-family: 'Alegreya', serif;
 }
 .standardButton:hover{
   background-color: #ba6700; 
@@ -703,11 +737,41 @@ MODAL BOX STUFF
 }
 
 .selectContainer{
-
+  font-size: 1.2rem;
   width:100%;
 }
 
 .selection{
   width:100%;
 
+}
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 1700px) {
+  .sidebarContainer {
+    height: 75vh;
+    max-height: 75vh;
+
+  }
+  .outputContainer{
+    height: 75vh;
+    max-height: 75vh;
+
+  }
+  .inputContainer{
+    height: 75vh;
+    max-height: 75vh;
+  }
+  h1{
+    font-size: 3.7rem;
+  }
+  h2{
+    font-size: 2.4rem;
+  }
 }
