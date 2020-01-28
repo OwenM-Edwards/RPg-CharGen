@@ -26,7 +26,7 @@ import Select from 'react-select';
 */ 
 
 const initialState = {
-  route:'signIn',
+  route:'main',
 
   subTitle:'Who are you looking for?',
   modalIsOpen: false,
