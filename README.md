@@ -1,3 +1,13 @@
+
+A React based personal project that generates a character for use in tabletop roleplaying games. The unique feature is the ability for users to submit their own character names and traits to the database for others to come accross.
+
+The projects front-end and back-end are both hosted on Heroku, I used PostgreSQL for the database and NodeJS for the server. User passwords are encrypted with bCrypt, and user image submissions are handled with the Cloudinary API, which communicates moderation status, uploads, and deletions to the server.
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
