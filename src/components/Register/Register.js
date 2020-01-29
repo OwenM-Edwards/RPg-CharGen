@@ -1,6 +1,5 @@
 import React from 'react';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
-
+import LoadingIcons from '../LoadingIcons/LoadingIcons';
 
 class Register extends React.Component {
    constructor(props){
@@ -27,7 +26,6 @@ class Register extends React.Component {
       }
       else {
          console.log('yup')
-
       }
    }
    handleLoading = (data)=>{
@@ -68,7 +66,8 @@ class Register extends React.Component {
 
 
    render(){
-      const isEnabled = this.state.email.length > 0 && this.state.password.length > 0 && this.state.name.length > 0;
+      // Enables submit buttons when submission text reaches required min length
+      const isEnabled = this.state.email.length > 3 && this.state.password.length > 3 && this.state.name.length > 3;
       let displayMainPage = ''
       if(this.state.loading === 'loading'){
          displayMainPage = 
@@ -76,7 +75,6 @@ class Register extends React.Component {
                <LoadingIcons/>
             </div>
          } 
-   
       else if(this.state.loading !== 'loading'){
          displayMainPage = 
             <div className="outputContainer">

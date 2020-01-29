@@ -1,29 +1,23 @@
 import React from 'react';
-import Tilt from 'react-tilt'
-
-
+import Tilt from 'react-tilt';
 
 const CharImage = ({loadingState,imageOutput}) => {
-
    var displayStateImage;
    if (loadingState === 'init') {
       displayStateImage = 
          <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
             <img src={require('../../img/blankProfile.png')} alt={''}></img>
          </Tilt>
-
-   } else if(loadingState === 'loading') {
+   } 
+   else if(loadingState === 'loading') {
       displayStateImage = <div></div>
-
-   } else if(loadingState === 'loaded') {
+   } 
+   else if(loadingState === 'loaded') {
       displayStateImage = 
       <Tilt className="Tilt br2 shadow-2" options={{ max : 30 }} >
          <img src={`${imageOutput}` } alt={''}></img>        
-      </Tilt>      
-                                            
+      </Tilt>                                             
    }
-
-
    return (
       <span>{displayStateImage} </span>
    )

@@ -1,8 +1,7 @@
 import React from 'react';
 
-
-
 const CharDesc = ({genderOutput, nameOutput, lastNameOutput, loadingState, raceOutput}) => {
+   // List of possible random interests for characters
    const randomInterestArr = 
    [
       'pottery',
@@ -32,28 +31,23 @@ const CharDesc = ({genderOutput, nameOutput, lastNameOutput, loadingState, raceO
    ];
    let interest = randomInterestArr[Math.floor(Math.random()*randomInterestArr.length)];
 
-
    var displayStateMainLine;
    if (loadingState === 'init') {
       displayStateMainLine = 
          <div  className={"title"}>
             Description :  ???
          </div>;
-           
-
-
-   } else if(loadingState === 'loading') {
+   } 
+   else if(loadingState === 'loading') {
       displayStateMainLine =  <div></div>
-
-   } else if(loadingState === 'loaded') {
+   } 
+   else if(loadingState === 'loaded') {
       displayStateMainLine = 
          <div>
             <span className="descNameSpan">{`${nameOutput} ${lastNameOutput} `}</span> 
             <p className="descNameP">{`is a ${genderOutput} ${raceOutput}, with an interest in ${interest}.`}</p>
-
          </div>
    }
-
    return (
       <div>{displayStateMainLine}</div>
    )

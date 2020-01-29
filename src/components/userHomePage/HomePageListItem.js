@@ -14,7 +14,6 @@ const  HomePageListItem = ({items,handleCheck}) => {
       gender = 'Gender: Female'
    }
 
-
    if(items.moderation){
       moderation = 'Moderation Status: Accepted'
    }
@@ -24,8 +23,6 @@ const  HomePageListItem = ({items,handleCheck}) => {
       moderation = 'Moderation Status: Failed'
    }
       
-
-   
    // If relevent information is present in argument, display it in a heading
    return (
       <span>

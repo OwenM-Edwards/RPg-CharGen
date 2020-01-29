@@ -1,40 +1,35 @@
 import React, {Component} from 'react';
 import './App.css';
-import InputName from './components/inputName/InputName';
-import InputImage from './components/inputImage/InputImage';
-import InputDesc from './components/inputdesc/DescInput';
-import CharImage from './components/charImage/CharImage';
-import CharDesc from './components/charDesc/CharDesc';
-import CharRoleplay from './components/charRoleplay/CharRoleplay';
-import CharIntrigue from './components/charIntrigue/CharIntrigue';
+import InputName from './components/InputName/InputName';
+import InputImage from './components/InputImage/InputImage';
+import InputDesc from './components/Inputdesc/DescInput';
+import CharImage from './components/CharImage/CharImage';
+import CharDesc from './components/CharDesc/CharDesc';
+import CharRoleplay from './components/CharRoleplay/CharRoleplay';
+import CharIntrigue from './components/CharIntrigue/CharIntrigue';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
-import LoadingIcons from './components/loadingIcons/LoadingIcons';
+import LoadingIcons from './components/LoadingIcons/LoadingIcons';
 import Modal from 'react-modal';
-import UserHomePage from './components/userHomePage/UserHomePage';
-import SignedUserTab from './components/signedUserTab/SignedUserTab';
+import UserHomePage from './components/UserHomePage/UserHomePage';
+import SignedUserTab from './components/SignedUserTab/SignedUserTab';
 import Select from 'react-select';
  
-/* 
-  TODO Make input submits direct to the temp moderation databases
-  TODO Add confirmation popups to submits
-  TODO CHANGED NAME DATABASES TO MIXED GENDER, NEED TO CHANGE SERVER DATABASE CALLS TO MATCH
-
-  DONE finish updating the intrigue and roleplay submitions
-  TODO finish up the imahge submissions
-  TODO Standardize all the different submit button css's
-*/ 
-
 const initialState = {
   route:'main',
-
   subTitle:'Who are you looking for?',
+
   modalIsOpen: false,
   modalMessage:'',
+
+  // Used to active loading icon
   loadingState:'init',
-  addNewCharPage:false,
+
   isSignedIn: false,
-  fullRandom: true,
+
+  // Used to change generate char button text
+  genNewChar: true,
+  
   charGenrace: 'random',
   charGengender:'random',
 
@@ -52,6 +47,7 @@ const initialState = {
     { value: 'dwarf', label: 'Dwarf' },
   ],
 
+  // Character returned from server
   newChar:{
     raceOutput:'',
     nameOutput:'',
@@ -69,6 +65,8 @@ const initialState = {
     name: '',
     email: ''
   },
+
+  // Submission selected for edit or delete
   selectedUserSub:{
     type:'',
     value:''
@@ -76,13 +74,11 @@ const initialState = {
   editedUserSub:''
 }
 
-
 const customStyles = {
   menu: (provided, state) => ({
     ...provided,
   }),
 }
-
 
 class App extends Component {
   constructor(){
@@ -100,10 +96,7 @@ class App extends Component {
     }})
   }
 
-
-
-  //HANDLES SUBMIT BUTTON
-
+  //HANDLES CHARACTER GENERATION
   submit = () => {
     this.setState({loadingState:'loading'})
     fetch('https://safe-dawn-37731.herokuapp.com/genchar', {
@@ -115,6 +108,7 @@ class App extends Component {
       })
     })
     .then(response => response.json())
+    
     .then(data => {
       if(data[4]===true){
         data[4]='male'
@@ -136,7 +130,7 @@ class App extends Component {
       
     })
     .then(this.setState({
-      fullRandom: false
+      genNewChar: false
     }))
     .then(this.setState({
       submitted: true
@@ -150,13 +144,14 @@ class App extends Component {
   handleSignIn=(signInStatus)=>{
     this.setState({isSignedIn:signInStatus})
   }
-  //HANDLES DROP OPTIONS CHANGES
+  //HANDLES MAIN PAGE drop selection OPTIONS CHANGES
   handleGender = (event) => {
     this.setState({charGengender: event.value});
   }
   handleRace = (event) => {
     this.setState({charGenrace: event.value});
   }
+  // Route state control function
   routeChange = (newRoute) =>{
     if(newRoute){
       this.setState({route:newRoute})
@@ -164,6 +159,7 @@ class App extends Component {
       this.setState({route:'home'})
     }   
   }
+
   changeSubTitle = (data)=>{
     this.setState({subTitle:data})
   }
@@ -182,6 +178,8 @@ class App extends Component {
   modalMessageChange=(data)=>{
     this.setState({modalMessage:data});
   }
+
+  // Selects currently selected user submission from their homepage
   setCurrentUserSubmission=(data)=>{
     this.setState({selectedUserSub: {
       type:data[0],
@@ -191,6 +189,8 @@ class App extends Component {
   handleEditedUserSub=(event)=>{
     this.setState({editedUserSub:event.target.value})
   }
+
+  // Submits user edited submission to server
   submitEditedUserSub=()=>{
     if(this.state.editedUserSub===''){
       console.log('Edit first')
@@ -220,6 +220,7 @@ class App extends Component {
       })
     }
   }
+  // Submits user deleted submission to server
   submitDeletedUserSub=()=>{
     this.setState({loadingState:'loading'})
     fetch('https://safe-dawn-37731.herokuapp.com/delete', {
@@ -247,24 +248,24 @@ class App extends Component {
   
 
 
+
   render() {
     const {subTitle,isSignedIn,route,loadingState,user} = this.state;
-    if(this.state.route==='homepage'){
+    if(route==='homepage'){
       var modalBox = 
+      // Popup box for edited or deleted user submissions
       <Modal
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         className="editModal"
         >
         <button className="editModalCloseButton" onClick={this.closeModal} >X</button>
-
         <textarea className="editModalTextArea" onChange={this.handleEditedUserSub} defaultValue={this.state.selectedUserSub.value.textContent}minLenth="3" maxLength="80"></textarea>
         <button className="editModalEditButton" onClick={this.submitEditedUserSub}>Submit Changes</button>
         <button className="editModalDeleteButton" onClick={this.submitDeletedUserSub}>Delete Submission</button>
-      
-      
       </Modal>
     } else{
+      // Regular modal confirmation box for users adding new things
       var modalBox = 
       <Modal
         isOpen={this.state.modalIsOpen}
@@ -272,19 +273,12 @@ class App extends Component {
         onRequestClose={this.closeModal}
         className="Modal"
         >
-
         <button className="ModalButton" onClick={this.closeModal}>X</button>
         <h2 className="ModalText" ref={subtitle => this.subtitle = subtitle}>{this.state.modalMessage}</h2>
-      
       </Modal>
     }
-      
-    
-    let displayStateImg = <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
-    
-    let displayStateDesc = <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
-    let displayStateRoleplay = <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
-    let displayStateIntrigue = <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
+
+    // Pings the server to ensure its not idling
     window.onload = function(){
       fetch('https://safe-dawn-37731.herokuapp.com/', {
         method: 'get',
@@ -294,11 +288,10 @@ class App extends Component {
       .catch(error => console.log('server down'))
     }
 
-
     return (
       <div  className="App">
         <div className="titleContainer">
-          <h1>The RPG-NPC character generator</h1>
+          <h1>The Community NPC Generator</h1>
           <h2>{subTitle}</h2>
         </div>
 
@@ -333,7 +326,7 @@ class App extends Component {
             </div>
           )
           
-
+          // User homepage listing their submissions, can delete and edit
           : (
             route === 'homepage' ? (
             <div className="main">
@@ -355,7 +348,7 @@ class App extends Component {
             </div>
           ) 
 
-
+          // Page where users can submit entries of their own
           : (
           route === 'input' ? (
             <div className="main">
@@ -384,7 +377,7 @@ class App extends Component {
             </div>
           ) 
 
-
+          // Initial page, has the character generation output
           : (
             <div className="main">
                 <div className="sidebarContainer">
@@ -427,11 +420,10 @@ class App extends Component {
                 ) : (
                   <div className="outputContainer">
                     <div className="charOutputItems">
-                      {displayStateDesc}
-                      {displayStateImg}
-              
-                      {displayStateRoleplay}
-                      {displayStateIntrigue}
+                      <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
+                      <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+                      <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
+                      <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
                     </div>
                   </div>
                 )}

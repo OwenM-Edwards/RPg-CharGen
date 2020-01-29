@@ -1,15 +1,6 @@
 import React from 'react';
 import HomePageListItem from './HomePageListItem';
 
-   /*
-   title - your submissions
-
-   list, submission, type, moderation status, reason
-
-   once clicked on a submission there should be a drop down
-   the dropdown should have an edit and a delete button.
-   */
-
 class UserHomePage extends React.Component {
    constructor(props){
       super(props); 
@@ -80,16 +71,12 @@ class UserHomePage extends React.Component {
          this.sortSubmissionArrImages();
          this.sortSubmissionArrDesc();
          this.setState({displayList:true})
-
       })
-
       .catch(err=>{
          console.log(err);
-         
       })
    }
 
-   
    sortSubmissionArrNames=()=>{
       let SubmissionArr = []
       SubmissionArr.push('First Names');

@@ -1,7 +1,7 @@
 import React from 'react';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
+import LoadingIcons from '../LoadingIcons/LoadingIcons';
 
-
+// This component handles both user roleplay cue input, and user intrigue input
 class InputDesc extends React.Component {
    constructor(props){
       super(props)
@@ -13,24 +13,32 @@ class InputDesc extends React.Component {
       }
    }
 
+   // Removes spaces and fullstops from start and end, then sets as state
+   // Handles rp-input state updating
    handleRP = (event) =>{
-      this.setState({roleplay: event.target.value});
+      let str = event.target.value.split('.').join("").trim();
+      this.setState({roleplay: str});
    }
+   // Handles intrigue-input state updating
    handleIntrigue = (event) =>{
-      this.setState({intrigue: event.target.value});
+      let str = event.target.value.split('.').join("").trim();
+      this.setState({intrigue: str});
    }
+
+   // Activates loading icon on submit
    handleRoleplayLoading=(data)=>{
       this.setState({roleplayLoading: data});
    }
    handleIntrigueLoading=(data)=>{
       this.setState({intrigueLoading: data});
    }
+
+   // Checks that submission isnt blank
    handleSubmitCheckRoleplay=()=>{
       if(this.state.roleplay){
          this.onSubmitRoleplay();
       } 
       else if(!this.state.roleplay){
-
       }
    }
    handleSubmitCheckIntrigue=()=>{
@@ -38,14 +46,12 @@ class InputDesc extends React.Component {
          this.onSubmitIntrigue();
       } 
       else if(!this.state.intrigue){
-
       }
    }
 
    onSubmitRoleplay = () => {
       if(this.state.roleplay){
          this.handleRoleplayLoading('loading')
-         this.handleIntrigueLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addroleplay', {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -58,7 +64,6 @@ class InputDesc extends React.Component {
          .then(response => response.json())
          .then(status => {
             this.handleRoleplayLoading('default')
-            this.handleIntrigueLoading('default')
             if(status === 'Success'){
                this.props.modalMessageChange('Roleplay added, thank you for your contribution!');
                this.props.openModal();
@@ -69,7 +74,6 @@ class InputDesc extends React.Component {
          })
          .catch(err=>{
             this.handleRoleplayLoading('default')
-            this.handleIntrigueLoading('default')
             this.props.modalMessageChange('Error Adding Roleplay');
             this.props.openModal();
             console.log('problemo')
@@ -80,7 +84,6 @@ class InputDesc extends React.Component {
 
    onSubmitIntrigue = () => {
       if(this.state.intrigue){
-         this.handleRoleplayLoading('loading')
          this.handleIntrigueLoading('loading')
          fetch('https://safe-dawn-37731.herokuapp.com/addintrigue', {
             method: 'post',
@@ -93,7 +96,6 @@ class InputDesc extends React.Component {
          })
          .then(response => response.json())
          .then(status => {
-            this.handleRoleplayLoading('default')
             this.handleIntrigueLoading('default')
             if(status === 'Success'){
                this.props.modalMessageChange('Intrigue added, thank you for your contribution!');
@@ -104,7 +106,6 @@ class InputDesc extends React.Component {
             }
          })
          .catch(err=>{
-            this.handleRoleplayLoading('default')
             this.handleIntrigueLoading('default')
             this.props.modalMessageChange('Error Adding Intrigue');
             this.props.openModal();
@@ -115,8 +116,9 @@ class InputDesc extends React.Component {
 
 
    render(){
-      const isRoleplayEnabled = this.state.roleplay.length > 0 ;
-      const isIntrigueEnabled = this.state.intrigue.length > 0 ;
+      // Enables submit buttons when submission text reaches required min length
+      const isRoleplayEnabled = this.state.roleplay.length > 3 ;
+      const isIntrigueEnabled = this.state.intrigue.length > 3 ;
       let displayRoleplay = '';
       let displayIntrigue = '';
       if(this.state.roleplayLoading === 'loading'){
@@ -134,22 +136,17 @@ class InputDesc extends React.Component {
 
       if(this.state.intrigueLoading === 'loading'){
          displayIntrigue = <LoadingIcons/>
-      } else {
+      } 
+      else {
          displayIntrigue =
          <form onSubmit={this.handleSubmitCheckIntrigue} className="inputIntrigueForm">
             Intrigue: 
-            
             <textarea  name="hello" className="intrigueText" placeholder="Character Intrigue" onChange={this.handleIntrigue} maxLength="80"></textarea>
             <div className="roleplayDescStandardButtonContainer">
                <button disabled={!isIntrigueEnabled} className="standardButton" type={"submit"}>Submit</button> 
-            </div>
-            
+            </div> 
          </form>
       }
-
-
-      
-      
       return (
          <div className="inputDescContainer">
             {displayRoleplay}

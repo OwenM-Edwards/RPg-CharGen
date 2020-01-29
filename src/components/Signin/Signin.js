@@ -1,7 +1,5 @@
 import React from 'react';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
-
-
+import LoadingIcons from '../LoadingIcons/LoadingIcons';
 
 class Signin extends React.Component {
    constructor(props){
@@ -18,13 +16,9 @@ class Signin extends React.Component {
    onPasswordChange = (event) => {
       this.setState({signInPassword:event.target.value}) 
    }
-   sayHello = () =>{
-      console.log('hello')
-   }
    handleLoading = (data)=>{
       this.setState({loading:data}) 
    }
-
 
    onSubmitSignIn = () => {
       this.handleLoading('loading')
@@ -37,8 +31,6 @@ class Signin extends React.Component {
          })
       })
       .then(response => response.json())
-
-
       .then(user => {
             if(user.id){
                this.setState({signInPassword:false}) 
@@ -57,7 +49,6 @@ class Signin extends React.Component {
                this.handleLoading('default')
             }
       })
-
       .catch(err=>{
          console.log(err)
          this.setState({signInPassword:false}) 
@@ -67,8 +58,6 @@ class Signin extends React.Component {
          this.props.openModal();
       })
    }
-
-
 
    render() {
       const isEnabled = this.state.signInEmail.length > 0 && this.state.signInPassword.length > 0;

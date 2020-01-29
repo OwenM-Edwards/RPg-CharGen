@@ -1,39 +1,23 @@
-/* 
-  TODO Need to make mobile res CSS
-
-  TODO Make ui scale with lower widths
-  
-  TODO Move image Input image and resize
-
-  TODO Style image input upload buttons
-
-  TODO standardize CSS submit buttons
-*/ 
-
 
 html {
   --dark:#333;
   --light:#fbfbfb ;
+  --pop:#fc8c03;
+  --popHover:#ba6700;
   background-color: var(--light);
-  height: 100%;
   overflow-x: hidden;
-
 }
 body{
-  height:100%;
   max-height:100%;
-
 }
 .App {
   text-align: center;
-  
   font-family: 'Alegreya', serif;
   font-size: 1.8rem;
   color: var(--dark);
   height:90vh;
   min-width: 100vw;
-  max-height: 90vh;
-
+  max-height:90vh;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -50,6 +34,7 @@ h1{
   left:20px;
   max-height: 70px;
   font-size: 3.3rem;
+  /* Stop text being selectable, looks cleaner */
   -webkit-touch-callout: none; 
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -62,6 +47,7 @@ h2{
   left:20px;
   max-height: 60px;
   font-size: 2.3rem;
+    /* Stop text being selectable, looks cleaner */
   -webkit-touch-callout: none; 
     -webkit-user-select: none;
      -khtml-user-select: none;
@@ -69,6 +55,7 @@ h2{
         -ms-user-select: none; 
             user-select: none;
 }
+/* Wrapper of every window */
 .main {
   grid-area: Main;
 
@@ -79,25 +66,25 @@ h2{
   grid-row-gap: 0px; 
 
   margin:0 auto;
-  height: 90vh;
-  width:100%;
-  max-width: 80%;
+  height: 70vh;
   max-height:70vh;
+  width:80%;
+  max-width: 80%;
 }
 /* MAIN LAYOUT */
 /* The vertical side and navbar */
 .sidebarContainer {
   grid-area: 1 / 1 / 2 / 2;
 
-  border-radius:5px;
   background-color: var(--dark);
   width:100%;
   height: 70vh;
-  max-height: 70vh;
+  max-height: 1200px;
 
   display: flex;
   flex-direction:column;
   border:5px solid var(--dark);
+  border-radius:5px;
 }
 .sidebarSelectionContainer{
   width:100%;
@@ -109,12 +96,22 @@ h2{
   height:100px;
   margin-top:auto;
 }
+
+/* GenChar drop down options */
+.selectMainContainer{
+  width:100%;
+}
+.selectContainer{
+  font-size: 1.2rem;
+  width:100%;
+}
+/* Main chargen window */
 .outputContainer{
   grid-area: 1 / 2 / 2 / 6;
   border:5px solid var(--dark);
   border-radius: 5px;
   height: 70vh;
-  max-height: 70vh;
+  max-height: 1200px;
   font-size: 1.7rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -125,11 +122,12 @@ h2{
   height:50%;
   width: 100%;
 }
+
 /* SIGNED IN TAB  */
 .tabContainer{
   width:200px;
   height:100px;
-  background-color: #fc8c03;
+  background-color:var(--pop);
   margin-bottom:auto;
   margin-top:-30%;
   z-index: -1;
@@ -169,12 +167,94 @@ SIGN-IN and REGISTER PAGES
 
 
 /* 
+  CHARGEN OUTPUT PAGE
+*/
+.charOutputItems{
+  width:100%;
+  height:100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px; 
+  text-align: left;
+}
+.OutputImage{
+  grid-area: 1 / 3 / 4 / 4;
+  text-align: center;
+}
+.OutputImage img{
+  object-fit: contain;
+  width:auto;
+  height: 300px;
+  margin-top:20px;
+  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
+}
+
+/* OUTPUT DESC IS THE GENERATED CHARS NAME, RACE, GENDER AND INTERESTS LINE */
+.OutputDesc{
+  grid-area: 1 / 1 / 2 / 3;
+  padding-left:30px;
+  padding-top:30px;
+}
+.descNameSpan{
+  font-weight:bold;
+  font-size: 2.3rem;
+  margin-bottom:-20px;
+}
+.descNameP{
+  position: relative;
+  left:25px;
+  bottom:15px;
+}
+
+/* Roleplay outputs three items in an unordered list */
+.OutputRoleplay{
+  grid-area: 2 / 1 / 3 / 3;
+  padding-left:30px;
+  padding-top:20px;
+  padding-bottom:30px;
+  margin-top:-5%;
+}
+.roleplayItems ul{
+  position: relative;
+  top:-15px;
+  font-size: 1.3rem;
+}
+.roleplayItems li{
+  margin-bottom:-25px;
+}
+.roleplayItems p{
+  font-size: 1.8rem;
+}
+.OutputIntrigue{
+  grid-area: 3 / 1 / 4 / 3;
+  padding-left:30px;
+  padding-top:-10px;
+  margin-top:0%;
+}
+.intrigueItems ul{
+  position: relative;
+  top:-15px;
+  font-size: 1.3rem;
+}
+.intrigueItems li{
+  margin-bottom:-25px;
+}
+.intrigueItems p{
+  font-size: 1.8rem;
+}
+
+
+/* 
 USER INPUT PAGE
  */
-.inputContainer{
+ .inputContainer{
   grid-area: 1 / 2 / 2 / 6;
   height: 70vh;
-  max-height: 70vh;
+  max-height: 1200px;
   font-size: 1.2rem;
   
   overflow: hidden;
@@ -191,7 +271,6 @@ USER INPUT PAGE
   height:50%;
   width: 100%;
 }
-
 
 /* User Image Submit */
 .inputImageContainer{
@@ -220,10 +299,10 @@ USER INPUT PAGE
   width: 100%;
   text-align: center;
 }
-/* Label that covers up the choose image file input */
+/* Label that covers up the choose image file input, not the same as a normal button */
 .imageButtonLabel{
   display: block;
-  background-color:#fc8c03;
+  background-color:var(--pop);
   width: 100%;
   height:100%;
   color: white;
@@ -232,7 +311,6 @@ USER INPUT PAGE
   border-radius: 4px;
   cursor: pointer;
   z-index: 2;
-  
   transition: background-color 0.5s ease;
   /* This styles it to have similar 3d effect as regular buttons */
   -webkit-box-shadow: 1px 1px 0px 0px rgba(0,0,0,0.75);
@@ -258,7 +336,7 @@ input[type="file"] {
   width: 1px; 
 }
 .imageButtonLabel:hover{
-  background-color: #ba6700; 
+  background-color:var(--popHover); 
 }
 .newImageSelectContainer{
   max-width:300px;
@@ -280,7 +358,6 @@ input[type="file"] {
   -moz-box-shadow: 0px 10px 21px -6px rgba(0,0,0,0.75);
   box-shadow: 0px 10px 21px -6px rgba(0,0,0,0.75);
 }
-
 
 /* Roleplay and Intrigue Inputs */
 .roleplayAndIntrigueContainer{
@@ -323,7 +400,6 @@ input[type="file"] {
   top:-10px;
 }
 .intrigueText{
-  
   width:65%;
   height:90px;
   position: relative;
@@ -344,10 +420,22 @@ input[type="file"] {
   width: 100px;
 }
 
-/* SELECT CONTAINER FOR INPUT NAMES */
-
-/* INPUT BOXES FOR INPUT NAMES */
-.inputField{
+/* INPUT NAME */
+.inputNameContainer{
+  padding-top:15px;
+  grid-area: 1 / 1 / 2 / 2;
+  text-align: left;
+  width:100%;
+  max-height: 100%;
+  padding-left:10px;
+  min-height: 300px;
+}
+.inputNameFormContainer{
+  max-width:300px;
+  margin:0 auto;
+}
+/* Input field for both first and last names */
+.inputNameField{
   width:299px;
   height:35px;
   border-radius: 4px;
@@ -364,114 +452,15 @@ input[type="file"] {
   position: relative;
   top:25px;
 }
-.inputNameContainer{
-  padding-top:15px;
-  grid-area: 1 / 1 / 2 / 2;
-  text-align: left;
-  width:100%;
-  max-height: 100%;
-  padding-left:10px;
-  min-height: 300px;
-}
-.inputNameFormContainer{
-  max-width:300px;
-  margin:0 auto;
-}
-
 
 
 /* 
-  CHARGEN OUTPUT PAGE
- */
-
-.charOutputItems{
-  width:100%;
-  height:100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px; 
-  text-align: left;
-}
-.OutputImage{
-  grid-area: 1 / 3 / 4 / 4;
-  text-align: center;
-}
-.OutputImage img{
-  object-fit: contain;
-  width:auto;
-  height: 300px;
-  margin-top:20px;
-  -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-
-}
-
-.OutputDesc{
-  grid-area: 1 / 1 / 2 / 3;
-  padding-left:30px;
-  padding-top:30px;
-}
-.descNameSpan{
-  font-weight:bold;
-  font-size: 2.3rem;
-  margin-bottom:-20px;
-}
-.descNameP{
-  position: relative;
-  left:25px;
-  bottom:15px;
-}
-/* Roleplay outputs three items in an unordered list */
-.OutputRoleplay{
-  grid-area: 2 / 1 / 3 / 3;
-  padding-left:30px;
-  padding-top:20px;
-  padding-bottom:30px;
-  margin-top:-5%;
-}
-.roleplayItems ul{
-  position: relative;
-  top:-15px;
-  font-size: 1.3rem;
-}
-.roleplayItems li{
-  margin-bottom:-25px;
-}
-.roleplayItems p{
-  font-size: 1.8rem;
-}
-
-
-.OutputIntrigue{
-  grid-area: 3 / 1 / 4 / 3;
-  padding-left:30px;
-  padding-top:-10px;
-  margin-top:0%;
-}
-.intrigueItems ul{
-  position: relative;
-  top:-15px;
-  font-size: 1.3rem;
-}
-.intrigueItems li{
-  margin-bottom:-25px;
-}
-.intrigueItems p{
-  font-size: 1.8rem;
-}
-
-
-/* 
-  USER HOME PAGE STUFF
+  USER HOME PAGE STUFF,  WHERE THEY CAN VEIW/EDIT/DELETE ALL OF THEIR SUBMISSIONS
 */
 .homepageSidebarStandardButtonContainer{
   height:50%;
   width: 100%;
 }
-
 .userListContainer{
   background-color: var(--dark);
   font-family: 'Alegreya', serif;
@@ -497,12 +486,7 @@ input[type="file"] {
   transition: all .2s ease-in-out;
   font-style: normal;
 }
-/* .homePageListUl:hover{
-  transform: scale(1.05);
-  color: #fc8c03;
-} */
 .homePageItemLi{
-
   margin: auto;
   vertical-align: middle;
 }
@@ -513,21 +497,15 @@ input[type="file"] {
 }
 .listItemSpan{
   transition: all .2s ease-in-out;
-
 }
-
 .listItemSpan:hover .homePageListUl{
   transform: scale(1.05);
-  color: #fc8c03;
+  color: var(--pop);
 }
-
-
-
-
 
 
 /* 
-MODAL BOX STUFF
+MODAL POPUPS, default modal appears when users submit things, edit and delete are used in user homepage
  */
 .Modal {
   position: absolute;
@@ -576,7 +554,6 @@ MODAL BOX STUFF
   border: none;
 }
 
-
 .editModal{
   width: 50%;
   height:300px;
@@ -592,8 +569,6 @@ MODAL BOX STUFF
   -webkit-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
   box-shadow: 2px 2px 7px -3px rgba(0,0,0,0.75);
-  /* transform: 'translate(-50%, -50%)' */
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -614,11 +589,10 @@ MODAL BOX STUFF
   box-sizing: border-box;
   resize: none;
   background-color: var(--light);
-
 }
 .editModalEditButton{
   grid-area: 4 / 1 / 5 / 2;
-  background-color:#fc8c03;
+  background-color:var(--pop);
   width: 85%;
   height:70%;
   margin:0 auto;
@@ -641,7 +615,7 @@ MODAL BOX STUFF
 }
 .editModalDeleteButton{
   grid-area: 4 / 2 / 5 / 3;
-  background-color:#fc8c03;
+  background-color:var(--pop);
   width: 85%;
   height:70%;
   margin:0 auto;
@@ -661,17 +635,16 @@ MODAL BOX STUFF
   font-family: 'Alegreya', serif;
   position: relative;
   top:-5px;
-
 }
 .editModalEditButton:hover{
-  background-color: #ba6700; 
+  background-color: var(--popHover); 
 }
 .editModalDeleteButton:hover{
-  background-color: #ba6700; 
+  background-color:var(--popHover); 
 }
 .editModalCloseButton{
   position: absolute;
-  background-color:#fc8c03;
+  background-color:var(--pop);
   border-color: black;
   color: white;
   text-align: center;
@@ -684,7 +657,7 @@ MODAL BOX STUFF
   font-family: 'Alegreya', serif;
 }
 .editModalCloseButton:hover{
-  background-color: #ba6700; 
+  background-color: var(--popHover); 
 }
 .editModalCloseButton::-moz-focus-inner{
   outline: 0 !important;
@@ -703,10 +676,9 @@ MODAL BOX STUFF
 }
 
 
-
 /* BUTTON STYLES */
 .standardButton{
-  background-color:#fc8c03;
+  background-color:var(--pop);
   width: 100%;
   height:100%;
   border-color: black;
@@ -722,10 +694,10 @@ MODAL BOX STUFF
   font-family: 'Alegreya', serif;
 }
 .standardButton:hover{
-  background-color: #ba6700; 
+  background-color: var(--popHover); 
 }
 .submitButton:hover{
-  background-color: #ba6700; /* Green */
+  background-color:var(--popHover); /* Green */
 }
 .standardButton::-moz-focus-inner {
   outline: 0 !important;
@@ -734,28 +706,7 @@ MODAL BOX STUFF
 }
 
 
-
-.selectMainContainer{
-  width:100%;
-}
-
-.selectContainer{
-  font-size: 1.2rem;
-  width:100%;
-}
-
-.selection{
-  width:100%;
-
-}
-
-
-
-
-
-
-
-
+/* Slightly increases size of some elements when the window is large enough */
 @media only screen and (min-width: 1700px) {
   .sidebarContainer {
     height: 75vh;

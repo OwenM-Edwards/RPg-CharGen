@@ -1,16 +1,14 @@
 import React from 'react';
 
-
-
 const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, loadingState}) => {
    var displayRoleplay;
    if (loadingState === 'init') {
       displayRoleplay = <div className="roleplayTextDefault">Roleplay Cues :  ???</div>;
-
-   } else if(loadingState === 'loading') {
+   } 
+   else if(loadingState === 'loading') {
       displayRoleplay = <div></div>;
-
-   } else if(loadingState === 'loaded') {
+   } 
+   else if(loadingState === 'loaded') {
       displayRoleplay = 
          <div>
             <div className="roleplayItems">Roleplay Cues :</div>
@@ -21,7 +19,6 @@ const CharRoleplay = ({roleplayOutputA, roleplayOutputB, roleplayOutputC, loadin
             </ul>
          </div>
    }
-
    return (
       <div>{displayRoleplay} </div>
    )

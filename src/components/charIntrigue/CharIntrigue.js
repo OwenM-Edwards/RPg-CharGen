@@ -1,16 +1,14 @@
 import React from 'react';
 
-
-
 const CharIntrigue = ({intrigueOutput, loadingState}) => {
    var displayIntrigue;
    if (loadingState === 'init') {
       displayIntrigue =<div className="intrigueTextDefault">Intrigue : ???</div>;
-
-   } else if(loadingState === 'loading') {
+   } 
+   else if(loadingState === 'loading') {
       displayIntrigue = <div></div>;
-
-   } else if(loadingState === 'loaded') {
+   } 
+   else if(loadingState === 'loaded') {
       displayIntrigue = 
          <div>
             <div className="intrigueItems">Intrigue :</div>
@@ -19,7 +17,6 @@ const CharIntrigue = ({intrigueOutput, loadingState}) => {
                   <p>{`${intrigueOutput}.`}</p>
                </li>
             </ul>
-            
          </div>
    }
    return (

@@ -1,18 +1,19 @@
 import React from 'react';
-import LoadingIcons from '../loadingIcons/LoadingIcons';
+import LoadingIcons from '../LoadingIcons/LoadingIcons';
 import Select from 'react-select';
+
 const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
    { value: 'female', label: 'Gender: Female' },
 ];
 const customStyles = {
-   menu: (provided, state) => ({
+   menu: (provided, state) => ({ 
      ...provided,
    }),
 }
+// Sets default options for drop boxes
 let currentGender = { value: 'male', label: 'Gender: Male' };
 let currentRace = { value: 'human', label: 'Race: Human' };
-
 
 class InputImage extends React.Component {
    constructor(props){
@@ -27,12 +28,12 @@ class InputImage extends React.Component {
          previewSrc: ''
       }
    }
-   handleRace = (event)=>{
+   handleRaceChange = (event)=>{
       this.setState({race: event.value});
       currentRace.value = event.value;
       currentRace.label = 'Race:'+event.value;
    }
-   handleGender = (event) =>{
+   handleGenderChange = (event) =>{
       this.setState({gender: event.value});
       currentGender.value = event.value;
       currentGender.label = 'Gender:'+event.value;
@@ -40,6 +41,7 @@ class InputImage extends React.Component {
    handleLoading=(data)=>{
       this.setState({loading: data});
    }
+   // Checks if an image is ready to submit
    handleSubmitCheck=()=>{
       if(this.state.previewSrc){
          this.uploadImage();
@@ -78,13 +80,11 @@ class InputImage extends React.Component {
       })
    }
 
-
+   // Displays user selected image for preview before submission
    handlePreview = (data) => {
       data.preventDefault();
-  
       let file = data.target.files[0];
       let reader = new FileReader();
-  
       if (data.target.files.length === 0) {
         return;
       }
@@ -92,17 +92,13 @@ class InputImage extends React.Component {
          this.setState({
            previewSrc: [reader.result]
          });
-       }
-   
-       reader.readAsDataURL(file);
-     }
-
+      }
+      reader.readAsDataURL(file);
+   }
 
    render(){
       const isEnabled = this.state.previewSrc;
       let display = '';
-
-
       if(this.state.loading === 'loading'){
          display = <LoadingIcons/>
       } else {
@@ -111,21 +107,19 @@ class InputImage extends React.Component {
                <div>
                   <Select  className="selectContainer"
                      defaultValue={currentGender}
-                     onChange={this.handleGender}
+                     onChange={this.handleGenderChange}
                      isSearchable={false}
                      styles={customStyles}
                      options={optionsGender}
                   />
                   <Select  className="selectContainer"
                      defaultValue={currentRace}
-                     onChange={this.handleRace}
+                     onChange={this.handleRaceChange}
                      isSearchable={false}
                      styles={customStyles}
                      options={this.props.optionsRace}
                   />
                </div>
-
-
             <div className="imageSubmitBox">
                <div className="imageButtonContainer">
                   <div className="imageButtonBox">
@@ -145,6 +139,7 @@ class InputImage extends React.Component {
             <img className="imageInputPreview" src={this.state.previewSrc} alt="" />   
          </form>
          }
+         
       return (
          display
       )
