@@ -3,6 +3,8 @@ A React based personal project that generates a character for use in tabletop ro
 
 The projects front-end and back-end are both hosted on Heroku, I used PostgreSQL for the database and NodeJS for the server. User passwords are encrypted with bCrypt, and user image submissions are handled with the Cloudinary API, which communicates moderation status, uploads, and deletions to the server.
 
+Project is available from this location - https://intense-badlands-71234.herokuapp.com/
+
 
 
 
