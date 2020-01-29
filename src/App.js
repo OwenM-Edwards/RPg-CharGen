@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import './App.css';
-import InputName from './components/InputName/InputName';
-import InputImage from './components/InputImage/InputImage';
-import InputDesc from './components/Inputdesc/DescInput';
-import CharImage from './components/CharImage/CharImage';
-import CharDesc from './components/CharDesc/CharDesc';
-import CharRoleplay from './components/CharRoleplay/CharRoleplay';
-import CharIntrigue from './components/CharIntrigue/CharIntrigue';
+import InputName from './components/inputName/InputName';
+import InputImage from './components/inputImage/InputImage';
+import InputDesc from './components/inputdesc/DescInput';
+import CharImage from './components/charImage/CharImage';
+import CharDesc from './components/charDesc/CharDesc';
+import CharRoleplay from './components/charRoleplay/CharRoleplay';
+import CharIntrigue from './components/charIntrigue/CharIntrigue';
 import Signin from './components/Signin/Signin';
 import Register from './components/Register/Register';
-import LoadingIcons from './components/LoadingIcons/LoadingIcons';
+import LoadingIcons from './components/loadingIcons/LoadingIcons';
 import Modal from 'react-modal';
-import UserHomePage from './components/UserHomePage/UserHomePage';
-import SignedUserTab from './components/SignedUserTab/SignedUserTab';
+import UserHomePage from './components/userHomePage/UserHomePage';
+import SignedUserTab from './components/signedUserTab/SignedUserTab';
 import Select from 'react-select';
  
 const initialState = {

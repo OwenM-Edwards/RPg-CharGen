@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingIcons from '../LoadingIcons/LoadingIcons';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 // This component handles both user roleplay cue input, and user intrigue input
 class InputDesc extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingIcons from '../LoadingIcons/LoadingIcons';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 class Signin extends React.Component {
    constructor(props){

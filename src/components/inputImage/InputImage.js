@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadingIcons from '../LoadingIcons/LoadingIcons';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 import Select from 'react-select';
 
 const optionsGender = [

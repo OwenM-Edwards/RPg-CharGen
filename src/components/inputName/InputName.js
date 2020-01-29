@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import LoadingIcons from '../LoadingIcons/LoadingIcons';
+import LoadingIcons from '../loadingIcons/LoadingIcons';
 
 const optionsGender = [
    { value: 'male', label: 'Gender: Male' },
