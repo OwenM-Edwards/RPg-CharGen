@@ -400,7 +400,7 @@ class App extends Component {
                   </div>
                   <div className="sidebarButtonContainer">
                     <div className="standardButtonContainer">
-                      { this.state.fullRandom === true
+                      { this.state.genNewChar === true
                         ? <button  className="standardButton" onClick={this.submit}>Suprise me!</button>
                         : <button className="standardButton" onClick={this.submit}>Make another NPC</button>
                       }
