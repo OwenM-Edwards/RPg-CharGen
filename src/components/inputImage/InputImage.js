@@ -123,7 +123,7 @@ class InputImage extends React.Component {
             <div className="imageSubmitBox">
                <div className="imageButtonContainer">
                   <div className="imageButtonBox">
-                     <input className="hiddenFileInput" id="file" type="file" onChange={this.handlePreview} />
+                     <input className="hiddenFileInput" id="file" type="file" accept="image/png, image/jpeg" onChange={this.handlePreview} />
                      <label htmlFor="file" className="imageButtonLabel" >
                      <div>Select Image</div>
                      </label>

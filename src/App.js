@@ -12,7 +12,7 @@ import Register from './components/Register/Register';
 import LoadingIcons from './components/loadingIcons/LoadingIcons';
 import Modal from 'react-modal';
 import UserHomePage from './components/userHomePage/UserHomePage';
-import SignedUserTab from './components/signedUserTab/SignedUserTab';
+// import SignedUserTab from './components/signedUserTab/SignedUserTab';
 import Select from 'react-select';
  
 const initialState = {
@@ -251,8 +251,7 @@ class App extends Component {
 
   render() {
     const {subTitle,isSignedIn,route,loadingState,user} = this.state;
-    if(route==='homepage'){
-      var modalBox = 
+      var modalEditBox = 
       // Popup box for edited or deleted user submissions
       <Modal
         isOpen={this.state.modalIsOpen}
@@ -260,11 +259,10 @@ class App extends Component {
         className="editModal"
         >
         <button className="editModalCloseButton" onClick={this.closeModal} >X</button>
-        <textarea className="editModalTextArea" onChange={this.handleEditedUserSub} defaultValue={this.state.selectedUserSub.value.textContent}minLenth="3" maxLength="80"></textarea>
+        <textarea className="editModalTextArea" onChange={this.handleEditedUserSub} defaultValue={this.state.selectedUserSub.value.textContent}minlenth="3" maxLength="80"></textarea>
         <button className="editModalEditButton" onClick={this.submitEditedUserSub}>Submit Changes</button>
         <button className="editModalDeleteButton" onClick={this.submitDeletedUserSub}>Delete Submission</button>
       </Modal>
-    } else{
       // Regular modal confirmation box for users adding new things
       var modalBox = 
       <Modal
@@ -276,7 +274,6 @@ class App extends Component {
         <button className="ModalButton" onClick={this.closeModal}>X</button>
         <h2 className="ModalText" ref={subtitle => this.subtitle = subtitle}>{this.state.modalMessage}</h2>
       </Modal>
-    }
 
     // Pings the server to ensure its not idling
     window.onload = function(){
@@ -330,7 +327,7 @@ class App extends Component {
           : (
             route === 'homepage' ? (
             <div className="main">
-              {modalBox}
+              {modalEditBox}
               <div className="sidebarContainer">
                 <div className="sidebarButtonContainer">
                   <div className="homepageSidebarStandardButtonContainer">
@@ -420,8 +417,8 @@ class App extends Component {
                 ) : (
                   <div className="outputContainer">
                     <div className="charOutputItems">
-                      <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>;
-                      <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>;
+                      <div className="OutputImage"><CharImage imageOutput={this.state.newChar.imageOutput} loadingState={loadingState} /></div>
+                      <div className="OutputDesc"><CharDesc genderOutput={this.state.newChar.genderOutput} nameOutput={this.state.newChar.nameOutput} lastNameOutput={this.state.newChar.lastNameOutput} loadingState={loadingState} ageOutput={this.state.newChar.ageOutput} raceOutput={this.state.newChar.raceOutput}  /></div>
                       <div className="OutputRoleplay"><CharRoleplay roleplayOutputA={this.state.newChar.roleplayOutputA} roleplayOutputB={this.state.newChar.roleplayOutputB} roleplayOutputC={this.state.newChar.roleplayOutputC} loadingState={loadingState} /></div>
                       <div className="OutputIntrigue"><CharIntrigue intrigueOutput={this.state.newChar.intrigueOutput} loadingState={loadingState} /></div>
                     </div>
