@@ -1,7 +1,7 @@
 
 html {
-  --dark:#333;
-  --light:#fbfbfb ;
+  --dark:#b4b4b4 ;
+  --light:#333;
   --pop:#fc8c03;
   --popHover:#ba6700;
   background-color: var(--light);
@@ -17,7 +17,7 @@ body{
   color: var(--dark);
   height:90vh;
   min-width: 100vw;
-  max-height:90vh;
+  max-height:90vh; 
 
   display: grid;
   grid-template-columns: 1fr 1fr;
