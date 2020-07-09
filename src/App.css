@@ -1,7 +1,7 @@
 
 html {
-  --dark:#dbdbdb ;
-  --light:#333;
+  --dark:#323232 ;
+  --light:#121212;
   --pop:#ad5f00;
   --popHover:#7a4300;
   background-color: var(--light);
@@ -711,8 +711,13 @@ MODAL POPUPS, default modal appears when users submit things, edit and delete ar
   outline-style: none;
   border: none;
 }
-
-
+@media only screen and (min-width: 1300px) {
+  .outputContainer{
+    height: 75vh;
+    max-height: 75vh;
+    font-size: 2rem;
+  }
+}
 /* Slightly increases size of some elements when the window is large enough */
 @media only screen and (min-width: 1700px) {
   .sidebarContainer {
@@ -723,7 +728,6 @@ MODAL POPUPS, default modal appears when users submit things, edit and delete ar
   .outputContainer{
     height: 75vh;
     max-height: 75vh;
-
   }
   .inputContainer{
     height: 75vh;
