@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+import { ThemeToggleBtn } from '../components/Index';
 
 const Wrapper = styled.div`
    width:100%;
@@ -9,6 +9,8 @@ const Wrapper = styled.div`
    display:flex;
    flex-direction:row;
    flex-wrap:wrap;
+   background-color:${props => props.theme.backgroundHvyColor};
+   color:${props => props.theme.fontColor};
 
    & .headtext{
       margin: 0 auto;
@@ -28,10 +30,10 @@ const Wrapper = styled.div`
       * {
          margin:10px;
          text-decoration: none;
-         color:black;
+         color:${props => props.theme.fontColor};
          &:visited{
             text-decoration: none;
-            color:black;
+            color:${props => props.theme.fontColor};
          }
       }
    }
@@ -41,6 +43,7 @@ const Header = () => {
    return(
       <Wrapper >
          <h1 className="headtext">The Community NPC Generator</h1>
+         <ThemeToggleBtn/>
          <nav className="navBarContainer">
             <ul className="navList">
                <li><Link to="/signin">Sign in</Link></li>
@@ -49,9 +52,9 @@ const Header = () => {
                <li><Link to="/submit">Submit</Link></li>
             </ul>
          </nav>
+         
       </Wrapper>
    )
 } 
-
 
 export default Header;

@@ -15,35 +15,31 @@ import { Footer, Header} from './components/Index';
 import { Register, Generator, SignIn, Submit, Submissions } from './pages/Index';
 
 const Wrapper = styled.div`
-  background-color:red;
+  background-color:${props => props.theme.backgroundHvyColor};
+  color:${props => props.theme.fontColor};
   display:flex;
   flex-wrap:wrap;
   height: 100vh;
   margin: 0;
+  padding: 0 0 0 20px;
   & .header {
-    background-color:white;
     height:10%;
     max-height:200px;
     width:100%;
   }
-  & .nav {
-    grid-column: 2 / 3;
-  }
   & .main {
-    background-color:yellow;
-    height:85%;
-    width:100%;
+    height:88%;
+    width:95%;
+    /* padding-right:5%; */
   }
   & .footer {
     align-self:flex-end;
-    background-color:pink;
-    height:5%;
+    height:2%;
     width:100%;
   }
 `
 
-
-function App({authenticated}) {
+function App({ authenticated }) {
   return (
     <Router>
       <Wrapper>
@@ -61,12 +57,12 @@ function App({authenticated}) {
               }
             </Route>
 
-            <Route path="/register">
-              {(authenticated)
-              ? <div className="main"><Generator/></div>
-              : <div className="main"><Register/></div>
-              }
-            </Route>
+              <Route path="/register">
+                {(authenticated)
+                ? <div className="main"><Generator/></div>
+                : <div className="main"><Register/></div>
+                }
+              </Route>
 
             <Route path="/submissions">
               {(authenticated)
@@ -82,21 +78,21 @@ function App({authenticated}) {
               }
             </Route>
 
-            <Route path="/generator">
-              <div className="main"><Generator/></div>
-            </Route>
-          </Switch>
+              <Route path="/generator">
+                <div className="main"><Generator/></div>
+              </Route>
+            </Switch>
 
-        <div className="footer">
-          <Footer/>
-        </div>
-        
-      </Wrapper>
+          <div className="footer">
+            <Footer/>
+          </div>
+          
+        </Wrapper>
     </Router>
   )
 }
 
 
-const mapStateToProps = (state) => ({ authenticated: state.signIn.authenticated });
+const mapStateToProps = (state) => ({ authenticated: state.authenticate.authenticated });
 
 export default connect(mapStateToProps)(App);

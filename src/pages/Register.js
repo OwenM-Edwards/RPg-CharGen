@@ -4,14 +4,40 @@ import { connect } from "react-redux";
 import { registerUser } from "../redux/actions/index";
 import Loader from 'react-loader-spinner';
 import { Link } from "react-router-dom";
+import { LoadingIcon } from '../components/Index';
 
 const Wrapper = styled.div`
+   width:100%;
+   height:100%;
+   display:flex;
+   justify-content:center;
 
+   & .registerForm {
+      padding:20px;
+      background-color:${props => props.theme.backgroundLgtColor};
+      color:${props => props.theme.fontColor};
+      align-self:center;
+      width:50%;
+      justify-content:center;
+      max-width:600px;
+      border-radius:5px;
+   }
+   & .registerFieldset {
+      display:flex;
+      flex-direction:column;
+      padding:10px;
+   }
+   & .buttonContainer {
+      margin: 10px auto 0;
+      width:100%;
+   }
+   & .registerInput {
+      padding:10px;
+      width:100%;
+      margin: 0 auto;
+   }
 `
-const SpinnerContainer = styled.div`
-   margin:0 auto;
-   align-self:center;
-`
+
 const ErrorBox = styled.div`
    width:100px;
    height:100px;
@@ -32,7 +58,7 @@ const Register = ({registerUser, isFetching}) => {
    const handleUserName = (event) => {
       setUserName(event.target.value)
    }
-   if(isFetching == false){
+   if(isFetching === false){
       return(
          <Wrapper>
             <form>
@@ -40,34 +66,38 @@ const Register = ({registerUser, isFetching}) => {
                   <legend>Register</legend>
                   <input
                      placeholder="User Name"
-                     className="signinInput"
+                     className="registerInput"
                      onChange={handleUserName} 
                      type="text" name="user-name"  id="user-name" 
                   />
                   <input
                      placeholder="Email"
-                     className="signinInput"
+                     className="registerInput"
                      onChange={handleEmail} 
                      type="email" name="email-address"  id="email-address" 
                   />
                   <input 
                      placeholder="Password"
-                     className="signinInput"
+                     className="registerInput"
                      onChange={handlePassword} 
                      type="password" name="password"  id="password" 
                   />
-   
-                  <input 
-                     className="registerButton" 
-                     type="submit" 
-                     value="Register" 
-                     onClick={()=> registerUser({userEmail, userPassword, userName})}
-                  />
-                  <Link to="/signIn"><input                           
-                     type="submit" 
-                     value="Sign In"
-                     className="signInButton" 
-                  /></Link>
+                  <div className="buttonContainer">
+                     <input 
+                        className="registerInput" 
+                        type="submit" 
+                        value="Register" 
+                        onClick={()=> registerUser({userEmail, userPassword, userName})}
+                     />
+                  </div>
+
+                  <Link className="buttonContainer" to="/signIn"> 
+                     <input
+                        type="submit" 
+                        value="Sign In"
+                        className="registerInput" 
+                     />
+                  </Link>
                </fieldset>
             </form>
          </Wrapper>
@@ -76,12 +106,10 @@ const Register = ({registerUser, isFetching}) => {
    else {
       return(
          <Wrapper>
-            <SpinnerContainer>
-               <Loader type="BallTriangle" color="red" height={100} width={100} />
-            </SpinnerContainer>
+            <LoadingIcon/>
          </Wrapper>
       )
-   }
+   } 
 }
 
 

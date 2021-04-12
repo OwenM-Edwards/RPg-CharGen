@@ -2,16 +2,41 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { signIn } from "../redux/actions/index";
-import Loader from 'react-loader-spinner';
 import { Link } from "react-router-dom";
+import { LoadingIcon } from '../components/Index';
 
 
 const Wrapper = styled.div`
+   width:100%;
+   height:100%;
+   display:flex;
+   justify-content:center;
 
-`
-const SpinnerContainer = styled.div`   
-   margin:0 auto;
-   align-self:center;
+
+   & .signInForm {
+      padding:20px;
+      background-color:${props => props.theme.backgroundLgtColor};
+      color:${props => props.theme.fontColor};
+      align-self:center;
+      width:50%;
+      justify-content:center;
+      max-width:600px;
+      border-radius:5px;
+   }
+   & .signInFieldset {
+      display:flex;
+      flex-direction:column;
+      padding:10px;
+   }
+   & .buttonContainer {
+      margin: 10px auto 0;
+      width:100%;
+   }
+   & .signinInput {
+      padding:10px;
+      width:100%;
+      margin: 0 auto;
+   }
 `
 
 const SignIn = ({signIn, isFetching}) => {
@@ -22,9 +47,17 @@ const SignIn = ({signIn, isFetching}) => {
       setUserPassword(event.target.value)
    }
    const handleEmail = (event) => {
-      setUserEmail(event.target.value)
+      setUserEmail(event.target.value) 
    }
-   if(isFetching == false){
+
+   if(isFetching){
+      return(
+         <Wrapper>
+            <LoadingIcon/>
+         </Wrapper>
+      )
+   }
+   else {
       return(
          <Wrapper>
             <form>
@@ -42,31 +75,26 @@ const SignIn = ({signIn, isFetching}) => {
                      onChange={handlePassword} 
                      type="password" name="password"  id="password" 
                   />
-   
-                  <input 
-                     className="signInButton" 
-                     type="submit" 
-                     value="Sign in" 
-                     onClick={()=> signIn({userEmail, userPassword})}
-                  />
-                  <Link to="/register"><input                           
-                     type="submit" 
-                     value="Register"
-                     className="registerButton" 
-                  /></Link>
+                  <div className="buttonContainer">
+                     <input 
+                        type="submit" 
+                        value="Sign in" 
+                        onClick={()=> signIn({userEmail, userPassword})}
+                        className="signinInput" 
+                     />
+                  </div>
+                  
+                  <Link className="buttonContainer" to="/register">
+                     <input                           
+                        type="submit" 
+                        value="Register"
+                        className="signinInput" 
+                     />
+                  </Link>
                </fieldset>
             </form>
          </Wrapper>
       )   
-   }
-   else {
-      return(
-         <Wrapper>
-            <SpinnerContainer>
-               <Loader type="BallTriangle" color="red" height={100} width={100} />
-            </SpinnerContainer>
-         </Wrapper>
-      )
    }
 }
 

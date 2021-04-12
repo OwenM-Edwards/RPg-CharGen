@@ -1,22 +1,21 @@
 import React from 'react';
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { CharImage, CharDesc, CharIntrigue, CharRoleplay, Sidebar} from '../components/Index';
-import Loader from 'react-loader-spinner';
+import { LoadingIcon, CharImage, CharDesc, CharIntrigue, CharRoleplay, Sidebar} from '../components/Index';
+
 const Wrapper = styled.div`
    width:100%;
    height:100%;
    display:flex;
 
-   & .sidebar {
-      background-color:red;
-      height:100%;
-      min-width:10%;
-   }
    & .main {
-      background-color:green;
+
+      background-color:${props => props.backgroundLgtColor};
+      color:${props => props.fontColor};
+      transition: background-color 5s ease-out;
+      transition: color 5s linear;
       min-height:100%;
-      min-width:90%;
+      min-width:80%;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: repeat(2, 1fr);
@@ -25,42 +24,32 @@ const Wrapper = styled.div`
    }
 `
 const OutputDesc = styled.div`
-   background-color:white;
    grid-area: 1 / 1 / 2 / 2;
    overflow: hidden;
 `
 const OutputImage = styled.div`
-   background-color:grey;
    grid-area: 1 / 2 / 2 / 3;
    overflow: hidden;
 `
 const OutputRoleplay = styled.div`
-   background-color:blue;
    grid-area: 2 / 1 / 3 / 2;
    overflow: hidden;
 `
 const OutputIntrigue = styled.div`
-   background-color:purple;
    grid-area: 2 / 2 / 3 / 3;
    overflow: hidden;
 `
-const SpinnerContainer = styled.div`
-   margin:0 auto;
-   align-self:center;
-`
-
 
 const Generator = ({newChar}) => {
 
-   if(newChar.isFetching == false){
+   if(newChar.isFetching === false){
       return(
          <Wrapper>
-            <div className="sidebar"> 
-               <Sidebar page={'generator'}/>
-            </div>
+            <Sidebar page={'generator'}/>
+            
 
             <div className="main">
-               {(newChar.newChar != false) 
+               {(newChar.newChar !== false) 
                   ? (   
                      <React.Fragment>
                         <OutputImage>
@@ -89,12 +78,8 @@ const Generator = ({newChar}) => {
    else{
       return(
          <Wrapper>
-            <div className="sidebar"> 
-               <Sidebar page={'generator'}/>
-            </div>
-            <SpinnerContainer>
-               <Loader type="BallTriangle" color="red" height={100} width={100} />
-            </SpinnerContainer>
+            <Sidebar page={'generator'}/>
+            <LoadingIcon/>
          </Wrapper>
       )
    }

@@ -1,11 +1,21 @@
 import { combineReducers } from "redux";
-import changeRace from "./changeRace";
 import newChar from "./newCharacter";
-import signIn from "./signIn";
+import authenticate from "./authenticate";
 import register from "./registerUser";
+import submissions from "./submissions";
+import inputCharDesc from "./inputCharDesc";
+import inputCharIntrigue from './inputCharIntrigue'
+import inputCharImage from './inputCharImage';
+import inputCharRoleplay from './inputCharRoleplay';
+// import currentTheme from './currentTheme';
+
 export default combineReducers({
-   changeRace,
    newChar,
-   signIn,
+   authenticate,
    register,
+   submissions,
+   inputCharDesc,
+   inputCharIntrigue,
+   inputCharImage,
+   inputCharRoleplay,
 });

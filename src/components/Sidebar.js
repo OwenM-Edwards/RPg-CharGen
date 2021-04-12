@@ -6,9 +6,13 @@ import { generateCharacter } from "../redux/actions/index";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-   width:100%;
+   min-width:20%;
+   height:100%;
    display:flex;
    flex-direction:column;
+   background-color:${props => props.theme.backgroundHvyColor};
+   color:${props => props.theme.fontColor};
+   padding:5px 15px 0 0;
 `
 const GenerateButton = styled.button`
    background-color: #4CAF50;
@@ -50,9 +54,10 @@ const Sidebar = ({ page, generateCharacter }) => {
          sidebarContent = <div>test2</div>
    }
    return(
-      <div>
+      <React.Fragment>
          {sidebarContent}
-      </div> 
+      </React.Fragment>
+
    )
 }
 const mapStateToProps = () => ({});
