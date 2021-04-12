@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { signIn, clearSignInError } from "../redux/actions/index";
+import { signIn } from "../redux/actions/index";
 import Loader from 'react-loader-spinner';
 import { Link } from "react-router-dom";
+
 
 const Wrapper = styled.div`
 
 `
-const SpinnerContainer = styled.div`
+const SpinnerContainer = styled.div`   
    margin:0 auto;
    align-self:center;
 `
-const ErrorBox = styled.div`
-   width:100px;
-   height:100px;
-   background-color:red;   
-`
 
-const SignIn = ({signIn, removeSignInError, error, isFetching}) => {
+const SignIn = ({signIn, isFetching}) => {
    const [ userEmail, setUserEmail] = useState(false);
    const [ userPassword, setUserPassword] = useState(false);
 
@@ -31,10 +27,6 @@ const SignIn = ({signIn, removeSignInError, error, isFetching}) => {
    if(isFetching == false){
       return(
          <Wrapper>
-            {(error)
-               ? <ErrorBox onClick={()=> removeSignInError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form>
                <fieldset>
                   <legend>Sign In</legend>
@@ -79,6 +71,6 @@ const SignIn = ({signIn, removeSignInError, error, isFetching}) => {
 }
 
 
-const mapStateToProps = (state) => ({ error: state.signIn.error, authenticated: state.signIn.authenticated, isFetching: state.signIn.isFetching });
+const mapStateToProps = (state) => ({ authenticated: state.signIn.authenticated, isFetching: state.signIn.isFetching });
 
-export default connect(mapStateToProps, { signIn, clearSignInError })(SignIn);
+export default connect(mapStateToProps, { signIn })(SignIn);

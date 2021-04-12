@@ -6,7 +6,10 @@ import {
   BrowserRouter as Router, 
   Switch,
   Route,
+  Redirect,
 } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify';
 
 import { Footer, Header} from './components/Index';
 import { Register, Generator, SignIn, Submit, Submissions } from './pages/Index';
@@ -44,6 +47,9 @@ function App({authenticated}) {
   return (
     <Router>
       <Wrapper>
+        <ToastContainer
+          position="bottom-right"
+        />
         <div className="header">
           <Header/>
         </div>
@@ -65,12 +71,15 @@ function App({authenticated}) {
             <Route path="/submissions">
               {(authenticated)
               ?  <div className="main"><Submissions/></div>
-              : <div className="main"><SignIn/></div>
+              :  <Redirect to="/signin"/>
               }
             </Route>
 
             <Route path="/submit">
-              <div className="main"><Submit/></div>
+              {(authenticated)
+              ?  <div className="main"><Submit/></div>
+              :  <Redirect to="/signin"/>
+              }
             </Route>
 
             <Route path="/generator">

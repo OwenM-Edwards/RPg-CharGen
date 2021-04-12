@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { registerUser, clearRegisterError } from "../redux/actions/index";
+import { registerUser } from "../redux/actions/index";
 import Loader from 'react-loader-spinner';
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,7 @@ const ErrorBox = styled.div`
    background-color:red;   
 `
 
-const Register = ({registerUser, clearRegisterError, error, isFetching}) => {
+const Register = ({registerUser, isFetching}) => {
    const [ userEmail, setUserEmail] = useState(false);
    const [ userPassword, setUserPassword] = useState(false);
    const [ userName, setUserName] = useState(false);
@@ -35,10 +35,6 @@ const Register = ({registerUser, clearRegisterError, error, isFetching}) => {
    if(isFetching == false){
       return(
          <Wrapper>
-            {(error)
-               ? <ErrorBox onClick={()=> clearRegisterError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form>
                <fieldset>
                   <legend>Register</legend>
@@ -89,6 +85,6 @@ const Register = ({registerUser, clearRegisterError, error, isFetching}) => {
 }
 
 
-const mapStateToProps = (state) => ({ error: state.register.error, authenticated: state.signIn.authenticated, isFetching: state.register.isFetching });
+const mapStateToProps = (state) => ({ authenticated: state.signIn.authenticated, isFetching: state.register.isFetching });
 
-export default connect(mapStateToProps, { registerUser, clearRegisterError })(Register);
+export default connect(mapStateToProps, { registerUser, })(Register);

@@ -1,9 +1,11 @@
-import { ADD_ARTICLE, CHANGE_RACE, NEW_CHAR, SIGN_IN, CLEAR_SIGN_IN_ERROR, REGISTER_USER, CLEAR_REGISTER_ERROR } from "./action-types";
+import { ADD_ARTICLE, CHANGE_RACE, NEW_CHAR, SIGN_IN, REGISTER_USER, CLEAR_REGISTER_ERROR } from "./action-types";
 import axios from 'axios';
+import { toast } from "react-toastify";
+
+
 export function addArticle(payload) {
    return { type: ADD_ARTICLE, payload}
 };
-
 
 export function changeRace() {
    return {
@@ -13,7 +15,6 @@ export function changeRace() {
       }
    }
 };
-
 
 export const generateCharacter = ({gender, race}) => async (dispatch) => {
    dispatch({
@@ -41,8 +42,6 @@ export const generateCharacter = ({gender, race}) => async (dispatch) => {
    })
 }
 
-
-
 export const signIn = ({userEmail, userPassword}) => async (dispatch) => {
    dispatch({
       type: SIGN_IN,
@@ -65,16 +64,16 @@ export const signIn = ({userEmail, userPassword}) => async (dispatch) => {
          payload:{
             isFetching: false,
             authenticated: true,
-            error:false,
          },
       })
    })
    .catch(error => {
+      toast.dismiss();
+      toast.error('Incorrect email address or password.');
       dispatch({
          type: SIGN_IN,
          payload:{
             isFetching: false,
-            error:true,
             authenticated: false,
          },
       })
@@ -103,7 +102,6 @@ export const registerUser = ({userEmail, userPassword, userName}) => async (disp
          type: REGISTER_USER,
          payload:{
             isFetching: false,
-            error:false,
          },
       })
       dispatch({
@@ -114,33 +112,13 @@ export const registerUser = ({userEmail, userPassword, userName}) => async (disp
       })
    })
    .catch(error => {
+      toast.dismiss();
+      toast.error('Incorrect email address or password.');
       dispatch({
          type: REGISTER_USER,
          payload:{
             isFetching: false,
-            error:true,
          },
       })
    });
-}
-
-export const clearRegisterError = () => (dispatch) => {
-   dispatch({
-      type: CLEAR_REGISTER_ERROR,
-      payload:{
-         error:false,
-         isFetching: false,
-      },
-   })
-}
-
-export const clearSignInError = () => (dispatch) => {
-   dispatch({
-      type: CLEAR_SIGN_IN_ERROR,
-      payload:{
-         error:false,
-         isFetching: false,
-         authenticated: false,
-      },
-   })
 }
