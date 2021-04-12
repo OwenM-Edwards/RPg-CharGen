@@ -94,7 +94,7 @@ const Submissions = ({
 
    const buildRoleplayElements = () => {
       let elementList = [];
-      submittedRoleplays.returnedSubRoleplay.forEach(function callback(element, index){
+      submittedRoleplays.forEach(function callback(element, index){
          elementList.push(
             <p data-text={element.roleplay} key={index}>Roleplay Cue:{element.roleplay} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
          )
@@ -103,7 +103,7 @@ const Submissions = ({
    }
    const buildIntrigueElements = () => {
       let elementList = [];
-      submittedIntrigues.returnedSubIntrigue.forEach(function callback(element, index){
+      submittedIntrigues.forEach(function callback(element, index){
          elementList.push(
             <p data-text={element.intrigue} key={index}>Intrigue:{element.intrigue} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
          )
@@ -141,7 +141,7 @@ const mapStateToProps = (state) => ({
    submittedImages:state.submissions.submittedImages,
    submittedRoleplays:state.submissions.submittedRoleplays,
    submittedIntrigues:state.submissions.submittedIntrigues,
-   userEmail: state.authenticate.userEmail 
+   userEmail: state.authenticate.authenticated.email,
 });
 
 export default connect(mapStateToProps, {getSubmissions})(Submissions);

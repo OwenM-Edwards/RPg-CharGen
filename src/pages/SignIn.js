@@ -99,6 +99,6 @@ const SignIn = ({signIn, isFetching}) => {
 }
 
 
-const mapStateToProps = (state) => ({ authenticated: state.signIn.authenticated, isFetching: state.signIn.isFetching });
+const mapStateToProps = (state) => ({ authenticated: state.authenticate.authenticated, isFetching: state.authenticate.isFetching });
 
 export default connect(mapStateToProps, { signIn })(SignIn);

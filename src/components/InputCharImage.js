@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { clearInputImageError, submitCharImage } from "../redux/actions/index";
+import {submitCharImage } from "../redux/actions/index";
 import {optionsRace, optionsGender} from "../constants/index";
 import { connect } from "react-redux";
 import { LoadingIcon } from '../components/Index';
@@ -25,7 +25,7 @@ const ErrorBox = styled.div`
 `
 
 
-const InputCharImage = ({ clearInputImageError, isFetching, error,  submitCharImage, userID, userEmail }) => {
+const InputCharImage = ({ isFetching,  submitCharImage, userID, userEmail }) => {
    const [ selectedGender, setSelectedGender] = useState('random');
    const [ selectedRace, setSelectedRace] = useState('random');
    const [ previewSRC, setPreviewSRC] = useState('');
@@ -72,10 +72,6 @@ const InputCharImage = ({ clearInputImageError, isFetching, error,  submitCharIm
    else {
       return(
          <Wrapper >
-            {(error)
-               ? <ErrorBox onClick={()=> clearInputImageError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form>
                Character Image:
                <Select  
@@ -117,6 +113,12 @@ const InputCharImage = ({ clearInputImageError, isFetching, error,  submitCharIm
 } 
 
 
-const mapStateToProps = (state) => ({  isFetching:state.inputCharImage.isFetching, error:state.inputCharImage.error, userID: state.authenticate.userID, userEmail: state.authenticate.userEmail  });
+const mapStateToProps = (state) => (
+   {  
+      isFetching:state.inputCharImage.isFetching, 
+      userID: state.authenticate.authenticated.id,
+      userEmail: state.authenticate.authenticated.email  
+   }
+);
 
-export default connect(mapStateToProps, { clearInputImageError, submitCharImage })(InputCharImage);
+export default connect(mapStateToProps, {  submitCharImage })(InputCharImage);

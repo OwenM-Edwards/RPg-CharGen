@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { submitCharDesc, clearInputDescError } from "../redux/actions/index";
+import { submitCharDesc } from "../redux/actions/index";
 import {optionsRace, optionsGender} from "../constants/index";
 import { connect } from "react-redux";
 import { LoadingIcon } from '../components/Index';
@@ -25,7 +25,7 @@ const ErrorBox = styled.div`
 `
 
 
-const InputCharDesc = ({ clearInputDescError, isFetching, error, submitCharDesc, userID, userEmail}) => {
+const InputCharDesc = ({ isFetching, submitCharDesc, userID, userEmail}) => {
    const [ selectedGender, setSelectedGender] = useState('random');
    const [ selectedRace, setSelectedRace] = useState('random');
    const [ inputFName, setinputFName] = useState('random');
@@ -38,10 +38,10 @@ const InputCharDesc = ({ clearInputDescError, isFetching, error, submitCharDesc,
       setSelectedRace(event.value)
    }
    const handleFName = (event) => {
-      setinputFName(event.target.value)
+      setinputFName(event.target.value.split('.').join("").trim())
    }
    const handleLName = (event) => {
-      setinputLName(event.target.value)
+      setinputLName(event.target.value.split('.').join("").trim())
    }
    const handleSubmit = () => {
       submitCharDesc(
@@ -63,10 +63,6 @@ const InputCharDesc = ({ clearInputDescError, isFetching, error, submitCharDesc,
    else {
       return(
          <Wrapper >
-            {(error)
-               ? <ErrorBox onClick={()=> clearInputDescError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form>
                Character Names:
                <Select
@@ -106,6 +102,9 @@ const InputCharDesc = ({ clearInputDescError, isFetching, error, submitCharDesc,
 } 
 
 
-const mapStateToProps = (state) => ({ isFetching:state.inputCharDesc.isFetching, error:state.inputCharDesc.error, userID:state.authenticate.userID, userEmail:state.authenticate.userEmail  });
+const mapStateToProps = (state) => ({ 
+   isFetching:state.inputCharDesc.isFetching, 
+   userID:state.authenticate.authenticated.id, 
+   userEmail:state.authenticate.authenticated.email });
 
-export default connect(mapStateToProps, { clearInputDescError, submitCharDesc })(InputCharDesc);
+export default connect(mapStateToProps, { submitCharDesc })(InputCharDesc);

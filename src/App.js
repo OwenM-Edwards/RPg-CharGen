@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     height:10%;
     max-height:200px;
     width:100%;
+    min-height:90px;
   }
   & .main {
     height:88%;
@@ -46,42 +47,39 @@ function App({ authenticated }) {
         <ToastContainer
           position="bottom-right"
         />
+
         <div className="header">
           <Header/>
         </div>
-          <Switch>
-            <Route path="/signin">
+
+        <Switch>
+          <Route path="/signin">
+            {(authenticated)
+            ? <div className="main"><Generator/></div>
+            : <div className="main"><SignIn/></div>
+            }
+          </Route>
+
+            <Route path="/register">
               {(authenticated)
               ? <div className="main"><Generator/></div>
-              : <div className="main"><SignIn/></div>
+              : <div className="main"><Register/></div>
               }
             </Route>
 
-              <Route path="/register">
-                {(authenticated)
-                ? <div className="main"><Generator/></div>
-                : <div className="main"><Register/></div>
-                }
-              </Route>
+          <Route path="/submissions">
+            <div className="main"><Submissions/></div>
 
-            <Route path="/submissions">
-              {(authenticated)
-              ?  <div className="main"><Submissions/></div>
-              :  <Redirect to="/signin"/>
-              }
+          </Route>
+
+          <Route path="/submit">
+            <div className="main"><Submit/></div>
+          </Route>
+
+            <Route path="/generator">
+              <div className="main"><Generator/></div>
             </Route>
-
-            <Route path="/submit">
-              {(authenticated)
-              ?  <div className="main"><Submit/></div>
-              :  <Redirect to="/signin"/>
-              }
-            </Route>
-
-              <Route path="/generator">
-                <div className="main"><Generator/></div>
-              </Route>
-            </Switch>
+          </Switch>
 
           <div className="footer">
             <Footer/>

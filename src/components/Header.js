@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { ThemeToggleBtn } from '../components/Index';
 
 const Wrapper = styled.div`
    width:100%;
@@ -43,7 +42,6 @@ const Header = () => {
    return(
       <Wrapper >
          <h1 className="headtext">The Community NPC Generator</h1>
-         <ThemeToggleBtn/>
          <nav className="navBarContainer">
             <ul className="navList">
                <li><Link to="/signin">Sign in</Link></li>

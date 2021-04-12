@@ -10,7 +10,6 @@ import InputCharImage from './InputCharImage';
 import InputCharIntrigue from './InputCharIntrigue';
 import InputCharRoleplay from './InputCharRoleplay';
 import LoadingIcon from './LoadingIcon';
-import ThemeToggleBtn from './ThemeToggleBtn';
 
 export {
    Header,
@@ -25,5 +24,4 @@ export {
    InputCharIntrigue,
    InputCharRoleplay,
    LoadingIcon,
-   ThemeToggleBtn,
 }

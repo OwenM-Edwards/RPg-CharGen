@@ -1,5 +1,4 @@
 import { 
-   CLEAR_INPUT_DESC_ERROR, 
    SUBMIT_CHAR_ROLEPLAY, 
    SUBMIT_CHAR_INTRIGUE, 
    SUBMIT_CHAR_IMAGE, 
@@ -7,36 +6,162 @@ import {
    GET_SUBMISSIONS, 
    NEW_CHAR, 
    SIGN_IN, 
-   CLEAR_SIGN_IN_ERROR, 
    REGISTER_USER, 
-   CLEAR_REGISTER_ERROR,
-   CLEAR_INPUT_IMAGE_ERROR,
-   CLEAR_INPUT_ROLEPLAY_ERROR,
-   CLEAR_INPUT_INTRIGUE_ERROR,
-   SWITCH_THEME,
 } from "./action-types";
 import axios from 'axios';
+import { toast } from "react-toastify";
 
 
-// import { lightModeTheme, darkModeTheme } from '../../constants/index';
+export const submitCharDesc = (
+   selectedRace, 
+   selectedGender,
+   inputFName,
+   inputLName,
+   userEmail,
+   userID,) => async (dispatch) => {
+
+   dispatch({
+      type: SUBMIT_CHAR_DESC,
+      payload:{
+         isFetching: true,
+      },
+   })
+   const json = JSON.stringify({
+      "race": selectedRace,
+      "gender": selectedGender,
+      "name":inputFName,
+      "lastname":inputLName,
+      "email":userEmail,
+      "id":userID
+   })
+   const inputCharDescAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/addname', json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   })
+   dispatch({
+      type: SUBMIT_CHAR_DESC,
+      payload:{
+         isFetching: false,
+      },
+   })
+}
 
 
-// export const switchTheme = (theme) => (dispatch) => {
-//    if(theme === 'light'){
-//       dispatch({
-//          type: SWITCH_THEME,
-//          payload: lightModeTheme,
-//       })
-//    }
-//    else {
-//       dispatch({
-//          type: SWITCH_THEME,
-//          payload: darkModeTheme,
-//       })
-//    }
 
-// }
 
+export const submitCharImage = (
+   previewSRC,
+   selectedGender,
+   selectedRace, 
+   userEmail,
+   userID,) => async (dispatch) => {
+
+   dispatch({
+      type: SUBMIT_CHAR_IMAGE,
+      payload:{
+         isFetching: true,
+      },
+   })
+   const json = JSON.stringify({
+      "race": selectedRace,
+      "gender": selectedGender,
+      "image": previewSRC,
+      "email":userEmail,
+      "id":userID
+   })
+   const inputCharImageAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/charimage', json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   })
+   dispatch({
+      type: SUBMIT_CHAR_IMAGE,
+      payload:{
+         isFetching: false,
+      },
+   })
+}
+
+export const submitCharIntrigue = (
+   inputIntrigue, 
+   userEmail,
+   userID,) => async (dispatch) => {
+
+   dispatch({
+      type: SUBMIT_CHAR_INTRIGUE,
+      payload:{
+         isFetching: true,
+      },
+   })
+   const json = JSON.stringify({
+      "intrigue": inputIntrigue,
+      "email":userEmail,
+      "id":userID
+   })
+   const inputCharIntrigueAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/addintrigue', json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   })
+   dispatch({
+      type: SUBMIT_CHAR_INTRIGUE,
+      payload:{
+         isFetching: false,
+      },
+   })
+}
+
+
+
+export const getSubmissions = (userEmail) => async (dispatch) => {
+   dispatch({
+      type: SUBMIT_CHAR_INTRIGUE,
+      payload:{
+         isFetching: true,
+      },
+   })
+   const json = JSON.stringify({
+      "email": userEmail
+   })
+   const getSubmissionsResponse = await axios.post('https://safe-dawn-37731.herokuapp.com/getsubmissions', json, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+   })
+
+   dispatch({
+      type: GET_SUBMISSIONS,
+      payload:{
+         isFetching: false,
+         submissions: false,
+         error: false,
+         submittedFNames: [
+            getSubmissionsResponse.data[0],
+            getSubmissionsResponse.data[1],
+            getSubmissionsResponse.data[2],
+            getSubmissionsResponse.data[3],
+            getSubmissionsResponse.data[4],
+         ],
+         submittedLNames: [
+            getSubmissionsResponse.data[10],
+            getSubmissionsResponse.data[11],
+            getSubmissionsResponse.data[12],
+            getSubmissionsResponse.data[13],
+            getSubmissionsResponse.data[14],
+         ],
+         submittedImages: [
+            getSubmissionsResponse.data[5],
+            getSubmissionsResponse.data[6],
+            getSubmissionsResponse.data[7],
+            getSubmissionsResponse.data[8],
+            getSubmissionsResponse.data[9],
+         ],
+         submittedRoleplays: getSubmissionsResponse.data[15],
+         submittedIntrigues: getSubmissionsResponse.data[16],
+      },
+   })
+}
 
 export const editUserSubmission = ( intrigue, email, id ) => async (dispatch) => {
    dispatch({
@@ -186,12 +311,14 @@ export const signIn = ({userEmail, userPassword}) => async (dispatch) => {
    const authenticated = await axios.post('https://safe-dawn-37731.herokuapp.com/signin', json, {
       headers: { 'Content-Type': 'application/json' }
    })
+
    .then(data => {
+      console.log(data)
       dispatch({
          type: SIGN_IN,
          payload:{
             isFetching: false,
-            authenticated: true,
+            authenticated: data.data,
          },
       })
    })

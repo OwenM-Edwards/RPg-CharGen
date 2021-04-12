@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { clearInputIntrigueError, submitCharIntrigue } from "../redux/actions/index";
+import { submitCharIntrigue } from "../redux/actions/index";
 import { connect } from "react-redux";
 import { LoadingIcon } from '../components/Index';
 
@@ -22,7 +22,7 @@ const ErrorBox = styled.div`
 `
 
 
-const InputCharIntrigue = ({ clearInputIntrigueError, isFetching, error, userEmail, userID, submitCharIntrigue}) => {
+const InputCharIntrigue = ({isFetching, userEmail, userID, submitCharIntrigue}) => {
    const [ inputIntrigue, setinputIntrigue] = useState(false);
 
    const handleIntrigue = (event) =>{
@@ -46,10 +46,6 @@ const InputCharIntrigue = ({ clearInputIntrigueError, isFetching, error, userEma
    else {
       return(
          <Wrapper >
-            {(error)
-               ? <ErrorBox onClick={()=> clearInputIntrigueError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form onSubmit={()=>handleSubmit()}>
                Character Intrigue:
                <textarea 
@@ -68,6 +64,10 @@ const InputCharIntrigue = ({ clearInputIntrigueError, isFetching, error, userEma
 } 
 
 
-const mapStateToProps = (state) => ({  isFetching:state.inputCharIntrigue.isFetching, error:state.inputCharIntrigue.error, userID: state.authenticate.userID, userEmail: state.authenticate.userEmail  });
+const mapStateToProps = (state) => ({  
+   isFetching:state.inputCharIntrigue.isFetching, 
+   userID: state.authenticate.authenticated.id,
+   userEmail: state.authenticate.authenticated.email
+});
 
-export default connect(mapStateToProps, { clearInputIntrigueError, submitCharIntrigue })(InputCharIntrigue);
+export default connect(mapStateToProps, { submitCharIntrigue })(InputCharIntrigue);

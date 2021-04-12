@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { clearInputRoleplayError, submitCharRoleplay } from "../redux/actions/index";
+import { submitCharRoleplay } from "../redux/actions/index";
 import { connect } from "react-redux";
 import { LoadingIcon } from '../components/Index';
 
@@ -21,7 +21,7 @@ const ErrorBox = styled.div`
    background-color:red;   
 `
 
-const InputCharRoleplay = ({ clearInputRoleplayError, isFetching, error, submitCharRoleplay, userEmail, userID }) => {
+const InputCharRoleplay = ({isFetching, submitCharRoleplay, userEmail, userID }) => {
    const [ inputRoleplay, setinputRoleplay] = useState(false);
 
    const handleRoleplay = (event) =>{
@@ -46,10 +46,6 @@ const InputCharRoleplay = ({ clearInputRoleplayError, isFetching, error, submitC
    else {
       return(
          <Wrapper >
-            {(error)
-               ? <ErrorBox onClick={()=> clearInputRoleplayError()}>Error</ErrorBox>
-               : <React.Fragment/>
-            }
             <form onSubmit={()=>handleSubmit()}>
                Roleplay cue:
                <textarea 
@@ -69,6 +65,10 @@ const InputCharRoleplay = ({ clearInputRoleplayError, isFetching, error, submitC
 } 
 
 
-const mapStateToProps = (state) => ({  isFetching:state.inputCharRoleplay.isFetching, error:state.inputCharRoleplay.error, userID: state.authenticate.userID, userEmail: state.authenticate.userEmail  });
+const mapStateToProps = (state) => ({  
+   isFetching:state.inputCharRoleplay.isFetching, 
+   userID: state.authenticate.authenticated.id,
+   userEmail: state.authenticate.authenticated.email
+});
 
-export default connect(mapStateToProps, { clearInputRoleplayError, submitCharRoleplay })(InputCharRoleplay);
+export default connect(mapStateToProps, { submitCharRoleplay })(InputCharRoleplay);
