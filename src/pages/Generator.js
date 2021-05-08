@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { LoadingIcon, CharImage, CharDesc, CharIntrigue, CharRoleplay, Sidebar} from '../components/Index';
+import { LoadingIcon, CharImage, CharDesc, CharIntrigue, CharRoleplay, Sidebar} from '../components';
+import { generateCharacter } from "../redux/actions/index";
 
 const Wrapper = styled.div`
    width:100%;
@@ -40,16 +41,23 @@ const OutputIntrigue = styled.div`
    overflow: hidden;
 `
 
-const Generator = ({newChar}) => {
+const Generator = ({generateCharacter, newChar, isFetching}) => {
 
-   if(newChar.isFetching === false){
+   useEffect(()=>{
+      console.log(newChar)
+      if(!newChar){
+         generateCharacter({ gender:'random', race:'random' })
+      }
+   },[])
+
+   if(isFetching === false){
       return(
          <Wrapper>
             <Sidebar page={'generator'}/>
             
 
             <div className="main">
-               {(newChar.newChar !== false) 
+               {(newChar !== false) 
                   ? (   
                      <React.Fragment>
                         <OutputImage>
@@ -85,6 +93,6 @@ const Generator = ({newChar}) => {
    }
 }
 
-const mapStateToProps = (state) => ({ newChar: state.newChar });
+const mapStateToProps = (state) => ({ newChar: state.newChar.newChar, isFetching:state.newChar.isFetching });
 
-export default connect(mapStateToProps)(Generator);
+export default connect(mapStateToProps, {generateCharacter})(Generator);

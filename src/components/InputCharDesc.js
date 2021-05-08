@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { submitCharDesc } from "../redux/actions/index";
 import {optionsRace, optionsGender} from "../constants/index";
 import { connect } from "react-redux";
-import { LoadingIcon } from '../components/Index';
+import { LoadingIcon } from '.';
 
 import Select from 'react-select';
 const Wrapper = styled.div`

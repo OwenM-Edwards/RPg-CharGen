@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { submitCharRoleplay } from "../redux/actions/index";
 import { connect } from "react-redux";
-import { LoadingIcon } from '../components/Index';
+import { LoadingIcon } from '.';
 
 const Wrapper = styled.div`
    width:100%;

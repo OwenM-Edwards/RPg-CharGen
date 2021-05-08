@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { signIn } from "../redux/actions/index";
 import { Link } from "react-router-dom";
-import { LoadingIcon } from '../components/Index';
+import { LoadingIcon } from '../components';
 
 
 const Wrapper = styled.div`

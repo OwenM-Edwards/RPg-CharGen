@@ -116,7 +116,7 @@ export const submitCharIntrigue = (
 
 export const getSubmissions = (userEmail) => async (dispatch) => {
    dispatch({
-      type: SUBMIT_CHAR_INTRIGUE,
+      type: GET_SUBMISSIONS,
       payload:{
          isFetching: true,
       },
@@ -129,13 +129,11 @@ export const getSubmissions = (userEmail) => async (dispatch) => {
         'Content-Type': 'application/json'
       },
    })
-
+   console.log(getSubmissionsResponse)
    dispatch({
       type: GET_SUBMISSIONS,
       payload:{
          isFetching: false,
-         submissions: false,
-         error: false,
          submittedFNames: [
             getSubmissionsResponse.data[0],
             getSubmissionsResponse.data[1],
@@ -161,9 +159,10 @@ export const getSubmissions = (userEmail) => async (dispatch) => {
          submittedIntrigues: getSubmissionsResponse.data[16],
       },
    })
+   return true;
 }
 
-export const editUserSubmission = ( intrigue, email, id ) => async (dispatch) => {
+export const editUserSubmission = ( entryType, editedUserSub, email, entryValue ) => async (dispatch) => {
    dispatch({
       type: SUBMIT_CHAR_INTRIGUE,
       payload:{
@@ -171,9 +170,10 @@ export const editUserSubmission = ( intrigue, email, id ) => async (dispatch) =>
       },
    })
    const json = JSON.stringify({
-      "entryType": intrigue,
+      "entryType": entryType,
+      "entryData": editedUserSub,
       "userEmail": email,
-      "originalSub": id,
+      "originalSub": entryValue
    })
    const getSubmissionsResponse = await axios.post('https://safe-dawn-37731.herokuapp.com/edit', json, {
       headers: {

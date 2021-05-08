@@ -1,147 +1,126 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { getSubmissions } from "../redux/actions/index";
+import { 
+   LoadingIcon,
+   SubmittedNames, 
+   SubmittedLastNames,
+   SubmittedImages,
+   SubmittedRoleplays,
+   SubmittedIntrigues,
+   EditEntryModal,
+} from '../components';
+import { Link, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
    width:100%;
    height:100%;
+   display:flex;
+   flex-direction:column;
+`
+const TabContainer = styled.div`
+   width:100%;
+   min-height:10%;
+   background-color:green;
+   display:flex;
+   justify-content:space-around;
+   align-items:center;
+`
+const ContentContainer = styled.div`
+   width:100%;
+   min-height:100%;
+   max-height:100%;
+   display:flex;
+   flex-direction:column;
+
 `
 
 const Submissions = ({
-      submittedFNames, 
-      submittedLNames, 
-      submittedImages,
-      submittedRoleplays,
-      submittedIntrigues,
       userEmail, 
-      getSubmissions
+      getSubmissions,
+      isFetching,
    }) => {
-   const [ displayFNames, setDisplayFNames] = useState([]);
-   const [ displayLNames, setDisplayLNames] = useState([]);
-   const [ displayImages, setDisplayImages] = useState([]);
-   const [ displayRoleplays, setDisplayRoleplays] = useState([]);
-   const [ displayIntrigues, setDisplayIntrigues] = useState([]);
-   const [ selectedSubmission, setSelectedSubmission ] = useState([]);
-   const races = ['Human','Orc','Dwarf','Elf','Halfling']
+   const [modalDisplay, setModalDisplay] = useState(false);
+   const [modalData, setModalData] = useState();
+   const {category} = useParams();
 
-   const handleEditAndDelete = (el) => {
-      setSelectedSubmission(el.target.dataset.text);
-      
-   }
-   const test = (el) => {
-      console.log(el.target.dataset.text);
-   }
-   const buildFNameElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedFNames).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedFNames[key].forEach(function callback(element){
-            elementList.push(
-               <p data-text={element.name} onClick={test.bind(this)} key={counter}>Name:{element.name} Gender:{(element.gender) ? 'male' : 'female'} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
-            )
-            counter++
-         })
-      })
-      setDisplayFNames(elementList)
+   const handleOpenModalDisplay = (entry) => {
+      setModalDisplay(true);
+      setModalData(entry);
+      // console.log(entry.target.dataset.text);
    }
 
-   const buildLNameElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedLNames).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedLNames[key].forEach(function callback(element){
-            elementList.push(
-               <p data-text={element.lastname} key={counter}>Last Name:{element.lastname} Gender:{(element.gender) ? 'male' : 'female'} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
-            )
-            counter++
-         })
-      })
-      setDisplayLNames(elementList)
+
+   useEffect(()=> {
+      getSubmissions(userEmail)
+      console.log(category)
+   },[userEmail])
+
+   useEffect(()=> {
+      getSubmissions(userEmail)
+   },[])
+
+
+   let displayData = false
+   switch(category){
+      case 'firstnames':
+         displayData = <SubmittedNames handleOpenModalDisplay={handleOpenModalDisplay}/>;
+         break;
+      case 'lastnames':
+         displayData = <SubmittedLastNames handleOpenModalDisplay={handleOpenModalDisplay}/>;
+         break;
+      case 'images':
+         displayData = <SubmittedImages handleOpenModalDisplay={handleOpenModalDisplay}/>;
+         break;
+      case 'roleplay':
+         displayData = <SubmittedRoleplays handleOpenModalDisplay={handleOpenModalDisplay}/>;
+         break;
+      case 'intrigue':
+         displayData = <SubmittedIntrigues handleOpenModalDisplay={handleOpenModalDisplay}/>;
+         break;
+      default:
+         displayData = <SubmittedNames handleOpenModalDisplay={handleOpenModalDisplay}/>;
    }
 
-   const buildImageElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedImages).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedImages[key].forEach(function callback(element){
-            elementList.push(
-               <p key={counter}>URL:{element.url} Gender:{(element.gender) ? 'male' : 'female'} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
-            )
-            counter++
-         })
-      })
-      setDisplayImages(elementList)
-   }
+   if(!isFetching){
+      return(
+         <Wrapper>
+            <TabContainer>
+               <Link to="/submissions/firstnames">First Names</Link>
+               <Link to="/submissions/lastnames">Last Names</Link>
+               <Link to="/submissions/images">Images</Link>
+               <Link to="/submissions/roleplay">Roleplay</Link>
+               <Link to="/submissions/intrigue">Intrigue</Link>
+            </TabContainer>
+   
+            <ContentContainer>
+               {(modalDisplay)
+                  ? <EditEntryModal modalData={modalData} setModalDisplay={setModalDisplay}/>
+                  : <React.Fragment/>
+               }
+               {displayData}
+            </ContentContainer>
 
-   const buildRoleplayElements = () => {
-      let elementList = [];
-      submittedRoleplays.forEach(function callback(element, index){
-         elementList.push(
-            <p data-text={element.roleplay} key={index}>Roleplay Cue:{element.roleplay} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
-         )
-      })
-      setDisplayRoleplays(elementList)
+   
+         </Wrapper>
+      )
    }
-   const buildIntrigueElements = () => {
-      let elementList = [];
-      submittedIntrigues.forEach(function callback(element, index){
-         elementList.push(
-            <p data-text={element.intrigue} key={index}>Intrigue:{element.intrigue} Moderation Status:{(element.moderation) ? 'Approved' : 'Denied'}</p>
-         )
-      })
-      setDisplayIntrigues(elementList)
+   else {
+      return(
+         <Wrapper>
+            <LoadingIcon/>
+         </Wrapper>
+      )
    }
-
-   return(
-      <Wrapper>
-         <div onClick={()=>getSubmissions(userEmail)}>Submissions</div>
-         <div onClick={()=>buildFNameElements()}>BuildFNames</div>
-         <div onClick={()=>buildLNameElements()}>BuildLNames</div>
-         <div onClick={()=>buildImageElements()}>BuildImages</div>
-         <div onClick={()=>buildRoleplayElements()}>BuildRoleplay</div>
-         <div onClick={()=>buildIntrigueElements()}>BuildIntrigues</div>
-         
-         <h2>First Names</h2>
-            {displayFNames}
-         <h2>Last Names</h2>
-            {displayLNames}
-         <h2>Images</h2>
-            {displayImages}
-         <h2>Roleplay Cues</h2>
-            {displayRoleplays}
-         <h2>Intrigues</h2>
-            {displayIntrigues}
-      </Wrapper>
-   )
+   
 }
 
 
 const mapStateToProps = (state) => ({ 
-   submittedFNames:state.submissions.submittedFNames,
-   submittedLNames:state.submissions.submittedLNames,
-   submittedImages:state.submissions.submittedImages,
-   submittedRoleplays:state.submissions.submittedRoleplays,
-   submittedIntrigues:state.submissions.submittedIntrigues,
    userEmail: state.authenticate.authenticated.email,
+   isFetching: state.submissions.isFetching,
 });
 
 export default connect(mapStateToProps, {getSubmissions})(Submissions);

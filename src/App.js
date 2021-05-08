@@ -11,32 +11,37 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
-import { Footer, Header} from './components/Index';
+import { Footer, Header} from './components';
 import { Register, Generator, SignIn, Submit, Submissions } from './pages/Index';
 
 const Wrapper = styled.div`
   background-color:${props => props.theme.backgroundHvyColor};
   color:${props => props.theme.fontColor};
   display:flex;
-  flex-wrap:wrap;
+  flex-direction:column;
   height: 100vh;
+  min-height:100vh;
+  max-height: 100vh;
   margin: 0;
-  padding: 0 0 0 20px;
+  overflow:auto;
+  width:100%;
+  padding-top:30px;
+
   & .header {
-    height:10%;
-    max-height:200px;
     width:100%;
-    min-height:90px;
+    min-height:100px;
   }
   & .main {
-    height:88%;
-    width:95%;
-    /* padding-right:5%; */
+    width:90%;
+    align-self:center;
+    flex-grow:1;
+    max-height:70%;
   }
   & .footer {
-    align-self:flex-end;
-    height:2%;
     width:100%;
+    min-height:50px;
+    margin-top: auto;    
+    background-color:orange;
   }
 `
 
@@ -60,32 +65,37 @@ function App({ authenticated }) {
             }
           </Route>
 
-            <Route path="/register">
-              {(authenticated)
+          <Route path="/register">
+            {(authenticated)
               ? <div className="main"><Generator/></div>
               : <div className="main"><Register/></div>
-              }
-            </Route>
+            }
+          </Route>
 
-          <Route path="/submissions">
-            <div className="main"><Submissions/></div>
-
+          <Route path="/submissions/:category">
+            {(authenticated)
+              ? <div className="main"><Submissions/></div>
+              : <div className="main"><SignIn/></div>
+            }
           </Route>
 
           <Route path="/submit">
-            <div className="main"><Submit/></div>
+            {(authenticated)
+              ? <div className="main"><Submit/></div>
+              : <div className="main"><SignIn/></div>
+            }
           </Route>
 
-            <Route path="/generator">
-              <div className="main"><Generator/></div>
-            </Route>
-          </Switch>
+          <Route path="/generator">
+            <div className="main"><Generator/></div>
+          </Route>
+        </Switch>
 
-          <div className="footer">
-            <Footer/>
-          </div>
+        <div className="footer">
+          <Footer/>
+        </div>
           
-        </Wrapper>
+      </Wrapper>
     </Router>
   )
 }
