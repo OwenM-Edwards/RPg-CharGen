@@ -11,9 +11,45 @@ const Wrapper = styled.div`
    flex-direction:row;
    flex-wrap:wrap;
    justify-content:center;
-   border:3px solid black;
    border-radius:5px;
-   align-content:center;
+   padding:30px;
+
+   & h2 {
+      color:#01a4f6;
+   }
+   & form {
+      display:flex;
+      flex-direction:column;
+      width:100%;
+      height:100%;
+      justify-content:center;
+   }
+
+   & .input {
+      padding:10px;
+      width:100%;
+      margin: 0 auto;
+      /* background-color:red; */
+      border-radius:5px;
+      margin-bottom:10px;
+      outline: none;
+      border:0px;
+   }
+
+   & button {
+      background-color: #FF3E58;
+      border:0;
+      width:30%;
+      height:39px;
+      border-radius:5px;
+      color:white;
+      transition: all 0.2s ease-out;
+      cursor: pointer;
+      
+      &:hover {
+         background-color:#FB677B;
+      }
+   }
 `
 const ErrorBox = styled.div`
    width:100px;
@@ -46,8 +82,8 @@ const InputCharRoleplay = ({isFetching, submitCharRoleplay, userEmail, userID })
    else {
       return(
          <Wrapper >
+            <h2>Character Roleplay Cues</h2>
             <form onSubmit={()=>handleSubmit()}>
-               Roleplay cue:
                <textarea 
                   placeholder="Roleplay Cues:" 
                   onChange={handleRoleplay} 
@@ -55,6 +91,7 @@ const InputCharRoleplay = ({isFetching, submitCharRoleplay, userEmail, userID })
                   required="required"
                   minLength="3"
                   maxLength="80"
+                  className="input"
                />
                <button type={"submit"}>Submit</button>
             </form>

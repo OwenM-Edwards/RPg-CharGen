@@ -11,31 +11,78 @@ const Wrapper = styled.div`
    height:100%;
    display:flex;
    justify-content:center;
-
-
+   align-items:center;
    & .signInForm {
       padding:20px;
-      background-color:${props => props.theme.backgroundLgtColor};
-      color:${props => props.theme.fontColor};
+      height:auto;
+      background-color:#2f3438;
+      color:white;
       align-self:center;
-      width:50%;
+      width:90%;
       justify-content:center;
-      max-width:600px;
-      border-radius:5px;
+      max-width:560px;
+      align-self:center;
+      border-radius:5px 5px 0 0;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
    }
    & .signInFieldset {
       display:flex;
+      justify-content:center;
       flex-direction:column;
       padding:10px;
+      padding-top:20px;
+      border-radius:10px;
+      border:0px;
+      text-align:center;
+      font-size:1.2rem;
+      & p {
+         margin-top:30px;
+      }
+      & span {
+         font-weight:bold;
+         cursor: pointer;
+      }
+      & .registerContainer {
+         align-self:center;
+         width:auto;
+         text-decoration:none;
+         font-size:1.1rem;
+      }
    }
    & .buttonContainer {
       margin: 10px auto 0;
       width:100%;
+      display:flex;
+      justify-content:center;
+      text-decoration:none;
    }
    & .signinInput {
       padding:10px;
       width:100%;
       margin: 0 auto;
+      /* background-color:red; */
+      border-radius:5px;
+      margin-bottom:10px;
+      outline: none;
+      border:0px;
+   }
+   & .signinButton {
+      padding:10px;
+      width:100%;
+      justify-self:center;
+      margin: 0 auto;
+      background-color: #FF3E58;
+      border-radius:5px;
+      color:white;
+      border:0px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      font-size:1.1rem;
+      cursor: pointer;
+      transition: all 0.2s ease-out;
+
+      &:hover {
+         background-color:#FB677B;
+      }
    }
 `
 
@@ -60,8 +107,8 @@ const SignIn = ({signIn, isFetching}) => {
    else {
       return(
          <Wrapper>
-            <form>
-               <fieldset>
+            <form className="signInForm">
+               <fieldset className="signInFieldset">
                   <legend>Sign In</legend>
                   <input
                      placeholder="Email"
@@ -80,7 +127,7 @@ const SignIn = ({signIn, isFetching}) => {
                         type="submit" 
                         value="Sign in" 
                         onClick={()=> signIn({userEmail, userPassword})}
-                        className="signinInput" 
+                        className="signinButton" 
                      />
                   </div>
                   
@@ -88,7 +135,7 @@ const SignIn = ({signIn, isFetching}) => {
                      <input                           
                         type="submit" 
                         value="Register"
-                        className="signinInput" 
+                        className="signinButton" 
                      />
                   </Link>
                </fieldset>

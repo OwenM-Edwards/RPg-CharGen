@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
-import Tilt from 'react-parallax-tilt';
 import styled from "styled-components";
+import imageBG from "../img/bg.png";
 
 const Wrapper = styled.div`
    width:100%;
@@ -10,18 +10,15 @@ const Wrapper = styled.div`
    flex-direction:row;
    flex-wrap:wrap;
    justify-content:center;
-   border:3px solid black;
-   border-radius:5px;
    align-content:center;
+
 `
 
 const CharImage = ({ newCharImage }) => {
    
    return(
       <Wrapper>
-         <Tilt>
-            <img src={newCharImage}/>
-         </Tilt>
+         <img src={newCharImage}/>
       </Wrapper>
    )
 }

@@ -6,6 +6,7 @@ import {
    GET_SUBMISSIONS, 
    NEW_CHAR, 
    SIGN_IN, 
+   SIGN_OUT,
    REGISTER_USER, 
 } from "./action-types";
 import axios from 'axios';
@@ -294,6 +295,12 @@ export const generateCharacter = ({gender, race}) => async (dispatch) => {
          isFetching: false,
          newChar: genCharResponse,
       },
+   })
+}
+
+export const signOut = () => async (dispatch) => {
+   dispatch({
+      type: SIGN_OUT,
    })
 }
 

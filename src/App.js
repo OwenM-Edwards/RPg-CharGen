@@ -11,89 +11,92 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
-import { Footer, Header} from './components';
+import { Footer, Header, Sidebar} from './components';
 import { Register, Generator, SignIn, Submit, Submissions } from './pages/Index';
 
 const Wrapper = styled.div`
-  background-color:${props => props.theme.backgroundHvyColor};
+  background-color:#25292e;
   color:${props => props.theme.fontColor};
   display:flex;
-  flex-direction:column;
+  flex-direction:row;
   height: 100vh;
   min-height:100vh;
   max-height: 100vh;
   margin: 0;
-  overflow:auto;
+  overflow:hidden;
   width:100%;
-  padding-top:30px;
 
-  & .header {
-    width:100%;
-    min-height:100px;
-  }
   & .main {
-    width:90%;
-    align-self:center;
-    flex-grow:1;
-    max-height:70%;
-  }
-  & .footer {
     width:100%;
-    min-height:50px;
-    margin-top: auto;    
-    background-color:orange;
+    max-width:1600px;
+    height:100%;
+    background-color:#25292e;
+    margin:0 auto;
+    padding:20px;
   }
 `
 
 function App({ authenticated }) {
   return (
     <Router>
+
       <Wrapper>
+
         <ToastContainer
           position="bottom-right"
         />
 
-        <div className="header">
-          <Header/>
-        </div>
-
         <Switch>
-          <Route path="/signin">
-            {(authenticated)
-            ? <div className="main"><Generator/></div>
-            : <div className="main"><SignIn/></div>
-            }
-          </Route>
+            <Route path="/signin">
+              <Sidebar className="sidebar" page={'signin'}/>
 
-          <Route path="/register">
-            {(authenticated)
+              {(authenticated)
               ? <div className="main"><Generator/></div>
-              : <div className="main"><Register/></div>
-            }
-          </Route>
-
-          <Route path="/submissions/:category">
-            {(authenticated)
-              ? <div className="main"><Submissions/></div>
               : <div className="main"><SignIn/></div>
-            }
-          </Route>
+              }
+            </Route>
 
-          <Route path="/submit">
-            {(authenticated)
-              ? <div className="main"><Submit/></div>
-              : <div className="main"><SignIn/></div>
-            }
-          </Route>
+            <Route path="/register">
+              <Sidebar className="sidebar" page={'signin'}/>
 
-          <Route path="/generator">
-            <div className="main"><Generator/></div>
-          </Route>
+              {(authenticated)
+                ? <div className="main"><Generator/></div>
+                : <div className="main"><Register/></div>
+              }
+            </Route>
+
+            <Route path="/submissions/:category">
+              <Sidebar className="sidebar" page={'submissions'}/>
+              {(authenticated)
+                ? <div className="main"><Submissions/></div>
+                : <div className="main"><SignIn/></div>
+              }
+            </Route>
+
+            <Route path="/submit">
+              <Sidebar className="sidebar" page={'submit'}/>
+              {(authenticated)
+                ? <div className="main"><Submit/></div>
+                : <div className="main"><SignIn/></div>
+              }
+            </Route>
+
+            <Route path="/generator">
+              <Sidebar className="sidebar" page={'generator'}/>
+
+              <div className="main">
+                <Generator/>
+              </div>
+            </Route>
+
+            <Route exact path="/">
+              <Sidebar className="sidebar" page={'generator'}/>
+              <div className="main">
+                <Generator/>
+              </div>
+            </Route>
+        
         </Switch>
-
-        <div className="footer">
-          <Footer/>
-        </div>
           
       </Wrapper>
     </Router>

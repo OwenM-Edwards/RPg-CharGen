@@ -5,19 +5,42 @@ import { connect } from "react-redux";
 const Wrapper = styled.div`
    width:100%;
    max-height:100%;
-   background-color:purple;
-   overflow-y:auto;
-
    display:flex;
    flex-direction:column;
-   padding:20px 20px 20px 20px;
-
+   padding:0px 20px 20px 20px;
+   
    & h3 {
-
+      color:#01a4f6;
+      margin:20px 0 10px 5px;
+      font-size:1.3rem;
    }
-   & p {
+   & div {
       cursor:pointer;
+      background-color:#2f3438;
+      margin-bottom:3px;
+      border-radius:10px;
+      padding:10px 10px 10px 30px;
+      display:flex;
+      justify-content:space-between;
+      transition:background-color 0.2s ease-in-out;
+      & p {
+         width:30%;
+         font-size:1rem;
+      }
+      & .accepted {
+         color:green;
+      }
+      & .pending {
+         color:blue;
+      }
+      & .failed {
+         color:red;
+      }
+      &:hover {
+         background-color:#FB677B;
+      }
    }
+
 `
 const SubmittedNames = ({handleOpenModalDisplay, submittedFNames}) => {
    const [ displayFNames, setDisplayFNames] = useState([]);
@@ -35,13 +58,15 @@ const SubmittedNames = ({handleOpenModalDisplay, submittedFNames}) => {
          raceCounter++;
          submittedFNames[key].forEach(function callback(element){
             elementList.push(
-               <p 
+               <div 
                   data-text={element.name} 
                   onClick={()=>handleOpenModalDisplay(element)} 
-                  key={counter}>Name:{element.name} 
-                  Gender:{(element.gender) ? 'male' : 'female'}
-                  Moderation Status:{(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }
-               </p>
+                  key={counter}
+               >
+                  <p>Name: {element.name} </p>
+                  <p>Gender: {(element.gender) ? 'male' : 'female'}</p>
+                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+               </div>
             )
             counter++
          })

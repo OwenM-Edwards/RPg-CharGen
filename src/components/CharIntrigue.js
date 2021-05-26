@@ -6,20 +6,29 @@ const Wrapper = styled.div`
    width:100%;
    height:100%;
    display:flex;
-   flex-direction:row;
-   flex-wrap:wrap;
+   flex-direction:column;
    justify-content:center;
-   border:3px solid black;
-   border-radius:5px;
-   align-content:center;
+   padding:30px;
+
+   & .titleContainer {
+      width:100%;
+      font-size:1.8rem;
+      height:30%;
+      padding:0!important;
+   }
+   & .infoContainer {
+      width:100%;
+      font-size:1.2rem;
+      height:70%;
+   }
 `
 
 const CharIntrigue = ({ newCharIntrigue }) => {
    
    return(
       <Wrapper>
-         <h3>Intrigue:</h3>
-         <p>{newCharIntrigue}.</p>
+         <div className="titleContainer"><h3>Intrigue:</h3></div>
+         <div className="infoContainer"><p>{newCharIntrigue}.</p></div>
       </Wrapper>
    )
 }

@@ -7,12 +7,23 @@ const Wrapper = styled.div`
    width:100%;
    height:100%;
    display:flex;
-   flex-direction:row;
-   flex-wrap:wrap;
+   flex-direction:column;
    justify-content:center;
-   border:3px solid black;
-   border-radius:5px;
-   align-content:center;
+   padding:30px;
+
+   & .nameContainer {
+      width:100%;
+      /* background-color:red; */
+      font-size:2.1rem;
+      height:30%;
+      color:#01a4f6;
+   }
+   & .infoContainer {
+      width:100%;
+      /* background-color:blue; */
+      font-size:1.2rem;
+      height:70%;
+   }
 `
 
 
@@ -25,8 +36,8 @@ const CharDesc = ({ newCharDesc }) => {
 
    return(
       <Wrapper>
-         <h3>{firstName} {lastName}</h3>
-         <p>A {gender} {race} with an interest in {interest}.</p>
+         <div className="nameContainer"><h3>{firstName} {lastName}</h3></div>
+         <div className="infoContainer"><p>A <span>{gender} {race}</span> with an interest in <span>{interest}</span>.</p></div>
       </Wrapper>
    )
 }

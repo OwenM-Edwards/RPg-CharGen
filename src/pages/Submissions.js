@@ -19,22 +19,48 @@ const Wrapper = styled.div`
    height:100%;
    display:flex;
    flex-direction:column;
-`
-const TabContainer = styled.div`
-   width:100%;
-   min-height:10%;
-   background-color:green;
-   display:flex;
-   justify-content:space-around;
-   align-items:center;
-`
-const ContentContainer = styled.div`
-   width:100%;
-   min-height:100%;
-   max-height:100%;
-   display:flex;
-   flex-direction:column;
+   color:#f3f3f3;
 
+   & .titleContainer {
+      width:100%;
+      padding-left:20px;
+      margin-bottom:10px;
+      color:#01a4f6;
+      font-size:1.5rem;
+      padding:0;
+   }
+
+   & .tabContainer {
+      width:100%;
+      min-height:10%;
+      background-color:#2f3438;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+      padding:20px;
+      border-radius:10px 10px 0 0;
+      * {
+         color:white;
+         text-decoration: none;
+         margin-bottom:10px;
+         padding:10px;
+         opacity:0.8;
+
+      }
+      & .active {
+         border-bottom:2px solid #FF3E58;
+         opacity:1;
+      }
+   }
+
+   & .listContainer {
+      width:100%;
+      height:90%;
+      display:flex;
+      flex-direction:column;
+      overflow-y:scroll;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);      
+   }
 `
 
 const Submissions = ({
@@ -87,21 +113,24 @@ const Submissions = ({
    if(!isFetching){
       return(
          <Wrapper>
-            <TabContainer>
-               <Link to="/submissions/firstnames">First Names</Link>
-               <Link to="/submissions/lastnames">Last Names</Link>
-               <Link to="/submissions/images">Images</Link>
-               <Link to="/submissions/roleplay">Roleplay</Link>
-               <Link to="/submissions/intrigue">Intrigue</Link>
-            </TabContainer>
+            <div className="titleContainer">
+               <h1>Your Submissions</h1>
+            </div>
+            <div className="tabContainer">
+               <Link className={category === 'firstnames' ? 'active' : 'notactive'} to="/submissions/firstnames">First Names</Link>
+               <Link className={category === 'lastnames' ? 'active' : 'notactive'} to="/submissions/lastnames">Last Names</Link>
+               <Link className={category === 'images' ? 'active' : 'notactive'} to="/submissions/images">Images</Link>
+               <Link className={category === 'roleplay' ? 'active' : 'notactive'} to="/submissions/roleplay">Roleplay</Link>
+               <Link className={category === 'intrigue' ? 'active' : 'notactive'} to="/submissions/intrigue">Intrigue</Link>
+            </div>
    
-            <ContentContainer>
+            <div className="listContainer">
                {(modalDisplay)
                   ? <EditEntryModal modalData={modalData} setModalDisplay={setModalDisplay}/>
                   : <React.Fragment/>
                }
                {displayData}
-            </ContentContainer>
+            </div>
 
    
          </Wrapper>

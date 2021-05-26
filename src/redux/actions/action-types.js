@@ -1,5 +1,6 @@
 export const NEW_CHAR = "NEW_CHAR";
 export const SIGN_IN = "SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
 export const CLEAR_SIGN_IN_ERROR = "CLEAR_SIGN_IN_ERROR";
 export const REGISTER_USER = "REGISTER_USER";
 export const CLEAR_REGISTER_ERROR = "CLEAR_REGISTER_ERROR";

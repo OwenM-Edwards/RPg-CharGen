@@ -18,7 +18,7 @@ const SpinnerContainer = styled.div`
 // If no type provided, defaults to BallTriangle.
 const LoadingIcon = ({type}) => {
 
-   const spinnerColor = "#db8722";
+   const spinnerColor = "#FF3E58";
 
    return(
       <Wrapper>
