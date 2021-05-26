@@ -51,11 +51,6 @@ const Wrapper = styled.div`
       }
    }
 `
-const ErrorBox = styled.div`
-   width:100px;
-   height:100px;
-   background-color:red;   
-`
 
 const InputCharRoleplay = ({isFetching, submitCharRoleplay, userEmail, userID }) => {
    const [ inputRoleplay, setinputRoleplay] = useState(false);

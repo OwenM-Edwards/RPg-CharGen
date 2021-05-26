@@ -6,12 +6,11 @@ import {
   BrowserRouter as Router, 
   Switch,
   Route,
-  Redirect,
 } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
-import { Footer, Header, Sidebar} from './components';
+import { Sidebar} from './components';
 import { Register, Generator, SignIn, Submit, Submissions } from './pages/index.js';
 
 const Wrapper = styled.div`

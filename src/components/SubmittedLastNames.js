@@ -45,38 +45,39 @@ const SubmittedLastNames = ({handleOpenModalDisplay, submittedLNames}) => {
    const [ displayLNames, setDisplayLNames] = useState([]);
    const races = ['Human','Orc','Dwarf','Elf','Halfling'];
 
-   const buildLNameElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedLNames).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedLNames[key].forEach(function callback(element){
-            elementList.push(
-               <div 
-                  data-text={element.lastname} 
-                  key={counter}
-                  onClick={()=>handleOpenModalDisplay(element)} 
-               >
-                  <p>Last Name: {element.lastname} </p>
-                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
-               </div>
-            )
-            counter++
-         })
-      })
-      setDisplayLNames(elementList)
-   }
+   
 
    useEffect(()=>{
+      const buildLNameElements = () => {
+         let elementList = [];
+         let counter = 0;
+         let raceCounter = 0;
+         Object.keys(submittedLNames).forEach(key => {
+            elementList.push(
+               <h3 key={counter}>{races[raceCounter]}</h3>
+            )
+            counter++;
+            raceCounter++;
+            submittedLNames[key].forEach(function callback(element){
+               elementList.push(
+                  <div 
+                     data-text={element.lastname} 
+                     key={counter}
+                     onClick={()=>handleOpenModalDisplay(element)} 
+                  >
+                     <p>Last Name: {element.lastname} </p>
+                     <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+                  </div>
+               )
+               counter++
+            })
+         })
+         setDisplayLNames(elementList)
+      }
       if(submittedLNames){
          buildLNameElements();
       }
-   }, [])
+   }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
    
 

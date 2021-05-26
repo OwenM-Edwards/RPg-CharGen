@@ -55,12 +55,6 @@ const Wrapper = styled.div`
    
 `
 
-const ErrorBox = styled.div`
-   width:100px;
-   height:100px;
-   background-color:red;   
-`
-
 
 const InputCharDesc = ({ isFetching, submitCharDesc, userID, userEmail}) => {
    const [ selectedGender, setSelectedGender] = useState('random');

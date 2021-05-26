@@ -46,40 +46,41 @@ const SubmittedNames = ({handleOpenModalDisplay, submittedFNames}) => {
    const [ displayFNames, setDisplayFNames] = useState([]);
    const races = ['Human','Orc','Dwarf','Elf','Halfling'];
 
-   const buildFNameElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedFNames).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedFNames[key].forEach(function callback(element){
-            elementList.push(
-               <div 
-                  data-text={element.name} 
-                  onClick={()=>handleOpenModalDisplay(element)} 
-                  key={counter}
-               >
-                  <p>Name: {element.name} </p>
-                  <p>Gender: {(element.gender) ? 'male' : 'female'}</p>
-                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
-               </div>
-            )
-            counter++
-         })
-      })
-      setDisplayFNames(elementList)
-      console.log('built')
-   }
+   
 
    useEffect(()=>{
+      const buildFNameElements = () => {
+         let elementList = [];
+         let counter = 0;
+         let raceCounter = 0;
+         Object.keys(submittedFNames).forEach(key => {
+            elementList.push(
+               <h3 key={counter}>{races[raceCounter]}</h3>
+            )
+            counter++;
+            raceCounter++;
+            submittedFNames[key].forEach(function callback(element){
+               elementList.push(
+                  <div 
+                     data-text={element.name} 
+                     onClick={()=>handleOpenModalDisplay(element)} 
+                     key={counter}
+                  >
+                     <p>Name: {element.name} </p>
+                     <p>Gender: {(element.gender) ? 'male' : 'female'}</p>
+                     <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+                  </div>
+               )
+               counter++
+            })
+         })
+         setDisplayFNames(elementList)
+         console.log('built')
+      }
       if(submittedFNames){
          buildFNameElements();
       }
-   }, [])
+   }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
    
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
 import styled from "styled-components";
-import imageBG from "../img/bg.png";
 
 const Wrapper = styled.div`
    width:100%;
@@ -18,7 +17,7 @@ const CharImage = ({ newCharImage }) => {
    
    return(
       <Wrapper>
-         <img src={newCharImage}/>
+         <img alt="Character Portrait" src={newCharImage}/>
       </Wrapper>
    )
 }

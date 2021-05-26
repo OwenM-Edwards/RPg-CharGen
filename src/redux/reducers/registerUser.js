@@ -1,4 +1,4 @@
-import { REGISTER_USER, CLEAR_REGISTER_ERROR } from "../actions/action-types";
+import { REGISTER_USER } from "../actions/action-types";
 
 const initialState = {
    isFetching: false,

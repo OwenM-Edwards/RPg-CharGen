@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { Sidebar, InputCharDesc, InputCharImage, InputCharIntrigue, InputCharRoleplay } from '../components';
+import { InputCharDesc, InputCharImage, InputCharIntrigue, InputCharRoleplay } from '../components';
 
 const Wrapper = styled.div`
    width:100%;

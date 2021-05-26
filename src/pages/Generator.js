@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { LoadingIcon, CharImage, CharDesc, CharIntrigue, CharRoleplay, Sidebar} from '../components';
+import { LoadingIcon, CharImage, CharDesc, CharIntrigue, CharRoleplay} from '../components';
 import { generateCharacter } from "../redux/actions/index";
 import Select from 'react-select';
 import {optionsRace, optionsGender} from "../constants/index";
@@ -108,7 +108,7 @@ const Generator = ({generateCharacter, newChar, isFetching}) => {
       if(!newChar){
          generateCharacter({ gender:'random', race:'random' })
       }
-   },[])
+   },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
    if(isFetching === false){
       return(

@@ -35,7 +35,7 @@ export const submitCharDesc = (
       "email":userEmail,
       "id":userID
    })
-   const inputCharDescAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/addname', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/addname', json, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -71,7 +71,7 @@ export const submitCharImage = (
       "email":userEmail,
       "id":userID
    })
-   const inputCharImageAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/charimage', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/charimage', json, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -100,7 +100,7 @@ export const submitCharIntrigue = (
       "email":userEmail,
       "id":userID
    })
-   const inputCharIntrigueAPI = await axios.post('https://safe-dawn-37731.herokuapp.com/addintrigue', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/addintrigue', json, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -130,7 +130,6 @@ export const getSubmissions = (userEmail) => async (dispatch) => {
         'Content-Type': 'application/json'
       },
    })
-   console.log(getSubmissionsResponse)
    dispatch({
       type: GET_SUBMISSIONS,
       payload:{
@@ -176,7 +175,7 @@ export const editUserSubmission = ( entryType, editedUserSub, email, entryValue 
       "userEmail": email,
       "originalSub": entryValue
    })
-   const getSubmissionsResponse = await axios.post('https://safe-dawn-37731.herokuapp.com/edit', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/edit', json, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -212,7 +211,7 @@ export const deleteUserSubmission = ( intrigue, email, id ) => async (dispatch) 
       "userEmail": email,
       "originalSub": id,
    })
-   const getSubmissionsResponse = await axios.post('https://safe-dawn-37731.herokuapp.com/delete', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/delete', json, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -250,7 +249,7 @@ export const submitCharRoleplay = ( roleplay, email, id ) => async (dispatch) =>
       "email": email,
       "id": id,
    })
-   const getSubmissionsResponse = await axios.post('https://safe-dawn-37731.herokuapp.com/addroleplay', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/addroleplay', json, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -315,7 +314,7 @@ export const signIn = ({userEmail, userPassword}) => async (dispatch) => {
       "email": userEmail,
       "password": userPassword
    })
-   const authenticated = await axios.post('https://safe-dawn-37731.herokuapp.com/signin', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/signin', json, {
       headers: { 'Content-Type': 'application/json' }
    })
 
@@ -354,7 +353,7 @@ export const registerUser = ({userEmail, userPassword, userName}) => async (disp
       "password": userPassword,
       "name" : userName
    })
-   const authenticated = await axios.post('https://safe-dawn-37731.herokuapp.com/register', json, {
+   await axios.post('https://safe-dawn-37731.herokuapp.com/register', json, {
       headers: { 'Content-Type': 'application/json' }
    })
    .then(data => {

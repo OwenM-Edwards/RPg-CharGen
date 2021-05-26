@@ -45,29 +45,29 @@ const Wrapper = styled.div`
 const SubmittedIntrigues = ({handleOpenModalDisplay, submittedIntrigues}) => {
    const [ displayIntrigues, setDisplayIntrigues] = useState([]);
 
-   const buildIntrigueElements = () => {
-      let elementList = [];
-      submittedIntrigues.forEach(function callback(element, index){
-         elementList.push(
-            <div 
-               data-text={element.intrigue} 
-               key={index}
-               onClick={()=>handleOpenModalDisplay(element)} 
-            >
-               <p>Intrigue: {element.intrigue} </p>
-               <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
-            </div>
-         )
-      })
-      setDisplayIntrigues(elementList)
-   }
+   
 
    useEffect(()=>{
-      console.log(submittedIntrigues)
+      const buildIntrigueElements = () => {
+         let elementList = [];
+         submittedIntrigues.forEach(function callback(element, index){
+            elementList.push(
+               <div 
+                  data-text={element.intrigue} 
+                  key={index}
+                  onClick={()=>handleOpenModalDisplay(element)} 
+               >
+                  <p>Intrigue: {element.intrigue} </p>
+                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+               </div>
+            )
+         })
+         setDisplayIntrigues(elementList)
+      }
       if(submittedIntrigues){
          buildIntrigueElements();
       }
-   }, [])
+   }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
    
 

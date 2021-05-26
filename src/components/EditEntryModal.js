@@ -78,7 +78,6 @@ const Wrapper = styled.div`
    }
 `
 const EditEntryModal = ({modalData, setModalDisplay, editUserSubmission}) => {
-   console.log(modalData)
    const [entryType, setEntryType] = useState('');
    const [originalEntry, setOriginalEntry] = useState('');
    const [editedUserSub, setEditedUserSub] = useState(false);
@@ -100,7 +99,7 @@ const EditEntryModal = ({modalData, setModalDisplay, editUserSubmission}) => {
          setEntryType('intrigue')
          setOriginalEntry(modalData.intrigue)
       }
-   },[])
+   }, [modalData])
    
 
    const handleSubmit = (editUserSubmission) => {
@@ -112,20 +111,10 @@ const EditEntryModal = ({modalData, setModalDisplay, editUserSubmission}) => {
       }
    }
 
-   let moderationStatus = false;
-   if(modalData.moderation){
-      moderationStatus = 'Moderation Status: Accepted'
-   }
-   else if(modalData.moderation === null){
-      moderationStatus = 'Moderation Status: Pending'
-   } else if(modalData.moderation === false){
-      moderationStatus = 'Moderation Status: Failed'
-   }
-
    return (
       <Wrapper>
          
-         <img onClick={()=>setModalDisplay(false)} src={closeIcon}></img>
+         <img alt="Close icon" onClick={()=>setModalDisplay(false)} src={closeIcon}></img>
          <h1>Edit your submission.</h1>
          {(modalData.race)
             ? modalData.race

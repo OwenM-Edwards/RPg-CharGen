@@ -43,31 +43,31 @@ const Wrapper = styled.div`
 `
 const SubmittedRoleplays = ({handleOpenModalDisplay, submittedRoleplays}) => {
    const [ displayRoleplays, setDisplayRoleplays] = useState([]);
-   const races = ['Human','Orc','Dwarf','Elf','Halfling'];
 
-   const buildRoleplayElements = () => {
-      let elementList = [];
-      submittedRoleplays.forEach(function callback(element, index){
-         elementList.push(
-            <div 
-               data-text={element.roleplay} 
-               key={index}
-               onClick={()=>handleOpenModalDisplay(element)}
-            >
-
-               <p>Roleplay Cue: {element.roleplay} </p>
-               <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
-            </div>
-         )
-      })
-      setDisplayRoleplays(elementList)
-   }
+   
 
    useEffect(()=>{
+      const buildRoleplayElements = () => {
+         let elementList = [];
+         submittedRoleplays.forEach(function callback(element, index){
+            elementList.push(
+               <div 
+                  data-text={element.roleplay} 
+                  key={index}
+                  onClick={()=>handleOpenModalDisplay(element)}
+               >
+   
+                  <p>Roleplay Cue: {element.roleplay} </p>
+                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+               </div>
+            )
+         })
+         setDisplayRoleplays(elementList)
+      }
       if(submittedRoleplays){
          buildRoleplayElements();
       }
-   }, [])
+   }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
    
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actions/index";
-import Loader from 'react-loader-spinner';
+// import Loader from 'react-loader-spinner';
 import { Link } from "react-router-dom";
 import { LoadingIcon } from '../components';
 
@@ -38,11 +38,6 @@ const Wrapper = styled.div`
    }
 `
 
-const ErrorBox = styled.div`
-   width:100px;
-   height:100px;
-   background-color:red;   
-`
 
 const Register = ({registerUser, isFetching}) => {
    const [ userEmail, setUserEmail] = useState(false);

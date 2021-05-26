@@ -1,5 +1,3 @@
-import Header from './Header';
-import Footer from './Footer'
 import Sidebar from './Sidebar';
 import CharImage from './CharImage';
 import CharRoleplay from './CharRoleplay';
@@ -18,8 +16,6 @@ import SubmittedIntrigues from './SubmittedIntrigues';
 import EditEntryModal from './EditEntryModal';
 
 export {
-   Header,
-   Footer,
    Sidebar,
    CharImage,
    CharRoleplay,

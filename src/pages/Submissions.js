@@ -11,7 +11,7 @@ import {
    SubmittedIntrigues,
    EditEntryModal,
 } from '../components';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const Wrapper = styled.div`
@@ -81,12 +81,11 @@ const Submissions = ({
 
    useEffect(()=> {
       getSubmissions(userEmail)
-      console.log(category)
-   },[userEmail])
+   },[userEmail]) // eslint-disable-line react-hooks/exhaustive-deps
 
    useEffect(()=> {
       getSubmissions(userEmail)
-   },[])
+   },[]) // eslint-disable-line react-hooks/exhaustive-deps
 
 
    let displayData = false

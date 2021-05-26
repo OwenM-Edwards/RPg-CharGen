@@ -46,38 +46,40 @@ const SubmittedImages = ({handleOpenModalDisplay, submittedImages}) => {
    const [ displayImages, setDisplayImages] = useState([]);
    const races = ['Human','Orc','Dwarf','Elf','Halfling'];
 
-   const buildImageElements = () => {
-      let elementList = [];
-      let counter = 0;
-      let raceCounter = 0;
-      Object.keys(submittedImages).forEach(key => {
-         elementList.push(
-            <h3 key={counter}>{races[raceCounter]}</h3>
-         )
-         counter++;
-         raceCounter++;
-         submittedImages[key].forEach(function callback(element){
-            elementList.push(
-               <div 
-                  key={counter}
-                  onClick={()=>handleOpenModalDisplay(element)} 
-               >
-                  <p>URL: {element.url} </p>
-                  <p>Gender: {(element.gender) ? 'male' : 'female'} </p>
-                  <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
-               </div>
-            )
-            counter++
-         })
-      })
-      setDisplayImages(elementList)
-   }
+   
 
    useEffect(()=>{
+      const buildImageElements = () => {
+         let elementList = [];
+         let counter = 0;
+         let raceCounter = 0;
+         Object.keys(submittedImages).forEach(key => {
+            elementList.push(
+               <h3 key={counter}>{races[raceCounter]}</h3>
+            )
+            counter++;
+            raceCounter++;
+            submittedImages[key].forEach(function callback(element){
+               elementList.push(
+                  <div 
+                     key={counter}
+                     onClick={()=>handleOpenModalDisplay(element)} 
+                  >
+                     <p>URL: {element.url} </p>
+                     <p>Gender: {(element.gender) ? 'male' : 'female'} </p>
+                     <p className={(element.moderation) ? 'accepted' : (element.moderation === null) ? 'pending' : 'failed' }>Moderation Status: {(element.moderation) ? 'Accepted' : (element.moderation === null) ? 'Pending' : 'Failed' }</p>
+                  </div>
+               )
+               counter++
+            })
+         })
+         setDisplayImages(elementList)
+      }
       if(submittedImages){
          buildImageElements();
       }
-   }, [])
+      
+   }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
    
 

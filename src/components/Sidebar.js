@@ -79,14 +79,14 @@ const Sidebar = ({ page, signOut, authenticated }) => {
          <nav className="navBarContainer">
             <ul className="navList">
                
-               <Link data-tip="Character Generator" className={page === 'generator' ? 'active' : 'notactive'} to="/generator"><img src={homeIcon}/></Link>
+               <Link data-tip="Character Generator" className={page === 'generator' ? 'active' : 'notactive'} to="/generator"><img alt="Home icon" src={homeIcon}/></Link>
                
-               <Link data-tip="Your Submissions" className={page === 'submissions' ? 'active' : 'notactive'} to="/submissions/firstnames"><img src={submissionsIcon}/></Link>
+               <Link data-tip="Your Submissions" className={page === 'submissions' ? 'active' : 'notactive'} to="/submissions/firstnames"><img alt="Submissions icon" src={submissionsIcon}/></Link>
 
-               <Link data-tip="Add your own submissions!" className={page === 'submit' ? 'active' : 'notactive'} to="/submit"><img src={submitIcon}/></Link>
+               <Link data-tip="Add your own submissions!" className={page === 'submit' ? 'active' : 'notactive'} to="/submit"><img alt="Submit icon" src={submitIcon}/></Link>
                {authenticated 
-                  ? <div data-tip="Sign Out" onClick={()=>handleSignOut()}><img src={logoutIcon}/></div>
-                  : <Link data-tip="Sign In" to="/signin"><img src={loginIcon}/></Link>
+                  ? <div data-tip="Sign Out" onClick={()=>handleSignOut()}><img alt="Logout icon" src={logoutIcon}/></div>
+                  : <Link data-tip="Sign In" to="/signin"><img alt="Login icon" src={loginIcon}/></Link>
                }
             </ul>
          </nav>
