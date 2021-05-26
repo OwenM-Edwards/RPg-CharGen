@@ -114,7 +114,7 @@ const Generator = ({generateCharacter, newChar, isFetching}) => {
       return(
          <Wrapper>
             <div className="titleContainer">
-               <h1>Generator</h1>
+               <h1>NPC Generator</h1>
             </div>
 
 

@@ -31,7 +31,7 @@ const Wrapper = styled.div`
          color:green;
       }
       & .pending {
-         color:blue;
+         color:yellow;
       }
       & .failed {
          color:red;

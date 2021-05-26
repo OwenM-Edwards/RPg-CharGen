@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from 'react-toastify';
 
 import { Footer, Header, Sidebar} from './components';
-import { Register, Generator, SignIn, Submit, Submissions } from './pages/Index';
+import { Register, Generator, SignIn, Submit, Submissions } from './pages/index.js';
 
 const Wrapper = styled.div`
   background-color:#25292e;
