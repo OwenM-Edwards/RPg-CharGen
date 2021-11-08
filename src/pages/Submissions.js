@@ -45,7 +45,8 @@ const Wrapper = styled.div`
          margin-bottom:10px;
          padding:10px;
          opacity:0.8;
-
+         transition: border-color 0.2s ease-in-out, opacity 0.2s ease-in-out;  
+         border-bottom:2px solid #2f3438;
       }
       & .active {
          border-bottom:2px solid #FF3E58;
